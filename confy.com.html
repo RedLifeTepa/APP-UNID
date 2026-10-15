@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Control Admin (config.html) | UNID FUTURO QUEST</title>
+  <link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,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" />
+  <style>
+    :root {
+      --unid-navy: #001B3D;
+      --unid-blue: #002D62;
+      --unid-royal: #0055B3;
+      --unid-yellow: #FFD100;
+      --unid-gold: #FFC72C;
+      --bg-slate: #F1F5F9;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --border-col: #CBD5E1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--bg-slate);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Institutional Admin Bar */
+    .admin-header {
+      background: linear-gradient(135deg, #001530 0%, #002D62 65%, #004494 100%);
+      color: #FFFFFF;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 4px solid var(--unid-yellow);
+      box-shadow: 0 8px 25px rgba(0, 20, 50, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .admin-brand img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2.5px solid var(--unid-yellow);
+      object-fit: cover;
+    }
+
+    .admin-brand-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -0.4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-badge {
+      background: var(--unid-yellow);
+      color: #001B3D;
+      font-size: 0.75rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    .admin-sub {
+      font-size: 0.84rem;
+      color: #CBD5E1;
+      margin-top: 2px;
+    }
+
+    .admin-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 9px 15px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.18s ease;
+    }
+
+    .btn-gold {
+      background: var(--unid-yellow);
+      color: #001B3D;
+    }
+
+    .btn-gold:hover {
+      background: #FFE033;
+      transform: translateY(-1px);
+    }
+
+    .btn-navy {
+      background: var(--unid-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-navy:hover {
+      background: #00418C;
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .btn-danger {
+      background: #FEE2E2;
+      color: #B91C1C;
+    }
+
+    .btn-danger:hover {
+      background: #FECACA;
+    }
+
+    .btn-success {
+      background: #DCFCE7;
+      color: #15803D;
+    }
+
+    /* Layout Container */
+    .admin-container {
+      max-width: 1380px;
+      width: 100%;
+      margin: 22px auto;
+      padding: 0 22px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* KPI Row */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 14px rgba(0, 20, 50, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kpi-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .kpi-val {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: var(--unid-navy);
+      margin-top: 4px;
+    }
+
+    .kpi-ico {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #EFF6FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    /* Tabs Navigation */
+    .tabs-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      background: #E2E8F0;
+      padding: 6px;
+      border-radius: 14px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #334155;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.15s;
+    }
+
+    .tab-btn.active {
+      background: var(--unid-navy);
+      color: var(--unid-yellow);
+      box-shadow: 0 4px 12px rgba(0, 27, 61, 0.22);
+    }
+
+    .tab-panel {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tab-panel.active {
+      display: flex;
+    }
+
+    /* Cards & Tables */
+    .panel-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 22px;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 16px rgba(0, 20, 50, 0.05);
+    }
+
+    .panel-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #F1F5F9;
+    }
+
+    .panel-card-head h2 {
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: var(--unid-navy);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: #F8FAFC;
+      color: #334155;
+      font-weight: 800;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 2px solid #E2E8F0;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #E2E8F0;
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: #F8FAFC;
+    }
+
+    /* Forms & Grid Editors */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .field-box {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field-box label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    .input, select, textarea {
+      padding: 9px 12px;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: #0F172A;
+      background: #FFFFFF;
+    }
+
+    .input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--unid-royal);
+    }
+
+    .editor-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 16px;
+    }
+
+    .editor-item-card {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast-admin {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: var(--unid-navy);
+      color: #FFFFFF;
+      border-left: 5px solid var(--unid-yellow);
+      padding: 14px 18px;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      z-index: 2000;
+      font-size: 0.86rem;
+      font-weight: 700;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-brand">
+      <img src="data:image/jpeg;base64,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" alt="Uriel UNID" />
+      <div>
+        <div class="admin-brand-title">
+          <span>UNID FUTURO QUEST</span>
+          <span class="admin-badge">PANEL DE CONTROL • Acceso Directo por Link</span> <span id="adminFirebaseBadge" style="font-size:0.74rem; background:rgba(0,0,0,0.35); border:1px solid #22C55E; padding:3px 10px; border-radius:99px;">🔥 Firebase: quiniela-mundial-417fa</span>
+        </div>
+        <div class="admin-sub">Control total de registros de usuarios, preguntas de quizzes, botones, módulos, recompensas y notificaciones en tiempo real.</div>
+      </div>
+    </div>
+
+    <div class="admin-top-actions">
+      <a href="index.html" class="btn btn-gold">📱 Ver App Pública (index.html)</a>
+      <button class="btn btn-outline" onclick="exportRegistrationsCSV()">📊 Exportar Registros (CSV / Excel)</button>
+      <button class="btn btn-outline" onclick="exportFullJSON()">💾 Descargar Respaldo JSON</button>
+      <button class="btn btn-danger" onclick="resetToDefaults()">🔄 Restaurar de Fábrica</button>
+    </div>
+  </header>
+
+  <main class="admin-container">
+
+    <!-- KPI Metrics -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Personas Registradas</div>
+          <div class="kpi-val" id="kpiTotalUsers">0</div>
+        </div>
+        <div class="kpi-ico">👥</div>
+      </div>
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Preguntas de Quiz Activas</div>
+          <div class="kpi-val" id="kpiTotalQuizzes">0</div>
+        </div>
+        <div class="kpi-ico">🎮</div>
+      </div>
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Módulos y Accesos</div>
+          <div class="kpi-val" id="kpiTotalModules">10</div>
+        </div>
+        <div class="kpi-ico">🎛️</div>
+      </div>
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Recompensas Canjeadas</div>
+          <div class="kpi-val" id="kpiTotalRedeemed">0</div>
+        </div>
+        <div class="kpi-ico">🎁</div>
+      </div>
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Dudas Recibidas</div>
+          <div class="kpi-val" id="kpiTotalInquiries">0</div>
+        </div>
+        <div class="kpi-ico">💬</div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs-bar">
+      <button class="tab-btn active" onclick="switchTab('tab-users', this)">👥 1. Registros de Personas</button>
+      <button class="tab-btn" onclick="switchTab('tab-quizzes', this)">🎮 2. Preguntas para Quiz (Mis Retos)</button>
+      <button class="tab-btn" onclick="switchTab('tab-modules', this)">🎛️ 3. Editar Todos los Botones y Módulos</button>
+      <button class="tab-btn" onclick="switchTab('tab-catalogs', this)">🎓 4. Carreras, Recompensas y Etapas</button>
+      <button class="tab-btn" onclick="switchTab('tab-notifs', this)">🔔 5. Notificaciones, Mensajes y Ajustes</button>
+    </nav>
+
+    <!-- TAB 1: REGISTROS DE PERSONAS -->
+    <section class="tab-panel active" id="tab-users">
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>👥 Todos los Registros de Personas en Plataforma</h2>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input type="text" id="userSearchInput" class="input" placeholder="🔍 Buscar por nombre, celular o campus..." oninput="renderUsersTable()" />
+            <button class="btn btn-gold" onclick="exportRegistrationsCSV()">📥 Descargar CSV / Excel</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre Completo</th>
+                <th>Celular / Correo</th>
+                <th>Campus y Carrera</th>
+                <th>Nivel Acceso</th>
+                <th>Créditos ⭐</th>
+                <th>Avance / Cupones</th>
+                <th>Fecha Registro</th>
+                <th>Acciones de Control</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Add User Manually from Admin -->
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>➕ Agregar o Registrar Persona Manualmente</h2>
+        </div>
+        <form onsubmit="adminAddUser(event)" class="form-grid">
+          <div class="field-box">
+            <label>Nombre Completo *</label>
+            <input type="text" id="admUserName" class="input" placeholder="Ej. Fernanda Morales" required />
+          </div>
+          <div class="field-box">
+            <label>Teléfono Celular *</label>
+            <input type="text" id="admUserPhone" class="input" placeholder="Ej. 3781239876" required />
+          </div>
+          <div class="field-box">
+            <label>Correo Electrónico</label>
+            <input type="email" id="admUserEmail" class="input" placeholder="fernanda@ejemplo.com" />
+          </div>
+          <div class="field-box">
+            <label>Campus UNID</label>
+            <input type="text" id="admUserCampus" class="input" value="Campus Tepatitlán" />
+          </div>
+          <div class="field-box">
+            <label>Carrera de Interés</label>
+            <input type="text" id="admUserCareer" class="input" value="Lic. en Administración de Empresas" />
+          </div>
+          <div class="field-box">
+            <label>Nivel Inicial (Acceso Total = Nivel 2)</label>
+            <input type="number" id="admUserLevel" class="input" value="2" min="1" max="10" />
+          </div>
+          <div class="field-box">
+            <label>Créditos Asignados</label>
+            <input type="number" id="admUserCredits" class="input" value="750" step="50" />
+          </div>
+          <div class="field-box" style="justify-content:flex-end;">
+            <button type="submit" class="btn btn-navy" style="justify-content:center; padding:11px;">💾 Guardar Registro</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- TAB 2: GESTOR DE PREGUNTAS PARA LOS QUIZ -->
+    <section class="tab-panel" id="tab-quizzes">
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>➕ Agregar Nueva Pregunta para el Quiz (Módulo "Mis Retos")</h2>
+        </div>
+        <form onsubmit="adminAddQuiz(event)">
+          <div class="form-grid" style="margin-bottom:12px;">
+            <div class="field-box" style="grid-column: span 2;">
+              <label>Pregunta de la Trivia / Quiz *</label>
+              <input type="text" id="newQQuestion" class="input" placeholder="Ej. ¿Cuál es la duración de las licenciaturas cuatrimestrales en UNID?" required />
+            </div>
+            <div class="field-box">
+              <label>Categoría / Tema *</label>
+              <input type="text" id="newQCategory" class="input" placeholder="Ej. Modelo UNID / Vocación" value="Reto Vocacional UNID" required />
+            </div>
+            <div class="field-box">
+              <label>Créditos que otorga *</label>
+              <input type="number" id="newQCredits" class="input" value="150" min="10" step="10" required />
+            </div>
+          </div>
+
+          <div class="form-grid" style="margin-bottom:12px;">
+            <div class="field-box">
+              <label>Opción 1 (Índice 0) *</label>
+              <input type="text" id="newQOpt0" class="input" placeholder="Respuesta A" required />
+            </div>
+            <div class="field-box">
+              <label>Opción 2 (Índice 1) *</label>
+              <input type="text" id="newQOpt1" class="input" placeholder="Respuesta B" required />
+            </div>
+            <div class="field-box">
+              <label>Opción 3 (Índice 2) *</label>
+              <input type="text" id="newQOpt2" class="input" placeholder="Respuesta C" required />
+            </div>
+            <div class="field-box">
+              <label>Opción 4 (Índice 3) *</label>
+              <input type="text" id="newQOpt3" class="input" placeholder="Respuesta D" required />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field-box">
+              <label>¿Cuál es la opción correcta? *</label>
+              <select id="newQCorrect" class="input">
+                <option value="0">Opción 1</option>
+                <option value="1">Opción 2</option>
+                <option value="2">Opción 3</option>
+                <option value="3">Opción 4</option>
+              </select>
+            </div>
+            <div class="field-box" style="grid-column: span 2;">
+              <label>Mensaje de retroalimentación de Uriel al responder bien</label>
+              <input type="text" id="newQExplanation" class="input" placeholder="¡Excelente! Has sumado créditos para tu descuento de inscripción." value="¡Excelente respuesta! Sigue acumulando créditos UNID." />
+            </div>
+            <div class="field-box" style="justify-content:flex-end;">
+              <button type="submit" class="btn btn-gold" style="justify-content:center; padding:11px;">➕ Publicar Pregunta en la App</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>🎮 Banco de Preguntas Activas (Editable en Vivo)</h2>
+        </div>
+        <div class="editor-cards-grid" id="quizzesEditorContainer"></div>
+      </div>
+    </section>
+
+    <!-- TAB 3: EDITAR TODOS LOS BOTONES Y MÓDULOS -->
+    <section class="tab-panel" id="tab-modules">
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>📱 Los 6 Botones Principales del Celular (Mis Retos, Mis Créditos, Mis Carreras, Mis Recompensas, Mi Progreso, Pregúntanos)</h2>
+          <button class="btn btn-gold" onclick="saveModulesChanges()">💾 Guardar Todos los Botones</button>
+        </div>
+        <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:16px;">
+          Edita aquí el nombre, subtítulo, ícono, color institucional, descripción interna, aviso de nivel y visibilidad de cada uno de los 6 botones de la pantalla principal del celular:
+        </p>
+        <div class="editor-cards-grid" id="appModulesEditorContainer"></div>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>🏛️ Los 4 Botones Superiores Institucionales (Carreras, Beneficios, Campus, Comunidad)</h2>
+          <button class="btn btn-gold" onclick="saveTopNavChanges()">💾 Guardar Accesos Superiores</button>
+        </div>
+        <div class="editor-cards-grid" id="topNavEditorContainer"></div>
+      </div>
+    </section>
+
+    <!-- TAB 4: CARRERAS, RECOMPENSAS Y ETAPAS DEL JUEGO -->
+    <section class="tab-panel" id="tab-catalogs">
+      <!-- Careers Manager -->
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>🎓 Catálogo de Carreras UNID (Módulo "Mis Carreras")</h2>
+          <button class="btn btn-navy" onclick="addNewCareerPrompt()">➕ Agregar Nueva Carrera</button>
+        </div>
+        <div class="editor-cards-grid" id="careersEditorContainer"></div>
+      </div>
+
+      <!-- Rewards Manager -->
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>🎁 Catálogo de Recompensas y Descuentos (Módulo "Mis Recompensas")</h2>
+          <button class="btn btn-navy" onclick="addNewRewardPrompt()">➕ Agregar Nueva Recompensa / Beca</button>
+        </div>
+        <div class="editor-cards-grid" id="rewardsEditorContainer"></div>
+      </div>
+
+      <!-- How It Works / Etapas del Juego -->
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>🚀 Textos de "¿Cómo funciona?" y "Etapas del juego" (Pasos 1 al 4)</h2>
+          <button class="btn btn-gold" onclick="saveHowItWorksChanges()">💾 Guardar Pasos</button>
+        </div>
+        <div class="editor-cards-grid" id="howItWorksEditorContainer"></div>
+      </div>
+    </section>
+
+    <!-- TAB 5: NOTIFICACIONES PUSH, DUDAS Y CONFIGURACIÓN GENERAL -->
+    <section class="tab-panel" id="tab-notifs">
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>🔔 Enviar Notificación Push / Aviso en Tiempo Real a la App</h2>
+        </div>
+        <form onsubmit="adminSendPushNotification(event)" class="form-grid">
+          <div class="field-box">
+            <label>Título de la Notificación *</label>
+            <input type="text" id="pushTitle" class="input" placeholder="Ej. 🦊 ¡Bono Doble de Créditos Hoy!" required />
+          </div>
+          <div class="field-box" style="grid-column: span 2;">
+            <label>Mensaje para los Estudiantes *</label>
+            <input type="text" id="pushBody" class="input" placeholder="Ej. Entra a Mis Retos y obtén tu descuento preferencial de inscripción en UNID." required />
+          </div>
+          <div class="field-box">
+            <label>Regalar créditos extra a todos (opcional)</label>
+            <input type="number" id="pushBonusCredits" class="input" value="0" min="0" step="25" />
+          </div>
+          <div class="field-box" style="justify-content:flex-end;">
+            <button type="submit" class="btn btn-gold" style="justify-content:center; padding:11px;">🚀 Enviar Notificación Ahora</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>💬 Mensajes y Preguntas Recibidas desde el Botón "Pregúntanos"</h2>
+        </div>
+        <div id="inquiriesContainer"></div>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-card-head">
+          <h2>⚙️ Configuración Institucional, Nivel de Ingreso y Textos de Uriel</h2>
+          <button class="btn btn-gold" onclick="saveGeneralSettings()">💾 Guardar Configuración General</button>
+        </div>
+        <div class="form-grid" id="generalSettingsContainer"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast-admin" id="adminToast">Cambios guardados</div>
+
+  <script>
+    const STORAGE_KEY = 'UNID_FQ_DB_V1';
+    const DEFAULT_DB = {"version": "3.0-prod", "settings": {"brandName": "UNID", "brandSlogan": "LO VIVO LO APLICO®", "appName": "FUTURO QUEST", "heroTagline": "Tu futuro también se juega", "mascotName": "Uriel", "mascotBubble": "¡Hola! Soy Uriel, la mascota de UNID y ahora tu guía para llegar al éxito.", "mascotSubBubble": "Descubre, explora y decide", "mascotDescription": "UNID FUTURO QUEST es una plataforma interactiva que te permite conocer tus intereses, descubrir tu vocación y ganar créditos mientras te diviertes.", "rocketBanner": "Conecta, juega y construye tu mejor versión.", "initialLevel": 2, "initialCredits": 750, "requireLoginOnStart": false, "fullAccessLevel2": true, "promoBannerText": "¡Entre más juegues, más cerca estarás de tu descuento!", "footerCtaTitle": "UNID FUTURO QUEST", "footerCtaSub": "¡Juega hoy y construye tu mañana!", "whatsappAdvisor": "528000008643", "contactEmail": "admisiones@unid.edu.mx"}, "topNav": [{"id": "carreras", "title": "Carreras", "icon": "🎓", "badge": "Plan 3 Años", "subtitle": "Licenciaturas e Ingenierías con Estadía Empresarial", "description": "Termina tu carrera universitaria en 3 años (9 cuatrimestres) con un enfoque 100% práctico. Incluye Estadía Empresarial en empresas reales y opción de Modelo Dual Alemán (DHLA).", "highlights": ["Plan cuatrimestral intensivo: concluye en solo 3 años.", "Estadía Empresarial de 4 meses integrada en tu plan de estudios.", "Modalidades: Escolarizada, Ejecutiva (mixta) y 100% Online.", "Modelo Dual DHLA con rotación en empresas socias."]}, {"id": "beneficios", "title": "Beneficios", "icon": "⭐", "badge": "Becas y Descuentos", "subtitle": "Convierte tus créditos de juego en beneficios reales", "description": "En UNID Futuro Quest cada reto superado suma créditos a tu perfil Nivel 2+ que puedes canjear directamente por descuentos de inscripción y beneficios exclusivos.", "highlights": ["Hasta 70% de descuento en tu primera inscripción acumulando créditos.", "Acceso sin costo a talleres de orientación vocacional y simuladores.", "Bolsa de trabajo nacional conectada con más de 4,500 empresas.", "Doble titulación y certificaciones digitales por cuatrimestre."]}, {"id": "campus", "title": "Campus", "icon": "📍", "badge": "Red Nacional", "subtitle": "Presencia UNID en todo México cerca de ti", "description": "Contamos con campus equipados con laboratorios multimedia, cámaras de Gesell, salas de juicios orales y centros de negocios en todo el país.", "highlights": ["Sede destacada: Campus Tepatitlán, Guadalajara y Región Occidente.", "Sedes Norte, Centro y Sur: Monterrey, Mérida, Morelia, Aguascalientes, Cancún y más.", "Movilidad inter-campus sin perder tu avance ni tus créditos.", "Agenda tu recorrido presencial VIP desde el módulo Mis Recompensas."]}, {"id": "comunidad", "title": "Comunidad", "icon": "👥", "badge": "Soy UNID", "subtitle": "Conecta con otros jóvenes y vive la experiencia con Uriel", "description": "Forma parte de una comunidad vibrante donde desarrollas liderazgo, deporte, cultura, acción social y emprendimiento junto a Uriel, nuestra mascota oficial.", "highlights": ["Clubes deportivos, culturales y torneos inter-campus Soy UNID.", "Programas de liderazgo juvenil, voluntariado y formación humana.", "Eventos de networking, hackathons y ferias de emprendimiento.", "Comunidad de más de 100,000 egresados exitosos en toda Latinoamérica."]}], "appModules": [{"id": "retos", "title": "Mis Retos", "subtitle": "Trivias y desafíos vocacionales", "color": "#0072CE", "textColor": "#FFFFFF", "icon": "🎮", "enabled": true, "accessLevel": 2, "description": "Completa retos, trivias y actividades sobre las carreras, habilidades y la vida universitaria. ¡Cada respuesta correcta suma créditos al instante!", "customNotice": "Nivel 2 Activo: Tienes todos los retos desbloqueados."}, {"id": "creditos", "title": "Mis Créditos", "subtitle": "Tu billetera de puntos UNID", "color": "#FFC72C", "textColor": "#001E42", "icon": "🏆", "enabled": true, "accessLevel": 2, "description": "Revisa tu saldo actual de créditos, consulta el historial de puntos ganados y simula el descuento directo aplicable a tu inscripción.", "customNotice": "Tus créditos acumulados son canjeables por beneficios directos en tu inscripción."}, {"id": "carreras", "title": "Mis Carreras", "subtitle": "Explora y elige tu vocación", "color": "#10B981", "textColor": "#FFFFFF", "icon": "🎯", "enabled": true, "accessLevel": 2, "description": "Conoce a detalle los planes de estudio de UNID, filtra por tu área de interés y guarda tus carreras favoritas para ganar +50 créditos por exploración.", "customNotice": "Explora carreras para sumar créditos extra a tu perfil."}, {"id": "recompensas", "title": "Mis Recompensas", "subtitle": "Canjea tus créditos ganados", "color": "#7C3AED", "textColor": "#FFFFFF", "icon": "🎁", "enabled": true, "accessLevel": 2, "description": "Usa tus créditos acumulados para desbloquear cupones oficiales de descuento en inscripción, kits de Uriel y pases VIP a tu campus.", "customNotice": "Tus cupones generados quedan vinculados automáticamente a tu registro."}, {"id": "progreso", "title": "Mi Progreso", "subtitle": "Nivel, etapas e insignias", "color": "#F97316", "textColor": "#FFFFFF", "icon": "📊", "enabled": true, "accessLevel": 2, "description": "Visualiza tu avance en las 4 etapas de UNID Futuro Quest, tus estadísticas de desempeño y el camino hacia el siguiente nivel.", "customNotice": "Acceso Total Nivel 2 habilitado en tu cuenta."}, {"id": "preguntanos", "title": "Pregúntanos", "subtitle": "Chat con Uriel y Admisiones", "color": "#0EA5E9", "textColor": "#FFFFFF", "icon": "💬", "enabled": true, "accessLevel": 2, "description": "Envía tus dudas directamente al equipo de admisiones UNID o consulta las respuestas rápidas de Uriel sobre costos, becas, horarios y requisitos.", "customNotice": "Un asesor de tu campus UNID dará seguimiento a tus dudas."}], "howItWorks": [{"step": 1, "title": "Regístrate", "stageName": "REGISTRO", "desc": "Escanea el código QR o ingresa tu número de celular. Recibe tu acceso directo Nivel 2 y crea tu perfil.", "stageDesc": "Escanea el QR o ingresa tu número de celular.", "color": "#FFD100"}, {"step": 2, "title": "Juega y aprende", "stageName": "RETOS", "desc": "Completa retos, trivia y actividades sobre las carreras, habilidades y la vida universitaria.", "stageDesc": "Completa trivias, actividades y desafíos sobre profesiones.", "color": "#00A8E8"}, {"step": 3, "title": "Acumula puntos", "stageName": "CRÉDITOS", "desc": "Cada actividad te da créditos que podrás ir sumando en tiempo real en tu cuenta.", "stageDesc": "Acumula puntos por cada reto, participación y eventos.", "color": "#A855F7"}, {"step": 4, "title": "Canjea tus créditos", "stageName": "BENEFICIOS", "desc": "Obtén descuentos especiales en tu inscripción y otros beneficios exclusivos de UNID.", "stageDesc": "Canjea tus créditos por descuentos especiales en tu inscripción.", "color": "#22C55E"}], "quizzes": [{"id": "q1", "category": "Modelo UNID", "question": "¿En cuánto tiempo concluyes tu Licenciatura o Ingeniería con el plan cuatrimestral de UNID?", "options": ["En 3 años (9 cuatrimestres)", "En 5 años y medio", "En 6 años", "En 4 años y medio"], "correctIndex": 0, "credits": 150, "explanation": "¡Correcto! En UNID terminas tu carrera en solo 3 años gracias a su plan cuatrimestral intensivo."}, {"id": "q2", "category": "Lo Vivo Lo Aplico", "question": "¿Qué es la Estadía Empresarial UNID que impulsa tu experiencia profesional antes de graduarte?", "options": ["Un cuatrimestre completo de inmersión práctica dentro de una empresa real", "Una plática informativa de 1 hora", "Un examen teórico opcional", "Un viaje turístico de fin de semana"], "correctIndex": 0, "credits": 150, "explanation": "¡Excelente! La Estadía Empresarial te conecta con empresas reales para vivir y aplicar tu profesión."}, {"id": "q3", "category": "Comunidad UNID", "question": "¿Cómo se llama nuestra mascota oficial que te guía dentro de UNID Futuro Quest?", "options": ["Uriel, el zorro rojo de UNID", "Leo el león dorado", "Beto el halcón", "Rocco el lobo"], "correctIndex": 0, "credits": 100, "explanation": "¡Así es! Soy Uriel, tu guía para descubrir tu vocación y llegar al éxito en UNID."}, {"id": "q4", "category": "Vocación Negocios", "question": "Si te apasiona liderar equipos, emprender negocios y crear campañas de alto impacto, ¿qué área UNID es ideal para ti?", "options": ["Negocios, Administración de Empresas y Mercadotecnia Estratégica", "Biología Marina Profunda", "Geología Volcánica", "Astronomía Observacional"], "correctIndex": 0, "credits": 150, "explanation": "¡Tienes ADN de líder! Nuestras carreras de Negocios y Mercadotecnia incluyen simuladores y modelo Dual."}, {"id": "q5", "category": "Tecnología e Innovación", "question": "Si te entusiasma el desarrollo de software, apps móviles, IA y transformación digital, ¿qué carrera UNID te prepara para ello?", "options": ["Ingeniería en Sistemas de Información y Desarrollo de Software", "Licenciatura en Filología Clásica", "Historia Antigua", "Arqueología Subacuática"], "correctIndex": 0, "credits": 150, "explanation": "¡Brillante elección! En Ingeniería en Sistemas aprenderás a crear soluciones tecnológicas desde el primer día."}, {"id": "q6", "category": "Modelo Dual DHLA", "question": "¿Qué ventaja te ofrece el Modelo Dual UNID (certificado por el estándar alemán DHLA)?", "options": ["Alternar tu aprendizaje en el aula con formación práctica en empresas formadoras", "Estudiar sin presentar ningún proyecto", "Asistir solo un día al mes", "Cursar únicamente materias teóricas"], "correctIndex": 0, "credits": 200, "explanation": "¡Increíble! Con el Modelo Dual egresas con sólida experiencia laboral y altísima empleabilidad."}], "careers": [{"id": "c1", "name": "Lic. en Administración de Empresas", "area": "Negocios y Dirección", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual / Ejecutiva", "icon": "💼", "creditsBonus": 50, "description": "Dirige organizaciones, gestiona talento humano, finanzas y proyectos de innovación con Estadía Empresarial garantizada."}, {"id": "c2", "name": "Ing. en Sistemas de Información", "area": "Tecnología e Ingeniería", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva / Online", "icon": "💻", "creditsBonus": 50, "description": "Desarrolla aplicaciones web, móviles, bases de datos, arquitectura en la nube y soluciones de ciberseguridad."}, {"id": "c3", "name": "Lic. en Mercadotecnia Estratégica", "area": "Negocios y Creatividad", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual", "icon": "🚀", "creditsBonus": 50, "description": "Domina el marketing digital, posicionamiento de marcas, investigación de mercados y comercio electrónico."}, {"id": "c4", "name": "Lic. en Derecho y Ciencias Jurídicas", "area": "Derecho y Ciencias Sociales", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva", "icon": "⚖️", "creditsBonus": 50, "description": "Practica en salas de juicios orales, derecho corporativo, penal, constitucional y mediación legal."}, {"id": "c5", "name": "Lic. en Diseño Gráfico Digital", "area": "Diseño y Comunicación", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada", "icon": "🎨", "creditsBonus": 50, "description": "Crea identidad visual, animación digital, diseño UX/UI, producción audiovisual y dirección creativa."}, {"id": "c6", "name": "Lic. en Contabilidad y Finanzas", "area": "Negocios y Finanzas", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva / Online", "icon": "📈", "creditsBonus": 50, "description": "Especialízate en estrategias fiscales, auditoría, finanzas corporativas y análisis de inversiones."}, {"id": "c7", "name": "Ing. Industrial y de Logística", "area": "Tecnología e Ingeniería", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual", "icon": "⚙️", "creditsBonus": 50, "description": "Optimiza cadenas de suministro, manufactura esbelta, calidad total y automatización de procesos."}, {"id": "c8", "name": "Lic. en Educación Física y Deporte", "area": "Salud y Educación", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada", "icon": "🏅", "creditsBonus": 50, "description": "Forma líderes deportivos, entrenamiento de alto rendimiento, gestión deportiva y bienestar integral."}], "rewards": [{"id": "r1", "title": "30% de Descuento en Inscripción", "cost": 500, "icon": "🏷️", "codePrefix": "UNID-30", "description": "Cupón oficial aplicable directamente en tu pago de inscripción de nuevo ingreso en cualquier campus UNID."}, {"id": "r2", "title": "50% de Descuento en Inscripción", "cost": 850, "icon": "🌟", "codePrefix": "UNID-50", "description": "Descuento preferencial del 50% en tu primera inscripción por destacar en los retos de Futuro Quest."}, {"id": "r3", "title": "Kit Oficial Uriel (Sudadera UNID + Termo)", "cost": 650, "icon": "🦊", "codePrefix": "URIEL-KIT", "description": "Recoge en tu campus UNID tu kit oficial de bienvenida con la sudadera azul UNID y termo coleccionable."}, {"id": "r4", "title": "Pase VIP Campus Tour + Test Vocacional Pro", "cost": 300, "icon": "🎟️", "codePrefix": "VIP-TOUR", "description": "Acceso preferencial a laboratorios, sesión personalizada con coordinador de carrera y constancia vocacional."}, {"id": "r5", "title": "Beca Impulso 70% en Inscripción", "cost": 1200, "icon": "🏆", "codePrefix": "UNID-70PRO", "description": "Máximo beneficio de UNID Futuro Quest para jugadores que completaron todos los retos vocacionales."}], "faqs": [{"q": "¿Cómo funciona mi acceso Nivel 2 al registrarme?", "a": "Al ingresar tus datos en UNID Futuro Quest entras directamente como Jugador Nivel 2 con 750 créditos de bienvenida y acceso completo a los 6 módulos de la plataforma."}, {"q": "¿Cómo hago válido mi descuento de inscripción?", "a": "En el módulo 'Mis Recompensas' elige el beneficio que deseas canjear con tus créditos. El sistema generará tu folio único UNID para presentarlo en Admisiones."}, {"q": "¿Puedo instalar UNID Futuro Quest en mi celular y en mi computadora?", "a": "¡Sí! Puedes instalarla con el botón 'Instalar App' en la parte superior tanto en teléfonos Android/iOS como en computadoras Windows/Mac."}], "users": [], "inquiries": [], "notifications": [{"id": "notif_1", "title": "¡Bienvenido(a) a UNID Futuro Quest — Nivel 2!", "body": "Soy Uriel 🦊. Tienes acceso total desbloqueado y 750 créditos iniciales listos para jugar y canjear por descuentos en tu inscripción.", "date": "Reciente", "unread": true, "bonusCredits": 0}, {"id": "notif_2", "title": "🎯 Retos Vocacionales Activos", "body": "Responde las trivias en 'Mis Retos' y acumula créditos adicionales hoy mismo.", "date": "Reciente", "unread": true, "bonusCredits": 0}]};
+    const syncChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('unid_fq_sync_channel') : null;
+
+    let DB = loadDB();
+
+    if (syncChannel) {
+      syncChannel.onmessage = (ev) => {
+        if (ev.data && ev.data.type === 'DB_UPDATED') {
+          DB = loadDB();
+          renderAdminAll();
+        }
+      };
+    }
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY) {
+        DB = loadDB();
+        renderAdminAll();
+      }
+    });
+
+    function loadDB() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_DB));
+          return JSON.parse(JSON.stringify(DEFAULT_DB));
+        }
+        return Object.assign({}, DEFAULT_DB, JSON.parse(raw));
+      } catch (e) {
+        return JSON.parse(JSON.stringify(DEFAULT_DB));
+      }
+    }
+
+    window.onFirebaseRemoteUpdate = function(remoteDB) {
+      DB = Object.assign({}, DEFAULT_DB, remoteDB);
+      renderAdminAll();
+    };
+
+    function saveDB(notificationPayload = null) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(DB));
+      if (syncChannel) {
+        syncChannel.postMessage({ type: 'DB_UPDATED', notification: notificationPayload });
+      }
+      if (typeof window.pushStateToFirebase === 'function') {
+        window.pushStateToFirebase(DB, notificationPayload);
+      }
+      renderAdminAll();
+    }
+
+    function showAdminToast(msg) {
+      const t = document.getElementById('adminToast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 3200);
+    }
+
+    function switchTab(tabId, btnEl) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      if (btnEl) btnEl.classList.add('active');
+    }
+
+    function renderAdminAll() {
+      // KPIs
+      const users = DB.users || [];
+      const quizzes = DB.quizzes || [];
+      const redeemedCount = users.reduce((acc, u) => acc + ((u.redeemedRewards || []).length), 0);
+      document.getElementById('kpiTotalUsers').textContent = users.length;
+      document.getElementById('kpiTotalQuizzes').textContent = quizzes.length;
+      document.getElementById('kpiTotalModules').textContent = (DB.appModules || []).length + (DB.topNav || []).length;
+      document.getElementById('kpiTotalRedeemed').textContent = redeemedCount;
+      document.getElementById('kpiTotalInquiries').textContent = (DB.inquiries || []).length;
+
+      renderUsersTable();
+      renderQuizzesEditor();
+      renderModulesEditor();
+      renderTopNavEditor();
+      renderCatalogsEditor();
+      renderInquiriesAndSettings();
+    }
+
+    /* 1. USERS TABLE */
+    function renderUsersTable() {
+      const q = (document.getElementById('userSearchInput').value || '').toLowerCase();
+      const tbody = document.getElementById('usersTableBody');
+      const filtered = (DB.users || []).filter(u =>
+        (u.name || '').toLowerCase().includes(q) ||
+        (u.phone || '').toLowerCase().includes(q) ||
+        (u.campus || '').toLowerCase().includes(q) ||
+        (u.careerInterest || '').toLowerCase().includes(q)
+      );
+
+      tbody.innerHTML = filtered.map(u => {
+        const coupons = (u.redeemedRewards || []).map(r => `<span style="display:inline-block; background:#DCFCE7; color:#166534; padding:2px 6px; border-radius:6px; font-size:0.72rem; font-weight:800; margin:2px;">${r.code}</span>`).join(' ');
+        return `
+          <tr>
+            <td><strong>${u.name}</strong></td>
+            <td>📱 ${u.phone}<br><span style="font-size:0.75rem; color:#64748B;">${u.email || ''}</span></td>
+            <td><strong>${u.campus}</strong><br><span style="font-size:0.76rem; color:#475569;">${u.careerInterest}</span></td>
+            <td>
+              <input type="number" class="input" style="width:70px; padding:5px 8px;" value="${u.level}" min="1" max="10"
+                     onchange="updateUserField('${u.id}', 'level', Number(this.value))" />
+            </td>
+            <td>
+              <input type="number" class="input" style="width:95px; padding:5px 8px; font-weight:800;" value="${u.credits}" step="50"
+                     onchange="updateUserField('${u.id}', 'credits', Number(this.value))" />
+            </td>
+            <td>
+              <div style="font-size:0.76rem;">Retos: <strong>${(u.completedQuizzes || []).length}</strong></div>
+              <div>${coupons || '<span style="color:#94A3B8; font-size:0.74rem;">Sin cupones</span>'}</div>
+            </td>
+            <td style="font-size:0.76rem; color:#64748B;">${u.registeredAt || '-'}</td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <button class="btn btn-success" style="padding:5px 9px; font-size:0.74rem;" onclick="bonusUserCredits('${u.id}', 100)">+100 ⭐</button>
+                <button class="btn btn-danger" style="padding:5px 9px; font-size:0.74rem;" onclick="deleteUser('${u.id}')">🗑️</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateUserField(uid, field, val) {
+      const u = (DB.users || []).find(x => x.id === uid);
+      if (!u) return;
+      u[field] = val;
+      saveDB();
+      showAdminToast(`✅ Registro de ${u.name} actualizado en vivo`);
+    }
+
+    function bonusUserCredits(uid, amount) {
+      const u = (DB.users || []).find(x => x.id === uid);
+      if (!u) return;
+      u.credits = Number(u.credits || 0) + amount;
+      saveDB();
+      showAdminToast(`⭐ +${amount} créditos otorgados a ${u.name}`);
+    }
+
+    function deleteUser(uid) {
+      DB.users = (DB.users || []).filter(x => x.id !== uid);
+      saveDB();
+      showAdminToast('🗑️ Registro eliminado');
+    }
+
+    function adminAddUser(e) {
+      e.preventDefault();
+      const newUser = {
+        id: 'u_' + Date.now(),
+        name: document.getElementById('admUserName').value.trim(),
+        phone: document.getElementById('admUserPhone').value.trim(),
+        email: document.getElementById('admUserEmail').value.trim() || 'estudiante@unid.edu.mx',
+        campus: document.getElementById('admUserCampus').value.trim(),
+        careerInterest: document.getElementById('admUserCareer').value.trim(),
+        level: Number(document.getElementById('admUserLevel').value) || 2,
+        credits: Number(document.getElementById('admUserCredits').value) || 750,
+        completedQuizzes: [],
+        exploredCareers: [],
+        redeemedRewards: [],
+        registeredAt: new Date().toISOString().slice(0, 16).replace('T', ' ')
+      };
+      DB.users.unshift(newUser);
+      saveDB();
+      e.target.reset();
+      showAdminToast(`✅ Usuario ${newUser.name} registrado en plataforma`);
+    }
+
+    /* 2. QUIZZES EDITOR */
+    function renderQuizzesEditor() {
+      const container = document.getElementById('quizzesEditorContainer');
+      container.innerHTML = (DB.quizzes || []).map((q, idx) => `
+        <div class="editor-item-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="color:#001B3D;">Pregunta #${idx + 1}</strong>
+            <button class="btn btn-danger" style="padding:4px 9px; font-size:0.74rem;" onclick="deleteQuiz('${q.id}')">🗑️ Eliminar</button>
+          </div>
+          <div class="field-box">
+            <label>Categoría</label>
+            <input type="text" class="input" value="${q.category || ''}" onchange="updateQuizField('${q.id}', 'category', this.value)" />
+          </div>
+          <div class="field-box">
+            <label>Pregunta</label>
+            <textarea class="input" rows="2" onchange="updateQuizField('${q.id}', 'question', this.value)">${q.question}</textarea>
+          </div>
+          ${(q.options || []).map((opt, oIdx) => `
+            <div class="field-box">
+              <label>Opción ${oIdx + 1} ${Number(q.correctIndex) === oIdx ? '✅ (Correcta)' : ''}</label>
+              <input type="text" class="input" value="${opt}" onchange="updateQuizOption('${q.id}', ${oIdx}, this.value)" />
+            </div>
+          `).join('')}
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div class="field-box">
+              <label>Opción Correcta (1-4)</label>
+              <select class="input" onchange="updateQuizField('${q.id}', 'correctIndex', Number(this.value))">
+                <option value="0" ${Number(q.correctIndex) === 0 ? 'selected' : ''}>Opción 1</option>
+                <option value="1" ${Number(q.correctIndex) === 1 ? 'selected' : ''}>Opción 2</option>
+                <option value="2" ${Number(q.correctIndex) === 2 ? 'selected' : ''}>Opción 3</option>
+                <option value="3" ${Number(q.correctIndex) === 3 ? 'selected' : ''}>Opción 4</option>
+              </select>
+            </div>
+            <div class="field-box">
+              <label>Créditos ⭐</label>
+              <input type="number" class="input" value="${q.credits || 150}" onchange="updateQuizField('${q.id}', 'credits', Number(this.value))" />
+            </div>
+          </div>
+          <div class="field-box">
+            <label>Retroalimentación de Uriel</label>
+            <input type="text" class="input" value="${q.explanation || ''}" onchange="updateQuizField('${q.id}', 'explanation', this.value)" />
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function adminAddQuiz(e) {
+      e.preventDefault();
+      const newQ = {
+        id: 'q_' + Date.now(),
+        category: document.getElementById('newQCategory').value.trim(),
+        question: document.getElementById('newQQuestion').value.trim(),
+        options: [
+          document.getElementById('newQOpt0').value.trim(),
+          document.getElementById('newQOpt1').value.trim(),
+          document.getElementById('newQOpt2').value.trim(),
+          document.getElementById('newQOpt3').value.trim()
+        ],
+        correctIndex: Number(document.getElementById('newQCorrect').value),
+        credits: Number(document.getElementById('newQCredits').value) || 150,
+        explanation: document.getElementById('newQExplanation').value.trim()
+      };
+      DB.quizzes.push(newQ);
+      saveDB();
+      e.target.reset();
+      showAdminToast('🎮 Nueva pregunta agregada a Mis Retos');
+    }
+
+    function updateQuizField(qid, field, val) {
+      const q = (DB.quizzes || []).find(x => x.id === qid);
+      if (!q) return;
+      q[field] = val;
+      saveDB();
+      showAdminToast('✅ Pregunta actualizada');
+    }
+
+    function updateQuizOption(qid, optIdx, val) {
+      const q = (DB.quizzes || []).find(x => x.id === qid);
+      if (!q || !q.options) return;
+      q.options[optIdx] = val;
+      saveDB();
+      showAdminToast('✅ Opción actualizada');
+    }
+
+    function deleteQuiz(qid) {
+      DB.quizzes = (DB.quizzes || []).filter(x => x.id !== qid);
+      saveDB();
+      showAdminToast('🗑️ Pregunta eliminada');
+    }
+
+    /* 3. MODULES & TOP NAV EDITORS */
+    function renderModulesEditor() {
+      const container = document.getElementById('appModulesEditorContainer');
+      container.innerHTML = (DB.appModules || []).map((m, idx) => `
+        <div class="editor-item-card" style="border-top: 5px solid ${m.color};">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="font-size:0.95rem;">${m.icon} ${m.title} (ID: ${m.id})</strong>
+            <label style="font-size:0.78rem; font-weight:800; display:flex; align-items:center; gap:5px;">
+              <input type="checkbox" id="mod-en-${idx}" ${m.enabled !== false ? 'checked' : ''} /> Visible
+            </label>
+          </div>
+          <div style="display:grid; grid-template-columns:70px 1fr 80px; gap:8px;">
+            <div class="field-box">
+              <label>Ícono</label>
+              <input type="text" class="input" id="mod-ico-${idx}" value="${m.icon}" />
+            </div>
+            <div class="field-box">
+              <label>Título del Botón</label>
+              <input type="text" class="input" id="mod-title-${idx}" value="${m.title}" />
+            </div>
+            <div class="field-box">
+              <label>Color</label>
+              <input type="color" class="input" style="height:38px; padding:3px;" id="mod-col-${idx}" value="${m.color}" />
+            </div>
+          </div>
+          <div class="field-box">
+            <label>Subtítulo en botón</label>
+            <input type="text" class="input" id="mod-sub-${idx}" value="${m.subtitle || ''}" />
+          </div>
+          <div class="field-box">
+            <label>Descripción / Información dentro del módulo</label>
+            <textarea class="input" rows="2" id="mod-desc-${idx}">${m.description || ''}</textarea>
+          </div>
+          <div class="field-box">
+            <label>Aviso destacado dentro del módulo</label>
+            <input type="text" class="input" id="mod-notice-${idx}" value="${m.customNotice || ''}" />
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function saveModulesChanges() {
+      (DB.appModules || []).forEach((m, idx) => {
+        m.enabled = document.getElementById('mod-en-' + idx).checked;
+        m.icon = document.getElementById('mod-ico-' + idx).value.trim();
+        m.title = document.getElementById('mod-title-' + idx).value.trim();
+        m.color = document.getElementById('mod-col-' + idx).value;
+        m.subtitle = document.getElementById('mod-sub-' + idx).value.trim();
+        m.description = document.getElementById('mod-desc-' + idx).value.trim();
+        m.customNotice = document.getElementById('mod-notice-' + idx).value.trim();
+      });
+      saveDB();
+      showAdminToast('💾 Los 6 botones del celular se actualizaron en vivo');
+    }
+
+    function renderTopNavEditor() {
+      const container = document.getElementById('topNavEditorContainer');
+      container.innerHTML = (DB.topNav || []).map((n, idx) => `
+        <div class="editor-item-card">
+          <strong style="color:#001B3D;">${n.icon} Botón Superior: ${n.title}</strong>
+          <div style="display:grid; grid-template-columns:70px 1fr; gap:8px;">
+            <div class="field-box">
+              <label>Ícono</label>
+              <input type="text" class="input" id="tn-ico-${idx}" value="${n.icon}" />
+            </div>
+            <div class="field-box">
+              <label>Nombre del Botón</label>
+              <input type="text" class="input" id="tn-title-${idx}" value="${n.title}" />
+            </div>
+          </div>
+          <div class="field-box">
+            <label>Encabezado de Ventana</label>
+            <input type="text" class="input" id="tn-sub-${idx}" value="${n.subtitle || ''}" />
+          </div>
+          <div class="field-box">
+            <label>Descripción Institucional</label>
+            <textarea class="input" rows="2" id="tn-desc-${idx}">${n.description || ''}</textarea>
+          </div>
+          <div class="field-box">
+            <label>Puntos Clave (1 por línea)</label>
+            <textarea class="input" rows="3" id="tn-hl-${idx}">${(n.highlights || []).join('\n')}</textarea>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function saveTopNavChanges() {
+      (DB.topNav || []).forEach((n, idx) => {
+        n.icon = document.getElementById('tn-ico-' + idx).value.trim();
+        n.title = document.getElementById('tn-title-' + idx).value.trim();
+        n.subtitle = document.getElementById('tn-sub-' + idx).value.trim();
+        n.description = document.getElementById('tn-desc-' + idx).value.trim();
+        n.highlights = document.getElementById('tn-hl-' + idx).value.split('\n').map(s => s.trim()).filter(Boolean);
+      });
+      saveDB();
+      showAdminToast('💾 Botones superiores institucionales actualizados');
+    }
+
+    /* 4. CATALOGS EDITOR (Careers, Rewards, How It Works) */
+    function renderCatalogsEditor() {
+      // Careers
+      const cCont = document.getElementById('careersEditorContainer');
+      cCont.innerHTML = (DB.careers || []).map((c, idx) => `
+        <div class="editor-item-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>${c.icon || '🎓'} ${c.name}</strong>
+            <button class="btn btn-danger" style="padding:4px 8px; font-size:0.72rem;" onclick="deleteCareer('${c.id}')">🗑️</button>
+          </div>
+          <div class="field-box">
+            <label>Nombre de la Carrera</label>
+            <input type="text" class="input" value="${c.name}" onchange="updateCareerField('${c.id}', 'name', this.value)" />
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div class="field-box">
+              <label>Área</label>
+              <input type="text" class="input" value="${c.area}" onchange="updateCareerField('${c.id}', 'area', this.value)" />
+            </div>
+            <div class="field-box">
+              <label>Modalidades</label>
+              <input type="text" class="input" value="${c.modality}" onchange="updateCareerField('${c.id}', 'modality', this.value)" />
+            </div>
+          </div>
+          <div class="field-box">
+            <label>Descripción</label>
+            <textarea class="input" rows="2" onchange="updateCareerField('${c.id}', 'description', this.value)">${c.description}</textarea>
+          </div>
+        </div>
+      `).join('');
+
+      // Rewards
+      const rCont = document.getElementById('rewardsEditorContainer');
+      rCont.innerHTML = (DB.rewards || []).map(r => `
+        <div class="editor-item-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>${r.icon || '🎁'} ${r.title}</strong>
+            <button class="btn btn-danger" style="padding:4px 8px; font-size:0.72rem;" onclick="deleteReward('${r.id}')">🗑️</button>
+          </div>
+          <div class="field-box">
+            <label>Título de Recompensa / Beca</label>
+            <input type="text" class="input" value="${r.title}" onchange="updateRewardField('${r.id}', 'title', this.value)" />
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div class="field-box">
+              <label>Costo en Créditos ⭐</label>
+              <input type="number" class="input" value="${r.cost}" onchange="updateRewardField('${r.id}', 'cost', Number(this.value))" />
+            </div>
+            <div class="field-box">
+              <label>Prefijo Cupón</label>
+              <input type="text" class="input" value="${r.codePrefix || 'UNID'}" onchange="updateRewardField('${r.id}', 'codePrefix', this.value)" />
+            </div>
+          </div>
+          <div class="field-box">
+            <label>Descripción</label>
+            <textarea class="input" rows="2" onchange="updateRewardField('${r.id}', 'description', this.value)">${r.description}</textarea>
+          </div>
+        </div>
+      `).join('');
+
+      // How It Works
+      const hCont = document.getElementById('howItWorksEditorContainer');
+      hCont.innerHTML = (DB.howItWorks || []).map((st, idx) => `
+        <div class="editor-item-card">
+          <strong>Paso ${st.step}: ${st.title}</strong>
+          <div class="field-box">
+            <label>Título en "¿Cómo funciona?"</label>
+            <input type="text" class="input" id="hw-title-${idx}" value="${st.title}" />
+          </div>
+          <div class="field-box">
+            <label>Etiqueta en "Etapas del juego"</label>
+            <input type="text" class="input" id="hw-stage-${idx}" value="${st.stageName || st.title}" />
+          </div>
+          <div class="field-box">
+            <label>Descripción</label>
+            <textarea class="input" rows="2" id="hw-desc-${idx}">${st.desc}</textarea>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateCareerField(cid, f, v) {
+      const c = (DB.careers || []).find(x => x.id === cid);
+      if (c) { c[f] = v; saveDB(); showAdminToast('✅ Carrera actualizada'); }
+    }
+
+    function deleteCareer(cid) {
+      DB.careers = (DB.careers || []).filter(x => x.id !== cid);
+      saveDB();
+      showAdminToast('🗑️ Carrera eliminada');
+    }
+
+    function addNewCareerPrompt() {
+      DB.careers.push({
+        id: 'c_' + Date.now(),
+        name: 'Nueva Licenciatura / Ingeniería UNID',
+        area: 'Negocios e Innovación',
+        duration: '3 años (9 cuatrimestres)',
+        modality: 'Escolarizada / Ejecutiva',
+        icon: '🎓',
+        creditsBonus: 50,
+        description: 'Programa académico UNID con Estadía Empresarial integrada.'
+      });
+      saveDB();
+      showAdminToast('➕ Nueva carrera añadida (edítala en la tarjeta)');
+    }
+
+    function updateRewardField(rid, f, v) {
+      const r = (DB.rewards || []).find(x => x.id === rid);
+      if (r) { r[f] = v; saveDB(); showAdminToast('✅ Recompensa actualizada'); }
+    }
+
+    function deleteReward(rid) {
+      DB.rewards = (DB.rewards || []).filter(x => x.id !== rid);
+      saveDB();
+      showAdminToast('🗑️ Recompensa eliminada');
+    }
+
+    function addNewRewardPrompt() {
+      DB.rewards.push({
+        id: 'r_' + Date.now(),
+        title: 'Nuevo Beneficio Exclusivo UNID',
+        cost: 400,
+        icon: '🎁',
+        codePrefix: 'UNID-BECA',
+        description: 'Beneficio especial canjeable en admisiones de tu campus.'
+      });
+      saveDB();
+      showAdminToast('➕ Nueva recompensa añadida');
+    }
+
+    function saveHowItWorksChanges() {
+      (DB.howItWorks || []).forEach((st, idx) => {
+        st.title = document.getElementById('hw-title-' + idx).value.trim();
+        st.stageName = document.getElementById('hw-stage-' + idx).value.trim();
+        st.desc = document.getElementById('hw-desc-' + idx).value.trim();
+        st.stageDesc = st.desc;
+      });
+      saveDB();
+      showAdminToast('💾 Etapas del juego actualizadas');
+    }
+
+    /* 5. NOTIFICATIONS, INQUIRIES & GENERAL SETTINGS */
+    function adminSendPushNotification(e) {
+      e.preventDefault();
+      const title = document.getElementById('pushTitle').value.trim();
+      const body = document.getElementById('pushBody').value.trim();
+      const bonus = Number(document.getElementById('pushBonusCredits').value) || 0;
+
+      const notif = {
+        id: 'notif_' + Date.now(),
+        title,
+        body: bonus > 0 ? `${body} (🎁 +${bonus} créditos de regalo)` : body,
+        date: 'Ahora mismo',
+        unread: true,
+        bonusCredits: bonus
+      };
+
+      if (!DB.notifications) DB.notifications = [];
+      DB.notifications.unshift(notif);
+
+      if (bonus > 0) {
+        (DB.users || []).forEach(u => {
+          u.credits = Number(u.credits || 0) + bonus;
+        });
+      }
+
+      saveDB(notif);
+      e.target.reset();
+      showAdminToast('🚀 Notificación enviada en tiempo real a index.html');
+    }
+
+    function renderInquiriesAndSettings() {
+      const inqCont = document.getElementById('inquiriesContainer');
+      const inqs = DB.inquiries || [];
+      if (inqs.length === 0) {
+        inqCont.innerHTML = `<p style="color:#64748B; font-size:0.86rem;">No hay preguntas pendientes por el momento.</p>`;
+      } else {
+        inqCont.innerHTML = inqs.map(inq => `
+          <div class="editor-item-card" style="margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#475569;">
+              <strong>👤 ${inq.userName} (📱 ${inq.userPhone} • ${inq.campus})</strong>
+              <span>${inq.date}</span>
+            </div>
+            <p style="font-size:0.9rem; font-weight:700; color:#001B3D;">"${inq.message}"</p>
+          </div>
+        `).join('');
+      }
+
+      const s = DB.settings || DEFAULT_DB.settings;
+      const gCont = document.getElementById('generalSettingsContainer');
+      gCont.innerHTML = `
+        <div class="field-box">
+          <label>Nombre Institucional</label>
+          <input type="text" class="input" id="setBrandName" value="${s.brandName || 'UNID'}" />
+        </div>
+        <div class="field-box">
+          <label>Lema Institucional</label>
+          <input type="text" class="input" id="setBrandSlogan" value="${s.brandSlogan || 'LO VIVO LO APLICO®'}" />
+        </div>
+        <div class="field-box">
+          <label>Nivel Inicial al Registrarse (Solicitado: Nivel 2)</label>
+          <input type="number" class="input" id="setInitialLevel" value="${s.initialLevel || 2}" min="1" max="10" />
+        </div>
+        <div class="field-box">
+          <label>Créditos Iniciales al Registrarse</label>
+          <input type="number" class="input" id="setInitialCredits" value="${s.initialCredits || 750}" step="50" />
+        </div>
+        <div class="field-box" style="grid-column: span 2;">
+          <label>Mensaje del Globo de Uriel</label>
+          <input type="text" class="input" id="setMascotBubble" value="${(s.mascotBubble || '').replace(/"/g, '&quot;')}" />
+        </div>
+        <div class="field-box" style="grid-column: span 2;">
+          <label>Banner Amarillo de Promoción</label>
+          <input type="text" class="input" id="setPromoBanner" value="${(s.promoBannerText || '').replace(/"/g, '&quot;')}" />
+        </div>
+      `;
+    }
+
+    function saveGeneralSettings() {
+      DB.settings.brandName = document.getElementById('setBrandName').value.trim();
+      DB.settings.brandSlogan = document.getElementById('setBrandSlogan').value.trim();
+      DB.settings.initialLevel = Number(document.getElementById('setInitialLevel').value) || 2;
+      DB.settings.initialCredits = Number(document.getElementById('setInitialCredits').value) || 750;
+      DB.settings.mascotBubble = document.getElementById('setMascotBubble').value.trim();
+      DB.settings.promoBannerText = document.getElementById('setPromoBanner').value.trim();
+      saveDB();
+      showAdminToast('💾 Configuración institucional actualizada');
+    }
+
+    /* EXPORT CSV & JSON */
+    function exportRegistrationsCSV() {
+      const rows = [
+        ['ID', 'Nombre Completo', 'Celular', 'Correo', 'Campus', 'Carrera de Interes', 'Nivel', 'Creditos', 'Retos Completados', 'Cupones Canjeados', 'Fecha Registro']
+      ];
+      (DB.users || []).forEach(u => {
+        const codes = (u.redeemedRewards || []).map(r => r.code).join(' | ');
+        rows.push([
+          u.id,
+          u.name,
+          u.phone,
+          u.email || '',
+          u.campus || '',
+          u.careerInterest || '',
+          u.level,
+          u.credits,
+          (u.completedQuizzes || []).length,
+          codes,
+          u.registeredAt || ''
+        ]);
+      });
+      const csvContent = '\uFEFF' + rows.map(r => r.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'registros_unid_futuro_quest.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+      showAdminToast('📊 Archivo CSV descargado');
+    }
+
+    function exportFullJSON() {
+      const blob = new Blob([JSON.stringify(DB, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'unid_futuro_quest_backup.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showAdminToast('💾 Respaldo JSON descargado');
+    }
+
+    function resetToDefaults() {
+      if (confirm('¿Deseas restaurar todos los datos, botones y preguntas a los valores institucionales por defecto?')) {
+        DB = JSON.parse(JSON.stringify(DEFAULT_DB));
+        saveDB();
+        showAdminToast('🔄 Plataforma restaurada a valores de fábrica');
+      }
+    }
+
+    renderAdminAll();
+  </script>
+
+  <!-- Firebase Official Modular SDK (Conectado a quiniela-mundial-417fa) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    import {
+      getDatabase,
+      ref,
+      set as rtdbSet,
+      onValue as rtdbOnValue
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDcd6TgX2ykq_f7ipM_8iGEdQYA4xrmO_k",
+      authDomain: "quiniela-mundial-417fa.firebaseapp.com",
+      projectId: "quiniela-mundial-417fa",
+      storageBucket: "quiniela-mundial-417fa.firebasestorage.app",
+      messagingSenderId: "662664011522",
+      appId: "1:662664011522:web:5efb1805888f252addac1b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    let firestoreDb = null;
+    let realtimeDb = null;
+    let isRemoteUpdating = false;
+
+    function updateBadgeStatus(text, color = '#22C55E') {
+      const admStatus = document.getElementById('adminFirebaseBadge');
+      if (admStatus) {
+        admStatus.innerHTML = text;
+        admStatus.style.borderColor = color;
+      }
+    }
+
+    try {
+      firestoreDb = getFirestore(app);
+      const stateDocRef = doc(firestoreDb, "unid_futuro_quest", "platform_state");
+
+      onSnapshot(stateDocRef, (snapshot) => {
+        updateBadgeStatus('🟢 Firebase Activo (<strong>quiniela-mundial-417fa</strong> • Firestore)', '#22C55E');
+        if (snapshot.exists()) {
+          const remoteData = snapshot.data();
+          if (remoteData && remoteData.payload) {
+            try {
+              const parsed = typeof remoteData.payload === 'string' ? JSON.parse(remoteData.payload) : remoteData.payload;
+              isRemoteUpdating = true;
+              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(parsed));
+              if (typeof window.onFirebaseRemoteUpdate === 'function') {
+                window.onFirebaseRemoteUpdate(parsed);
+              }
+              setTimeout(() => { isRemoteUpdating = false; }, 150);
+            } catch (e) {}
+          }
+        } else {
+          const currentRaw = localStorage.getItem('UNID_FQ_DB_V1');
+          if (currentRaw) {
+            setDoc(stateDocRef, {
+              payload: currentRaw,
+              updatedAt: new Date().toISOString(),
+              project: "UNID FUTURO QUEST"
+            }).catch(() => {});
+          }
+        }
+      }, () => {
+        initRealtimeDbFallback();
+      });
+    } catch (err) {
+      initRealtimeDbFallback();
+    }
+
+    function initRealtimeDbFallback() {
+      try {
+        realtimeDb = getDatabase(app);
+        const stateRef = ref(realtimeDb, "unid_futuro_quest/platform_state");
+        rtdbOnValue(stateRef, (snap) => {
+          updateBadgeStatus('🟢 Firebase Activo (<strong>quiniela-mundial-417fa</strong> • RTDB)', '#22C55E');
+          const val = snap.val();
+          if (val && val.payload) {
+            try {
+              const parsed = typeof val.payload === 'string' ? JSON.parse(val.payload) : val.payload;
+              isRemoteUpdating = true;
+              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(parsed));
+              if (typeof window.onFirebaseRemoteUpdate === 'function') {
+                window.onFirebaseRemoteUpdate(parsed);
+              }
+              setTimeout(() => { isRemoteUpdating = false; }, 150);
+            } catch (e) {}
+          }
+        }, () => {
+          updateBadgeStatus('🟡 Firebase Configurado (<strong>quiniela-mundial-417fa</strong>)', '#FACC15');
+        });
+      } catch (e) {
+        updateBadgeStatus('🟡 Firebase Configurado (<strong>quiniela-mundial-417fa</strong>)', '#FACC15');
+      }
+    }
+
+    window.pushStateToFirebase = async function(dbObject, notificationObj = null) {
+      if (isRemoteUpdating) return;
+      const serialized = JSON.stringify(dbObject);
+      const record = {
+        payload: serialized,
+        updatedAt: new Date().toISOString(),
+        totalUsers: (dbObject.users || []).length,
+        lastNotification: notificationObj ? {
+          id: notificationObj.id || ('n_' + Date.now()),
+          title: notificationObj.title,
+          body: notificationObj.body,
+          ts: Date.now()
+        } : null
+      };
+
+      if (firestoreDb) {
+        try {
+          const stateDocRef = doc(firestoreDb, "unid_futuro_quest", "platform_state");
+          await setDoc(stateDocRef, record, { merge: true });
+          updateBadgeStatus('🟢 Sincronizado con Firebase (<strong>quiniela-mundial-417fa</strong>)', '#22C55E');
+        } catch (err) {}
+      }
+      if (realtimeDb) {
+        try {
+          const stateRef = ref(realtimeDb, "unid_futuro_quest/platform_state");
+          await rtdbSet(stateRef, record);
+        } catch (err) {}
+      }
+    };
+  </script>
+
+</body>
+</html>

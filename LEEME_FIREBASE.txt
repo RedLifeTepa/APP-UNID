@@ -1,0 +1,26 @@
+===================================================================
+UNID FUTURO QUEST — VERSIÓN OFICIAL CONECTADA A FIREBASE
+Proyecto Firebase: quiniela-mundial-417fa
+===================================================================
+
+ARCHIVOS INCLUIDOS:
+1. index.html          -> Aplicación principal PWA para celulares y computadoras (Nivel 2 con acceso total).
+2. config.html         -> Panel de Control Administrativo en tiempo real.
+3. confy.com.html      -> Alias directo del panel de administración (idéntico a config.html).
+4. firebase-config.js  -> Módulo oficial NPM con tus credenciales de Firebase.
+5. package.json        -> Configuración lista para `npm install` y despliegue.
+6. manifest.json / sw.js / icon-192.png / icon-512.png -> Archivos de instalación PWA.
+
+CÓMO FUNCIONA LA CONEXIÓN A FIREBASE:
+- `index.html` y `config.html` ya tienen integrado el SDK Modular Oficial de Firebase v10.14.1 con tus credenciales (`quiniela-mundial-417fa`).
+- Sincroniza automáticamente con Cloud Firestore (colección `unid_futuro_quest`, documento `platform_state`) y cuenta con respaldo automático en Realtime Database (`unid_futuro_quest/platform_state`) y almacenamiento local.
+- Para que cualquier celular o computadora escriba y lea sin restricciones durante tus pruebas, asegúrate de que en tu consola de Firebase (https://console.firebase.google.com/project/quiniela-mundial-417fa/firestore/rules) las reglas permitan lectura/escritura en la colección `unid_futuro_quest`:
+
+  rules_version = '2';
+  service cloud.firestore {
+    match /databases/{database}/documents {
+      match /unid_futuro_quest/{document=**} {
+        allow read, write: if true;
+      }
+    }
+  }
