@@ -1,16 +1,17 @@
 // Configuración Oficial de Firebase — UNID FUTURO QUEST
+// Proyecto: project-2998039825269712276
 // Compatible con NPM (npm install firebase) y ES Modules
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, getDocs, deleteDoc } from "firebase/firestore";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDcd6TgX2ykq_f7ipM_8iGEdQYA4xrmO_k",
-  authDomain: "quiniela-mundial-417fa.firebaseapp.com",
-  projectId: "quiniela-mundial-417fa",
-  storageBucket: "quiniela-mundial-417fa.firebasestorage.app",
-  messagingSenderId: "662664011522",
-  appId: "1:662664011522:web:5efb1805888f252addac1b"
+  apiKey: "AIzaSyDEN0sX4mJacYQSNcuIc2xMMUlgy3rfFQU",
+  authDomain: "project-2998039825269712276.firebaseapp.com",
+  projectId: "project-2998039825269712276",
+  storageBucket: "project-2998039825269712276.firebasestorage.app",
+  messagingSenderId: "401905115506",
+  appId: "1:401905115506:web:b4a36539d945bd8849fdeb"
 };
 
 export const app = initializeApp(firebaseConfig);

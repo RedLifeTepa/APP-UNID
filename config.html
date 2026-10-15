@@ -19,11 +19,21 @@
       --border-col: #CBD5E1;
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      overscroll-behavior-x: none;
+      touch-action: pan-y pinch-zoom;
+      position: relative;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
@@ -167,7 +177,7 @@
     /* KPI Row */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
       gap: 16px;
     }
 
@@ -311,7 +321,7 @@
     /* Forms & Grid Editors */
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
       gap: 14px;
     }
 
@@ -343,7 +353,7 @@
 
     .editor-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
       gap: 16px;
     }
 
@@ -372,6 +382,73 @@
       font-weight: 700;
       display: none;
     }
+
+    .span-2-desktop {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 768px) {
+      .span-2-desktop {
+        grid-column: span 1 !important;
+      }
+      .admin-header {
+        padding: 12px 14px;
+        gap: 10px;
+      }
+      .admin-brand-title {
+        font-size: 1.15rem;
+        flex-wrap: wrap;
+      }
+      .admin-top-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        width: 100%;
+      }
+      .admin-top-actions .btn {
+        justify-content: center;
+        text-align: center;
+        padding: 8px 6px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .admin-container {
+        margin: 12px auto;
+        padding: 0 12px 30px;
+        gap: 14px;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .kpi-card {
+        padding: 12px 14px;
+      }
+      .kpi-val {
+        font-size: 1.45rem;
+      }
+      .tabs-bar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+        padding: 6px;
+      }
+      .tabs-bar .tab-btn {
+        justify-content: center;
+        text-align: center;
+        padding: 9px 6px;
+        font-size: 0.75rem;
+        line-height: 1.2;
+      }
+      .tabs-bar .tab-btn:last-child {
+        grid-column: 1 / -1;
+      }
+      .panel-card {
+        padding: 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -383,21 +460,33 @@
       <div>
         <div class="admin-brand-title">
           <span>UNID FUTURO QUEST</span>
-          <span class="admin-badge">PANEL DE CONTROL • Acceso Directo por Link</span> <span id="adminFirebaseBadge" style="font-size:0.74rem; background:rgba(0,0,0,0.35); border:1px solid #22C55E; padding:3px 10px; border-radius:99px;">🔥 Firebase: quiniela-mundial-417fa</span>
+          <span class="admin-badge">PANEL DE CONTROL • Acceso Directo por Link</span> <span id="adminFirebaseBadge" style="font-size:0.74rem; background:rgba(0,0,0,0.35); border:1px solid #22C55E; padding:3px 10px; border-radius:99px;">🔥 Firebase: project-2998039825269712276</span>
         </div>
         <div class="admin-sub">Control total de registros de usuarios, preguntas de quizzes, botones, módulos, recompensas y notificaciones en tiempo real.</div>
       </div>
     </div>
 
     <div class="admin-top-actions">
-      <a href="index.html" class="btn btn-gold">📱 Ver App Pública (index.html)</a>
-      <button class="btn btn-outline" onclick="exportRegistrationsCSV()">📊 Exportar Registros (CSV / Excel)</button>
-      <button class="btn btn-outline" onclick="exportFullJSON()">💾 Descargar Respaldo JSON</button>
-      <button class="btn btn-danger" onclick="resetToDefaults()">🔄 Restaurar de Fábrica</button>
+      <button type="button" class="btn btn-gold" onclick="window.location.assign('index.html')">📱 Ver App Pública (index.html)</button>
+      <button class="btn btn-outline" onclick="window.forcePullFromFirebase && window.forcePullFromFirebase()">🔄 Sincronizar Ahora</button>
+      <button class="btn btn-outline" style="border-color:#FACC15; color:#FEF08A;" onclick="openFirebaseRulesModal()">🔥 Reglas de Firebase</button>
+      <button class="btn btn-outline" onclick="exportRegistrationsCSV()">📊 Exportar CSV / Excel</button>
+      <button class="btn btn-outline" onclick="exportFullJSON()">💾 Respaldo JSON</button>
+      <button class="btn btn-danger" onclick="resetToDefaults()">🔄 Restaurar</button>
     </div>
   </header>
 
   <main class="admin-container">
+    <!-- Aviso automático si faltan permisos en las Reglas de Firebase -->
+    <div id="firebaseRulesWarning" style="display:none; background:#FEF2F2; border:2px solid #EF4444; color:#7F1D1D; padding:16px 20px; border-radius:16px; box-shadow:0 8px 20px rgba(239,68,68,0.15);">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+        <div>
+          <strong style="font-size:1rem; display:block; margin-bottom:4px;">⚠️ Acción Requerida en tu Consola de Firebase (project-2998039825269712276): Permisos Bloqueados</strong>
+          <span style="font-size:0.85rem;">Las reglas actuales de tu proyecto Firebase están rechazando la lectura/escritura de nuevos usuarios. Haz clic en el botón de la derecha para copiar y pegar las reglas en tu consola de Firebase.</span>
+        </div>
+        <button class="btn btn-gold" onclick="openFirebaseRulesModal()">📋 Ver y Copiar Reglas de Firebase</button>
+      </div>
+    </div>
 
     <!-- KPI Metrics -->
     <section class="kpi-grid">
@@ -526,7 +615,7 @@
         </div>
         <form onsubmit="adminAddQuiz(event)">
           <div class="form-grid" style="margin-bottom:12px;">
-            <div class="field-box" style="grid-column: span 2;">
+            <div class="field-box span-2-desktop">
               <label>Pregunta de la Trivia / Quiz *</label>
               <input type="text" id="newQQuestion" class="input" placeholder="Ej. ¿Cuál es la duración de las licenciaturas cuatrimestrales en UNID?" required />
             </div>
@@ -569,7 +658,7 @@
                 <option value="3">Opción 4</option>
               </select>
             </div>
-            <div class="field-box" style="grid-column: span 2;">
+            <div class="field-box span-2-desktop">
               <label>Mensaje de retroalimentación de Uriel al responder bien</label>
               <input type="text" id="newQExplanation" class="input" placeholder="¡Excelente! Has sumado créditos para tu descuento de inscripción." value="¡Excelente respuesta! Sigue acumulando créditos UNID." />
             </div>
@@ -651,7 +740,7 @@
             <label>Título de la Notificación *</label>
             <input type="text" id="pushTitle" class="input" placeholder="Ej. 🦊 ¡Bono Doble de Créditos Hoy!" required />
           </div>
-          <div class="field-box" style="grid-column: span 2;">
+          <div class="field-box span-2-desktop">
             <label>Mensaje para los Estudiantes *</label>
             <input type="text" id="pushBody" class="input" placeholder="Ej. Entra a Mis Retos y obtén tu descuento preferencial de inscripción en UNID." required />
           </div>
@@ -816,6 +905,7 @@
       const u = (DB.users || []).find(x => x.id === uid);
       if (!u) return;
       u[field] = val;
+      u.adminEdited = true;
       saveDB();
       showAdminToast(`✅ Registro de ${u.name} actualizado en vivo`);
     }
@@ -829,7 +919,12 @@
     }
 
     function deleteUser(uid) {
+      if (!DB.deletedUserIds) DB.deletedUserIds = [];
+      if (!DB.deletedUserIds.includes(uid)) DB.deletedUserIds.push(uid);
       DB.users = (DB.users || []).filter(x => x.id !== uid);
+      if (typeof window.deleteUserFromFirebase === 'function') {
+        window.deleteUserFromFirebase(uid);
+      }
       saveDB();
       showAdminToast('🗑️ Registro eliminado');
     }
@@ -1252,13 +1347,17 @@
           <label>Créditos Iniciales al Registrarse</label>
           <input type="number" class="input" id="setInitialCredits" value="${s.initialCredits || 750}" step="50" />
         </div>
-        <div class="field-box" style="grid-column: span 2;">
+        <div class="field-box span-2-desktop">
           <label>Mensaje del Globo de Uriel</label>
           <input type="text" class="input" id="setMascotBubble" value="${(s.mascotBubble || '').replace(/"/g, '&quot;')}" />
         </div>
-        <div class="field-box" style="grid-column: span 2;">
+        <div class="field-box span-2-desktop">
           <label>Banner Amarillo de Promoción</label>
           <input type="text" class="input" id="setPromoBanner" value="${(s.promoBannerText || '').replace(/"/g, '&quot;')}" />
+        </div>
+        <div class="field-box span-2-desktop">
+          <label>🔗 Dirección / URL del Código QR</label>
+          <input type="text" class="input" id="setQrTargetUrl" value="${(s.qrTargetUrl || 'file:///C:/Users/Bryan%20Delgadillo/Documents/GitHub/APP-UNID/index.html').replace(/"/g, '&quot;')}" />
         </div>
       `;
     }
@@ -1270,8 +1369,9 @@
       DB.settings.initialCredits = Number(document.getElementById('setInitialCredits').value) || 750;
       DB.settings.mascotBubble = document.getElementById('setMascotBubble').value.trim();
       DB.settings.promoBannerText = document.getElementById('setPromoBanner').value.trim();
+      DB.settings.qrTargetUrl = document.getElementById('setQrTargetUrl').value.trim() || 'file:///C:/Users/Bryan%20Delgadillo/Documents/GitHub/APP-UNID/index.html';
       saveDB();
-      showAdminToast('💾 Configuración institucional actualizada');
+      showAdminToast('💾 Configuración institucional y URL del QR actualizadas');
     }
 
     /* EXPORT CSV & JSON */
@@ -1318,23 +1418,76 @@
     }
 
     function resetToDefaults() {
-      if (confirm('¿Deseas restaurar todos los datos, botones y preguntas a los valores institucionales por defecto?')) {
-        DB = JSON.parse(JSON.stringify(DEFAULT_DB));
-        saveDB();
-        showAdminToast('🔄 Plataforma restaurada a valores de fábrica');
-      }
+      DB = JSON.parse(JSON.stringify(DEFAULT_DB));
+      saveDB();
+      showAdminToast('🔄 Plataforma restaurada a valores de fábrica');
     }
 
     renderAdminAll();
   </script>
 
-  <!-- Firebase Official Modular SDK (Conectado a quiniela-mundial-417fa) -->
+  <!-- Modal de Reglas Oficiales de Firebase -->
+  <div id="fbRulesModal" style="position:fixed; inset:0; background:rgba(0,12,32,0.78); backdrop-filter:blur(5px); z-index:3000; display:none; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:#FFFFFF; color:#0F172A; max-width:680px; width:100%; border-radius:20px; overflow:hidden; box-shadow:0 25px 60px rgba(0,0,0,0.5); max-height:90vh; display:flex; flex-direction:column;">
+      <div style="background:linear-gradient(135deg,#001B3D,#003882); color:#FFF; padding:16px 20px; display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="font-size:1.05rem; font-weight:900;">🔥 Reglas de Firebase para Guardar y Cargar Usuarios (project-2998039825269712276)</h3>
+        <button onclick="document.getElementById('fbRulesModal').style.display='none'" style="background:rgba(255,255,255,0.15); color:#FFF; border:none; width:32px; height:32px; border-radius:50%; cursor:pointer;">✕</button>
+      </div>
+      <div style="padding:20px; overflow-y:auto; font-size:0.86rem; line-height:1.5;">
+        <p style="margin-bottom:12px; color:#334155;">
+          Para que los usuarios registrados en <code>index.html</code> (incluso abriéndolo como archivo local <code>file:///...</code>) se guarden y aparezcan al instante en <code>config.html</code>, pega estas reglas en tu consola de Firebase:
+        </p>
+
+        <div style="background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:12px; padding:14px; margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+            <strong style="color:#001B3D;">1️⃣ En Cloud Firestore (Firestore Database ➔ pestaña "Reglas" / "Rules"):</strong>
+            <a href="https://console.firebase.google.com/project/project-2998039825269712276/firestore/rules" target="_blank" style="color:#0055B3; font-weight:800; font-size:0.8rem;">🔗 Abrir Consola Firestore Rules ↗</a>
+          </div>
+          <pre id="firestoreRulesCode" style="background:#0F172A; color:#38BDF8; padding:12px; border-radius:10px; overflow-x:auto; font-family:monospace; font-size:0.8rem;">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}</pre>
+          <button class="btn btn-gold" style="margin-top:8px; width:100%; justify-content:center;" onclick="navigator.clipboard.writeText(document.getElementById('firestoreRulesCode').innerText); showAdminToast('📋 Reglas de Cloud Firestore copiadas');">📋 Copiar Reglas de Cloud Firestore</button>
+        </div>
+
+        <div style="background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:12px; padding:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+            <strong style="color:#001B3D;">2️⃣ En Realtime Database (Opcional de respaldo ➔ pestaña "Reglas" / "Rules"):</strong>
+            <a href="https://console.firebase.google.com/project/project-2998039825269712276/database/project-2998039825269712276-default-rtdb/rules" target="_blank" style="color:#0055B3; font-weight:800; font-size:0.8rem;">🔗 Abrir Consola Realtime DB Rules ↗</a>
+          </div>
+          <pre id="rtdbRulesCode" style="background:#0F172A; color:#A7F3D0; padding:12px; border-radius:10px; overflow-x:auto; font-family:monospace; font-size:0.8rem;">{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}</pre>
+          <button class="btn btn-navy" style="margin-top:8px; width:100%; justify-content:center;" onclick="navigator.clipboard.writeText(document.getElementById('rtdbRulesCode').innerText); showAdminToast('📋 Reglas de Realtime Database copiadas');">📋 Copiar Reglas de Realtime Database</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openFirebaseRulesModal() {
+      document.getElementById('fbRulesModal').style.display = 'flex';
+    }
+  </script>
+
+  <!-- Firebase Official Modular SDK (Conectado a project-2998039825269712276 con fusión de usuarios en tiempo real) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
     import {
       getFirestore,
       doc,
+      getDoc,
       setDoc,
+      deleteDoc,
+      collection,
+      getDocs,
       onSnapshot
     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
     import {
@@ -1345,12 +1498,12 @@
     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDcd6TgX2ykq_f7ipM_8iGEdQYA4xrmO_k",
-      authDomain: "quiniela-mundial-417fa.firebaseapp.com",
-      projectId: "quiniela-mundial-417fa",
-      storageBucket: "quiniela-mundial-417fa.firebasestorage.app",
-      messagingSenderId: "662664011522",
-      appId: "1:662664011522:web:5efb1805888f252addac1b"
+      apiKey: "AIzaSyDEN0sX4mJacYQSNcuIc2xMMUlgy3rfFQU",
+      authDomain: "project-2998039825269712276.firebaseapp.com",
+      projectId: "project-2998039825269712276",
+      storageBucket: "project-2998039825269712276.firebasestorage.app",
+      messagingSenderId: "401905115506",
+      appId: "1:401905115506:web:b4a36539d945bd8849fdeb"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -1358,29 +1511,74 @@
     let realtimeDb = null;
     let isRemoteUpdating = false;
 
-    function updateBadgeStatus(text, color = '#22C55E') {
+    function updateBadgeStatus(text, color = '#22C55E', showRulesWarn = false) {
       const admStatus = document.getElementById('adminFirebaseBadge');
       if (admStatus) {
         admStatus.innerHTML = text;
         admStatus.style.borderColor = color;
       }
+      const warnBox = document.getElementById('firebaseRulesWarning');
+      if (warnBox) {
+        warnBox.style.display = showRulesWarn ? 'block' : 'none';
+      }
+    }
+
+    function mergeAdminAndRemoteDB(localDB, remoteDB) {
+      const merged = Object.assign({}, localDB, remoteDB);
+      const deletedIds = new Set([...(localDB.deletedUserIds || []), ...(remoteDB.deletedUserIds || [])]);
+      merged.deletedUserIds = Array.from(deletedIds);
+
+      const userMap = new Map();
+      [...(localDB.users || []), ...(remoteDB.users || [])].forEach(u => {
+        if (u && u.id && !deletedIds.has(u.id)) {
+          const key = u.phone || u.id;
+          if (!userMap.has(key)) {
+            userMap.set(key, u);
+          } else {
+            const prev = userMap.get(key);
+            userMap.set(key, Object.assign({}, prev, u, {
+              credits: Math.max(Number(prev.credits || 0), Number(u.credits || 0)),
+              level: Math.max(Number(prev.level || 2), Number(u.level || 2)),
+              completedQuizzes: Array.from(new Set([...(prev.completedQuizzes || []), ...(u.completedQuizzes || [])])),
+              exploredCareers: Array.from(new Set([...(prev.exploredCareers || []), ...(u.exploredCareers || [])])),
+              redeemedRewards: (u.redeemedRewards && u.redeemedRewards.length >= (prev.redeemedRewards || []).length)
+                ? u.redeemedRewards : (prev.redeemedRewards || [])
+            }));
+          }
+        }
+      });
+      merged.users = Array.from(userMap.values());
+
+      const inqMap = new Map();
+      [...(localDB.inquiries || []), ...(remoteDB.inquiries || [])].forEach(inq => {
+        if (inq && inq.id) inqMap.set(inq.id, inq);
+      });
+      merged.inquiries = Array.from(inqMap.values());
+
+      return merged;
     }
 
     try {
       firestoreDb = getFirestore(app);
       const stateDocRef = doc(firestoreDb, "unid_futuro_quest", "platform_state");
+      const usersColRef = collection(firestoreDb, "unid_futuro_quest_users");
 
+      // 1) Escuchar el estado general de la plataforma
       onSnapshot(stateDocRef, (snapshot) => {
-        updateBadgeStatus('🟢 Firebase Activo (<strong>quiniela-mundial-417fa</strong> • Firestore)', '#22C55E');
+        updateBadgeStatus('🟢 Firebase Activo (<strong>project-2998039825269712276</strong> • Firestore)', '#22C55E', false);
         if (snapshot.exists()) {
           const remoteData = snapshot.data();
           if (remoteData && remoteData.payload) {
             try {
-              const parsed = typeof remoteData.payload === 'string' ? JSON.parse(remoteData.payload) : remoteData.payload;
+              const parsedRemote = typeof remoteData.payload === 'string' ? JSON.parse(remoteData.payload) : remoteData.payload;
+              const currentLocalRaw = localStorage.getItem('UNID_FQ_DB_V1');
+              const currentLocal = currentLocalRaw ? JSON.parse(currentLocalRaw) : {};
+              const merged = mergeAdminAndRemoteDB(currentLocal, parsedRemote);
+
               isRemoteUpdating = true;
-              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(parsed));
+              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(merged));
               if (typeof window.onFirebaseRemoteUpdate === 'function') {
-                window.onFirebaseRemoteUpdate(parsed);
+                window.onFirebaseRemoteUpdate(merged);
               }
               setTimeout(() => { isRemoteUpdating = false; }, 150);
             } catch (e) {}
@@ -1392,12 +1590,43 @@
               payload: currentRaw,
               updatedAt: new Date().toISOString(),
               project: "UNID FUTURO QUEST"
-            }).catch(() => {});
+            }).catch((err) => {
+              if (err && err.code === 'permission-denied') {
+                updateBadgeStatus('🔴 Reglas Firebase Bloqueadas (Haz clic en Reglas de Firebase)', '#EF4444', true);
+              }
+            });
           }
         }
-      }, () => {
+      }, (err) => {
+        console.warn("Firestore error en config.html:", err.code, err.message);
+        if (err && err.code === 'permission-denied') {
+          updateBadgeStatus('🔴 Permiso Denegado en Firestore (Publica las Reglas)', '#EF4444', true);
+        }
         initRealtimeDbFallback();
       });
+
+      // 2) Escuchar también la colección individual de usuarios registrados (unid_futuro_quest_users)
+      onSnapshot(usersColRef, (querySnapshot) => {
+        const currentLocalRaw = localStorage.getItem('UNID_FQ_DB_V1');
+        const currentLocal = currentLocalRaw ? JSON.parse(currentLocalRaw) : {};
+        const deletedIds = new Set(currentLocal.deletedUserIds || []);
+        const colUsers = [];
+        querySnapshot.forEach((docSnap) => {
+          const uData = docSnap.data();
+          if (uData && uData.id && !deletedIds.has(uData.id)) {
+            colUsers.push(uData);
+          }
+        });
+        if (colUsers.length > 0) {
+          const merged = mergeAdminAndRemoteDB(currentLocal, { users: colUsers });
+          isRemoteUpdating = true;
+          localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(merged));
+          if (typeof window.onFirebaseRemoteUpdate === 'function') {
+            window.onFirebaseRemoteUpdate(merged);
+          }
+          setTimeout(() => { isRemoteUpdating = false; }, 150);
+        }
+      }, () => {});
     } catch (err) {
       initRealtimeDbFallback();
     }
@@ -1407,26 +1636,67 @@
         realtimeDb = getDatabase(app);
         const stateRef = ref(realtimeDb, "unid_futuro_quest/platform_state");
         rtdbOnValue(stateRef, (snap) => {
-          updateBadgeStatus('🟢 Firebase Activo (<strong>quiniela-mundial-417fa</strong> • RTDB)', '#22C55E');
+          updateBadgeStatus('🟢 Firebase Activo (<strong>project-2998039825269712276</strong> • RTDB)', '#22C55E', false);
           const val = snap.val();
           if (val && val.payload) {
             try {
-              const parsed = typeof val.payload === 'string' ? JSON.parse(val.payload) : val.payload;
+              const parsedRemote = typeof val.payload === 'string' ? JSON.parse(val.payload) : val.payload;
+              const currentLocalRaw = localStorage.getItem('UNID_FQ_DB_V1');
+              const currentLocal = currentLocalRaw ? JSON.parse(currentLocalRaw) : {};
+              const merged = mergeAdminAndRemoteDB(currentLocal, parsedRemote);
               isRemoteUpdating = true;
-              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(parsed));
+              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(merged));
               if (typeof window.onFirebaseRemoteUpdate === 'function') {
-                window.onFirebaseRemoteUpdate(parsed);
+                window.onFirebaseRemoteUpdate(merged);
               }
               setTimeout(() => { isRemoteUpdating = false; }, 150);
             } catch (e) {}
           }
-        }, () => {
-          updateBadgeStatus('🟡 Firebase Configurado (<strong>quiniela-mundial-417fa</strong>)', '#FACC15');
-        });
-      } catch (e) {
-        updateBadgeStatus('🟡 Firebase Configurado (<strong>quiniela-mundial-417fa</strong>)', '#FACC15');
-      }
+        }, () => {});
+      } catch (e) {}
     }
+
+    window.deleteUserFromFirebase = async function(uid) {
+      if (firestoreDb && uid) {
+        try {
+          await deleteDoc(doc(firestoreDb, "unid_futuro_quest_users", String(uid)));
+        } catch (e) {}
+      }
+    };
+
+    window.forcePullFromFirebase = async function() {
+      if (!firestoreDb) return;
+      try {
+        const stateDocRef = doc(firestoreDb, "unid_futuro_quest", "platform_state");
+        const snap = await getDoc(stateDocRef);
+        const usersSnap = await getDocs(collection(firestoreDb, "unid_futuro_quest_users"));
+        const colUsers = [];
+        usersSnap.forEach(d => colUsers.push(d.data()));
+
+        const currentLocalRaw = localStorage.getItem('UNID_FQ_DB_V1');
+        let merged = currentLocalRaw ? JSON.parse(currentLocalRaw) : {};
+        if (snap.exists() && snap.data().payload) {
+          const parsedRemote = typeof snap.data().payload === 'string' ? JSON.parse(snap.data().payload) : snap.data().payload;
+          merged = mergeAdminAndRemoteDB(merged, parsedRemote);
+        }
+        if (colUsers.length > 0) {
+          merged = mergeAdminAndRemoteDB(merged, { users: colUsers });
+        }
+        localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(merged));
+        if (typeof window.onFirebaseRemoteUpdate === 'function') {
+          window.onFirebaseRemoteUpdate(merged);
+        }
+        updateBadgeStatus('🟢 Sincronizado con Firebase (<strong>project-2998039825269712276</strong>)', '#22C55E', false);
+        if (typeof showAdminToast === 'function') {
+          showAdminToast('🔄 Datos sincronizados desde Firebase (' + (merged.users || []).length + ' registros)');
+        }
+      } catch (err) {
+        if (err && err.code === 'permission-denied') {
+          updateBadgeStatus('🔴 Reglas Firebase Bloqueadas', '#EF4444', true);
+          openFirebaseRulesModal();
+        }
+      }
+    };
 
     window.pushStateToFirebase = async function(dbObject, notificationObj = null) {
       if (isRemoteUpdating) return;
@@ -1447,8 +1717,17 @@
         try {
           const stateDocRef = doc(firestoreDb, "unid_futuro_quest", "platform_state");
           await setDoc(stateDocRef, record, { merge: true });
-          updateBadgeStatus('🟢 Sincronizado con Firebase (<strong>quiniela-mundial-417fa</strong>)', '#22C55E');
-        } catch (err) {}
+          for (const u of (dbObject.users || [])) {
+            if (u && u.id) {
+              await setDoc(doc(firestoreDb, "unid_futuro_quest_users", String(u.id)), Object.assign({}, u, { updatedAt: new Date().toISOString() }), { merge: true });
+            }
+          }
+          updateBadgeStatus('🟢 Sincronizado con Firebase (<strong>project-2998039825269712276</strong>)', '#22C55E', false);
+        } catch (err) {
+          if (err && err.code === 'permission-denied') {
+            updateBadgeStatus('🔴 Reglas Firebase Bloqueadas', '#EF4444', true);
+          }
+        }
       }
       if (realtimeDb) {
         try {

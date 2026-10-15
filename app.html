@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <meta name="theme-color" content="#001E42" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -28,26 +28,40 @@
       --shadow-card: 0 8px 24px rgba(0, 18, 50, 0.25);
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     }
 
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      overscroll-behavior-x: none;
+      touch-action: pan-y pinch-zoom;
+      position: relative;
+      -webkit-text-size-adjust: 100%;
+    }
+
     body {
       background: radial-gradient(circle at 50% 25%, #004196 0%, #00204E 52%, #00112B 100%);
       color: var(--unid-white);
       min-height: 100vh;
-      overflow-x: hidden;
       display: flex;
       flex-direction: column;
     }
 
-    /* Top User Bar (Clean, No Admin Links) */
+    img, svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Top User Bar (Clean, Responsive Dock on Mobile) */
     .pwa-ribbon {
-      background: rgba(0, 12, 32, 0.92);
-      border-bottom: 1px solid rgba(255, 209, 0, 0.28);
+      background: rgba(0, 14, 38, 0.95);
+      border-bottom: 1px solid rgba(255, 209, 0, 0.3);
       padding: 8px 20px;
       display: flex;
       align-items: center;
@@ -57,7 +71,9 @@
       position: sticky;
       top: 0;
       z-index: 900;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
+      width: 100%;
+      max-width: 100%;
     }
 
     .pwa-ribbon-left {
@@ -65,28 +81,34 @@
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
+      min-width: 0;
     }
 
     .level-pill {
       background: linear-gradient(90deg, #FFD100, #FFA800);
       color: #001B3D;
-      font-weight: 800;
-      font-size: 0.78rem;
-      padding: 4px 12px;
+      font-weight: 900;
+      font-size: 0.76rem;
+      padding: 4px 11px;
       border-radius: 999px;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      box-shadow: 0 2px 10px rgba(255, 209, 0, 0.35);
+      box-shadow: 0 2px 10px rgba(255, 209, 0, 0.32);
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .sync-status {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: #93C5FD;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     .sync-dot {
@@ -95,6 +117,7 @@
       border-radius: 50%;
       background: #22C55E;
       box-shadow: 0 0 8px #22C55E;
+      flex-shrink: 0;
     }
 
     .pwa-ribbon-actions {
@@ -110,14 +133,16 @@
       border: 1px solid rgba(255, 255, 255, 0.22);
       padding: 6px 13px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       transition: all 0.2s ease;
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .ribbon-btn:hover {
@@ -131,6 +156,11 @@
       background: var(--unid-yellow);
       color: var(--unid-navy);
       border-color: var(--unid-yellow);
+      font-weight: 800;
+    }
+
+    .lbl-mobile {
+      display: none;
     }
 
     /* Main Institutional Header */
@@ -138,11 +168,15 @@
       max-width: 1360px;
       width: 100%;
       margin: 0 auto;
-      padding: 18px 24px 10px;
+      padding: 16px 24px 10px;
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
+    }
+
+    .inst-header-brand-row {
+      display: contents;
     }
 
     .brand-logo-box {
@@ -152,7 +186,7 @@
     }
 
     .brand-unid {
-      font-size: 3.6rem;
+      font-size: 3.5rem;
       font-weight: 900;
       letter-spacing: -1.5px;
       line-height: 0.92;
@@ -161,7 +195,7 @@
     }
 
     .brand-slogan {
-      font-size: 1.02rem;
+      font-size: 0.98rem;
       font-weight: 900;
       letter-spacing: 0.6px;
       color: var(--unid-yellow);
@@ -172,10 +206,11 @@
     .hero-tagline-box {
       text-align: center;
       padding: 4px 10px;
+      min-width: 0;
     }
 
     .hero-tagline-top {
-      font-size: 2rem;
+      font-size: 1.95rem;
       font-weight: 800;
       font-style: italic;
       color: #FFFFFF;
@@ -184,14 +219,14 @@
     }
 
     .hero-tagline-bottom {
-      font-size: 2.45rem;
+      font-size: 2.35rem;
       font-weight: 900;
       font-style: italic;
       color: var(--unid-yellow);
       text-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
       display: inline-block;
       position: relative;
-      padding: 0 16px;
+      padding: 0 14px;
     }
 
     .hero-tagline-bottom::after {
@@ -206,8 +241,9 @@
 
     /* Top 4 Institutional Navigation Buttons */
     .top-nav-grid {
-      display: flex;
-      background: rgba(0, 22, 58, 0.82);
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      background: rgba(0, 22, 58, 0.86);
       border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 14px;
       overflow: hidden;
@@ -217,17 +253,17 @@
     .top-nav-item {
       background: transparent;
       border: none;
-      border-right: 1px solid rgba(255, 255, 255, 0.18);
+      border-right: 1px solid rgba(255, 255, 255, 0.16);
       color: #FFFFFF;
-      padding: 12px 18px;
+      padding: 11px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       cursor: pointer;
       transition: all 0.2s ease;
-      min-width: 92px;
+      min-width: 86px;
     }
 
     .top-nav-item:last-child {
@@ -240,13 +276,14 @@
     }
 
     .top-nav-icon {
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       line-height: 1;
     }
 
     .top-nav-label {
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 700;
+      white-space: nowrap;
     }
 
     /* Main 3-Column Stage */
@@ -256,11 +293,10 @@
       margin: 8px auto 20px;
       padding: 0 20px;
       display: grid;
-      grid-template-columns: 1fr 410px 1fr;
+      grid-template-columns: minmax(0, 1fr) 405px minmax(0, 1fr);
       gap: 24px;
       align-items: center;
     }
-
 
     /* Installed PWA / Standalone Mode: ONLY the Phone App, nothing else */
     body.installed-standalone-mode .pwa-ribbon,
@@ -279,7 +315,7 @@
     }
 
     body.installed-standalone-mode .main-stage {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       max-width: 430px;
       width: 100%;
       margin: 0 auto;
@@ -290,7 +326,7 @@
       justify-content: center;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 520px) {
       body.installed-standalone-mode .phone-frame {
         max-width: 100%;
         width: 100%;
@@ -318,9 +354,10 @@
     }
 
     body.app-only-mode .main-stage {
-      grid-template-columns: 1fr;
-      max-width: 480px;
-      margin: 16px auto;
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 460px;
+      margin: 12px auto;
+      padding: 0 10px;
     }
 
     /* Left Column: Uriel Mascot & Speech Bubble */
@@ -329,24 +366,27 @@
       flex-direction: column;
       align-items: flex-start;
       position: relative;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .uriel-speech-bubble {
       background: rgba(0, 24, 65, 0.94);
       border: 2.5px solid #FFFFFF;
-      border-radius: 26px;
-      padding: 16px 20px;
+      border-radius: 24px;
+      padding: 15px 18px;
       max-width: 310px;
+      width: 100%;
       align-self: flex-end;
-      margin-bottom: -10px;
+      margin-bottom: -8px;
       position: relative;
       z-index: 3;
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-      transform: rotate(-2deg);
+      transform: rotate(-1.5deg);
     }
 
     .uriel-speech-bubble h3 {
-      font-size: 1.08rem;
+      font-size: 1.04rem;
       line-height: 1.35;
       font-weight: 800;
       color: #FFFFFF;
@@ -359,6 +399,7 @@
     .uriel-mascot-card {
       position: relative;
       width: 100%;
+      max-width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -371,7 +412,7 @@
 
     .uriel-mascot-img {
       width: 100%;
-      max-width: 280px;
+      max-width: 270px;
       border-radius: 18px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
       border: 2px solid rgba(255, 209, 0, 0.35);
@@ -379,7 +420,7 @@
     }
 
     .descubre-title {
-      font-size: 1.65rem;
+      font-size: 1.55rem;
       font-weight: 900;
       font-style: italic;
       color: #FFFFFF;
@@ -396,7 +437,7 @@
     }
 
     .uriel-desc-text {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       line-height: 1.45;
       color: #E2E8F0;
       margin-bottom: 14px;
@@ -407,20 +448,22 @@
       background: linear-gradient(90deg, #FFD100 0%, #FFAE00 100%);
       color: #001B3D;
       font-weight: 900;
-      font-size: 0.96rem;
-      padding: 12px 16px;
+      font-size: 0.92rem;
+      padding: 12px 15px;
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
       cursor: pointer;
       border: none;
       box-shadow: 0 8px 20px rgba(255, 209, 0, 0.32);
       transition: transform 0.2s ease;
+      text-align: left;
     }
 
     .yellow-rocket-banner:hover {
-      transform: scale(1.02);
+      transform: scale(1.01);
     }
 
     /* Center Column: Interactive Smartphone Mockup */
@@ -429,37 +472,38 @@
       max-width: 405px;
       margin: 0 auto;
       background: #0B1325;
-      border-radius: 44px;
-      padding: 12px;
+      border-radius: 42px;
+      padding: 11px;
       border: 4px solid #475569;
-      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.65), 0 0 35px rgba(0, 168, 232, 0.35);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 168, 232, 0.3);
       position: relative;
     }
 
     .phone-screen {
       background: linear-gradient(180deg, #002657 0%, #003E8A 26%, #F1F5F9 26.2%, #E2E8F0 100%);
-      border-radius: 34px;
+      border-radius: 32px;
       overflow: hidden;
-      min-height: 700px;
+      min-height: 690px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
+      width: 100%;
     }
 
     .phone-statusbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px 4px;
-      font-size: 0.76rem;
+      padding: 10px 18px 4px;
+      font-size: 0.75rem;
       font-weight: 700;
       color: #FFFFFF;
     }
 
     .phone-notch {
-      width: 96px;
-      height: 18px;
+      width: 88px;
+      height: 17px;
       background: #060B16;
       border-radius: 99px;
     }
@@ -468,7 +512,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 18px 12px;
+      padding: 8px 16px 12px;
       color: #FFFFFF;
     }
 
@@ -479,13 +523,14 @@
       width: 38px;
       height: 38px;
       border-radius: 12px;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       position: relative;
       transition: background 0.2s;
+      flex-shrink: 0;
     }
 
     .icon-btn:hover {
@@ -498,7 +543,7 @@
       right: -4px;
       background: #EF4444;
       color: #FFFFFF;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 900;
       min-width: 18px;
       height: 18px;
@@ -513,41 +558,44 @@
     .phone-brand-center {
       text-align: center;
       line-height: 1.05;
+      min-width: 0;
     }
 
     .phone-brand-unid {
-      font-size: 1.65rem;
+      font-size: 1.6rem;
       font-weight: 900;
       letter-spacing: -0.5px;
       color: #FFFFFF;
     }
 
     .phone-brand-sub {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 900;
       color: var(--unid-yellow);
       letter-spacing: 0.8px;
     }
 
     .phone-body {
-      padding: 0 14px 12px;
+      padding: 0 13px 12px;
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 11px;
+      min-width: 0;
     }
 
     /* User Profile Card Inside Phone */
     .user-hero-card {
       background: #FFFFFF;
-      border-radius: 22px;
-      padding: 14px 15px;
+      border-radius: 20px;
+      padding: 13px 14px;
       color: #0F172A;
       box-shadow: 0 10px 25px rgba(0, 28, 68, 0.16);
       display: flex;
       align-items: center;
-      gap: 13px;
+      gap: 12px;
       border: 2px solid #E2E8F0;
+      min-width: 0;
     }
 
     .user-avatar-wrap {
@@ -557,8 +605,8 @@
     }
 
     .user-avatar-img {
-      width: 68px;
-      height: 68px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #0072CE;
@@ -572,7 +620,7 @@
       transform: translateX(-50%);
       background: #002D62;
       color: var(--unid-yellow);
-      font-size: 0.65rem;
+      font-size: 0.64rem;
       font-weight: 900;
       padding: 2px 8px;
       border-radius: 99px;
@@ -593,7 +641,7 @@
     }
 
     .user-greeting {
-      font-size: 1.12rem;
+      font-size: 1.06rem;
       font-weight: 900;
       color: #00205B;
       white-space: nowrap;
@@ -605,28 +653,30 @@
       background: #EFF6FF;
       color: #0055B3;
       border: 1px solid #BFDBFE;
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       font-weight: 800;
       padding: 3px 8px;
       border-radius: 8px;
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .user-level-title {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 800;
       color: #334155;
       margin-top: 1px;
       display: flex;
       align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
     }
 
     .access-badge {
       background: #DCFCE7;
       color: #166534;
-      font-size: 0.66rem;
+      font-size: 0.65rem;
       font-weight: 800;
       padding: 1px 6px;
       border-radius: 6px;
@@ -634,7 +684,7 @@
 
     .level-progress-track {
       width: 100%;
-      height: 10px;
+      height: 9px;
       background: #E2E8F0;
       border-radius: 99px;
       overflow: hidden;
@@ -652,53 +702,57 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.92rem;
+      gap: 6px;
+      font-size: 0.88rem;
       font-weight: 900;
       color: #0F172A;
+      flex-wrap: wrap;
     }
 
     .credits-star-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       background: #FEF9C3;
       color: #854D0E;
       border: 1px solid #FDE047;
-      padding: 3px 10px;
+      padding: 3px 9px;
       border-radius: 99px;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 900;
+      white-space: nowrap;
     }
 
     /* 6 Module Buttons Grid inside Phone */
     .phone-modules-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 11px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
       flex: 1;
     }
 
     .module-tile {
       border: none;
-      border-radius: 20px;
-      padding: 15px 10px;
+      border-radius: 18px;
+      padding: 14px 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      gap: 6px;
       cursor: pointer;
       box-shadow: 0 8px 18px rgba(0, 20, 50, 0.16);
       transition: transform 0.18s ease, box-shadow 0.18s ease;
       position: relative;
       overflow: hidden;
-      min-height: 112px;
+      min-height: 108px;
       text-align: center;
+      min-width: 0;
     }
 
     .module-tile:hover {
-      transform: translateY(-3px) scale(1.015);
-      box-shadow: 0 12px 24px rgba(0, 20, 50, 0.26);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0, 20, 50, 0.24);
     }
 
     .module-tile:active {
@@ -706,29 +760,30 @@
     }
 
     .module-icon-box {
-      font-size: 2.15rem;
+      font-size: 2.05rem;
       line-height: 1;
       filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.18));
     }
 
     .module-title-text {
-      font-size: 0.98rem;
+      font-size: 0.94rem;
       font-weight: 900;
       letter-spacing: -0.2px;
+      word-break: break-word;
     }
 
     .module-sub-text {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      opacity: 0.9;
+      opacity: 0.92;
       line-height: 1.15;
     }
 
     /* In-Phone Subview Container */
     .phone-subview {
       background: #FFFFFF;
-      border-radius: 22px;
-      padding: 14px;
+      border-radius: 20px;
+      padding: 13px;
       color: #0F172A;
       flex: 1;
       display: none;
@@ -736,6 +791,8 @@
       box-shadow: 0 8px 20px rgba(0, 20, 50, 0.12);
       max-height: 430px;
       overflow-y: auto;
+      overflow-x: hidden;
+      min-width: 0;
     }
 
     .phone-subview.active {
@@ -760,11 +817,12 @@
       background: #F1F5F9;
       color: #0F172A;
       border: none;
-      padding: 6px 11px;
+      padding: 6px 10px;
       border-radius: 10px;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .back-chip:hover {
@@ -774,9 +832,9 @@
     /* Phone Bottom Navigation Bar */
     .phone-bottom-nav {
       background: #001B3D;
-      padding: 10px 12px 14px;
+      padding: 9px 10px 13px;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 4px;
       border-top: 2px solid rgba(255, 209, 0, 0.25);
     }
@@ -789,7 +847,7 @@
       flex-direction: column;
       align-items: center;
       gap: 3px;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
       padding: 4px 0;
@@ -798,7 +856,7 @@
     }
 
     .bnav-btn .bnav-ico {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
     }
 
     .bnav-btn.active,
@@ -811,68 +869,74 @@
     .stage-right {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 15px;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .yellow-brush-header {
       background: var(--unid-yellow);
       color: #001B3D;
-      font-size: 1.85rem;
+      font-size: 1.75rem;
       font-weight: 900;
       font-style: italic;
-      padding: 10px 22px;
+      padding: 10px 20px;
       border-radius: 16px;
       text-align: center;
       box-shadow: 0 8px 22px rgba(255, 209, 0, 0.32);
-      transform: rotate(-1deg);
     }
 
     .steps-vertical-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 11px;
     }
 
     .how-step-card {
       background: rgba(0, 24, 62, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 18px;
-      padding: 12px 16px;
+      padding: 12px 15px;
       display: flex;
       align-items: flex-start;
       gap: 12px;
       cursor: pointer;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      min-width: 0;
     }
 
     .how-step-card:hover {
-      transform: translateX(4px);
       border-color: var(--unid-yellow);
+      background: rgba(0, 36, 90, 0.92);
     }
 
     .how-step-num {
-      width: 36px;
-      height: 36px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #001B3D;
       flex-shrink: 0;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
+    .how-step-body {
+      min-width: 0;
+    }
+
     .how-step-body h4 {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 900;
       color: #FFFFFF;
       margin-bottom: 3px;
     }
 
     .how-step-body p {
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       color: #CBD5E1;
       line-height: 1.35;
     }
@@ -881,21 +945,22 @@
       background: linear-gradient(135deg, #FFD100 0%, #FFB700 100%);
       color: #001B3D;
       border-radius: 20px;
-      padding: 15px 18px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
       box-shadow: 0 10px 25px rgba(255, 209, 0, 0.35);
       cursor: pointer;
     }
 
     .gift-promo-icon {
-      font-size: 2.5rem;
+      font-size: 2.35rem;
       line-height: 1;
+      flex-shrink: 0;
     }
 
     .gift-promo-text {
-      font-size: 1.02rem;
+      font-size: 0.98rem;
       font-weight: 900;
       font-style: italic;
       line-height: 1.25;
@@ -915,47 +980,48 @@
       background: rgba(0, 20, 55, 0.95);
       border: 2px solid var(--unid-yellow);
       color: #FFFFFF;
-      font-size: 1.65rem;
+      font-size: 1.55rem;
       font-weight: 900;
       font-style: italic;
-      padding: 8px 32px;
+      padding: 8px 30px;
       border-radius: 999px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
 
     .etapas-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .etapa-card {
       background: rgba(0, 24, 62, 0.82);
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 20px;
-      padding: 18px 14px;
+      padding: 16px 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
       cursor: pointer;
       transition: transform 0.2s ease;
+      min-width: 0;
     }
 
     .etapa-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       border-color: var(--unid-yellow);
     }
 
     .etapa-circle {
-      width: 68px;
-      height: 68px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       margin-bottom: 10px;
       position: relative;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
@@ -965,13 +1031,13 @@
       position: absolute;
       top: -4px;
       left: -6px;
-      width: 26px;
-      height: 26px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       background: #001B3D;
       color: #FFFFFF;
       border: 2px solid var(--unid-yellow);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 900;
       display: flex;
       align-items: center;
@@ -979,17 +1045,18 @@
     }
 
     .etapa-ribbon {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 900;
-      padding: 4px 16px;
+      padding: 4px 12px;
       border-radius: 8px;
       color: #001B3D;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
       text-transform: uppercase;
+      max-width: 100%;
     }
 
     .etapa-desc {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: #E2E8F0;
       line-height: 1.35;
     }
@@ -998,17 +1065,19 @@
     .pillars-footer {
       background: rgba(0, 14, 38, 0.95);
       border-top: 2px solid rgba(255, 209, 0, 0.3);
-      padding: 20px 24px;
+      padding: 20px 20px;
       margin-top: auto;
+      width: 100%;
+      max-width: 100%;
     }
 
     .pillars-container {
       max-width: 1360px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(5, 1fr) auto auto;
+      grid-template-columns: repeat(5, minmax(0, 1fr)) auto auto;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .pillar-item {
@@ -1019,15 +1088,16 @@
       gap: 6px;
       padding: 8px;
       border-right: 1px solid rgba(255, 255, 255, 0.14);
+      min-width: 0;
     }
 
     .pillar-icon {
-      font-size: 1.7rem;
+      font-size: 1.65rem;
       color: var(--unid-yellow);
     }
 
     .pillar-text {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: #F8FAFC;
       line-height: 1.25;
@@ -1040,14 +1110,15 @@
       padding: 10px 14px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
       cursor: pointer;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
     }
 
     .qr-svg-box {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       background: #001B3D;
       border-radius: 8px;
       display: flex;
@@ -1097,7 +1168,7 @@
     }
 
     .quiz-q-title {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 800;
       color: #0F172A;
       margin-bottom: 8px;
@@ -1112,7 +1183,7 @@
       border-radius: 10px;
       padding: 8px 10px;
       margin-bottom: 6px;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       font-weight: 700;
       color: #1E293B;
       cursor: pointer;
@@ -1165,7 +1236,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 14px;
     }
 
     .modal-backdrop.open {
@@ -1177,7 +1248,7 @@
       color: #0F172A;
       width: 100%;
       max-width: 520px;
-      border-radius: 24px;
+      border-radius: 22px;
       overflow: hidden;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
       max-height: 90vh;
@@ -1188,14 +1259,15 @@
     .modal-head {
       background: linear-gradient(135deg, #001B3D 0%, #003882 100%);
       color: #FFFFFF;
-      padding: 18px 22px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 10px;
     }
 
     .modal-head h3 {
-      font-size: 1.15rem;
+      font-size: 1.08rem;
       font-weight: 900;
       display: flex;
       align-items: center;
@@ -1209,13 +1281,21 @@
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     .modal-body {
-      padding: 20px 22px;
+      padding: 18px 20px;
       overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .modal-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
     .form-group {
@@ -1224,7 +1304,7 @@
 
     .form-group label {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 800;
       color: #334155;
       margin-bottom: 4px;
@@ -1235,30 +1315,35 @@
       padding: 10px 12px;
       border: 1.5px solid #CBD5E1;
       border-radius: 10px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: #0F172A;
     }
 
     /* Toast Notification */
     .toast-container {
       position: fixed;
-      bottom: 22px;
-      right: 22px;
+      bottom: 18px;
+      right: 18px;
+      left: 18px;
       z-index: 3000;
       display: flex;
       flex-direction: column;
+      align-items: flex-end;
       gap: 10px;
-      max-width: 350px;
+      pointer-events: none;
     }
 
     .toast-item {
+      pointer-events: auto;
       background: #001B3D;
       color: #FFFFFF;
       border-left: 5px solid var(--unid-yellow);
-      padding: 13px 16px;
+      padding: 12px 15px;
       border-radius: 14px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
+      max-width: 350px;
+      width: 100%;
       animation: slideIn 0.25s ease;
     }
 
@@ -1267,85 +1352,313 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
+    /* ============================================================
+       RESPONSIVE DESIGN FOR TABLETS & MOBILE PHONES (NO OVERFLOW)
+       ============================================================ */
     @media (max-width: 1100px) {
       .inst-header {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        padding: 14px 16px 8px;
         text-align: center;
         justify-items: center;
       }
-      .main-stage {
-        grid-template-columns: 1fr;
+      .inst-header-brand-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
         max-width: 540px;
+        gap: 12px;
+        background: rgba(0, 20, 56, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 16px;
+        padding: 10px 16px;
       }
-      .stage-left {
-        order: 2;
+      .brand-logo-box {
+        align-items: flex-start;
+        text-align: left;
+      }
+      .brand-unid {
+        font-size: 2.5rem;
+      }
+      .brand-slogan {
+        font-size: 0.78rem;
+      }
+      .hero-tagline-box {
+        text-align: right;
+        padding: 0;
+      }
+      .hero-tagline-top {
+        font-size: 1.15rem;
+      }
+      .hero-tagline-bottom {
+        font-size: 1.45rem;
+        padding: 0 4px;
+      }
+      .top-nav-grid {
+        width: 100%;
+        max-width: 540px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .top-nav-item {
+        min-width: 0;
+        padding: 10px 6px;
+      }
+      .main-stage {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 540px;
+        padding: 0 14px;
+        gap: 18px;
       }
       .phone-frame {
         order: 1;
       }
+      .stage-left {
+        order: 2;
+      }
       .stage-right {
         order: 3;
       }
+      .uriel-speech-bubble {
+        transform: none;
+        align-self: center;
+        max-width: 100%;
+        margin-bottom: 10px;
+      }
+      .yellow-brush-header {
+        transform: none;
+      }
       .etapas-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
       }
       .pillars-container {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .qr-card-widget,
+      .footer-yellow-cta {
+        grid-column: 1 / -1;
       }
     }
 
-    @media (max-width: 520px) {
-      .etapas-grid {
-        grid-template-columns: 1fr;
+    /* Mobile Phone Specific Polish (Top Menu Bar + Compact Header + Zero Horizontal Scroll) */
+    @media (max-width: 640px) {
+      .pwa-ribbon {
+        padding: 8px 10px;
+        gap: 7px;
+        flex-direction: column;
+        align-items: stretch;
       }
-      .top-nav-grid {
+      .pwa-ribbon-left {
         width: 100%;
-        justify-content: space-around;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 6px;
+      }
+      .level-pill {
+        font-size: 0.7rem;
+        padding: 3px 9px;
+      }
+      .sync-status {
+        font-size: 0.7rem;
+      }
+      /* Transform the 4 top action buttons into a sleek 4-column horizontal app dock instead of a vertical list! */
+      .pwa-ribbon-actions {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+        width: 100%;
+      }
+      .ribbon-btn {
+        padding: 7px 4px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        flex-direction: column;
+        gap: 2px;
+        text-align: center;
+        min-width: 0;
+        width: 100%;
+      }
+      .lbl-desktop {
+        display: none;
+      }
+      .lbl-mobile {
+        display: inline;
+        font-size: 0.68rem;
+        line-height: 1.1;
+      }
+      .ribbon-ico {
+        font-size: 1.05rem;
+        line-height: 1;
+      }
+
+      /* Compact Institutional Header on Mobile */
+      .inst-header {
+        padding: 10px 12px 6px;
+        gap: 8px;
+      }
+      .inst-header-brand-row {
+        padding: 9px 13px;
+        border-radius: 14px;
+      }
+      .brand-unid {
+        font-size: 2.1rem;
+      }
+      .brand-slogan {
+        font-size: 0.68rem;
+      }
+      .hero-tagline-top {
+        font-size: 0.96rem;
+      }
+      .hero-tagline-bottom {
+        font-size: 1.22rem;
+      }
+      .hero-tagline-bottom::after {
+        height: 3px;
+      }
+
+      /* Top 4 Institutional Menu Buttons (Carreras | Beneficios | Campus | Comunidad) in a sleek horizontal bar */
+      .top-nav-grid {
+        border-radius: 13px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
       .top-nav-item {
-        min-width: 72px;
+        padding: 8px 4px;
+        gap: 4px;
+        min-width: 0;
+      }
+      .top-nav-icon {
+        font-size: 1.25rem;
+      }
+      .top-nav-label {
+        font-size: 0.73rem;
+      }
+
+      /* Phone Mockup on Mobile Screen */
+      .main-stage {
+        padding: 0 10px;
+        margin: 4px auto 16px;
+      }
+      .phone-frame {
+        max-width: 100%;
+        border-radius: 32px;
+        padding: 8px;
+        border-width: 3px;
+      }
+      .phone-screen {
+        border-radius: 25px;
+        min-height: 640px;
+      }
+      .user-hero-card {
+        padding: 11px 12px;
+        gap: 10px;
+      }
+      .user-avatar-img {
+        width: 56px;
+        height: 56px;
+      }
+
+      /* Etapas del juego as 2x2 grid on mobile */
+      .etapas-section {
+        padding: 0 10px;
+      }
+      .etapas-title-badge {
+        font-size: 1.3rem;
+        padding: 6px 22px;
+      }
+      .etapas-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .etapa-card {
+        padding: 13px 10px;
+      }
+      .etapa-circle {
+        width: 54px;
+        height: 54px;
+        font-size: 1.5rem;
+      }
+      .etapa-ribbon {
+        font-size: 0.76rem;
+        padding: 3px 8px;
+      }
+      .etapa-desc {
+        font-size: 0.74rem;
+      }
+
+      /* Footer Pillars on Mobile */
+      .pillars-footer {
+        padding: 16px 12px;
+      }
+      .pillars-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .pillar-item {
+        border-right: none;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
         padding: 10px 8px;
+      }
+      .pillar-item:nth-child(5) {
+        grid-column: 1 / -1;
+      }
+
+      .modal-grid-2 {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
   </style>
 </head>
 <body class="installed-standalone-mode">
 
-  <!-- Top Public User Ribbon (No Admin Accesses Shown) -->
+  <!-- Top Public User Ribbon (Responsive App Dock on Mobile, No Admin Accesses Shown) -->
   <div class="pwa-ribbon">
     <div class="pwa-ribbon-left">
       <span class="level-pill" id="ribbonLevelBadge">⚡ NIVEL 2 • ACCESO TOTAL</span>
       <span class="sync-status">
         <span class="sync-dot"></span>
-        <span id="firebaseSyncText">Plataforma Oficial UNID en línea</span>
+        <span id="firebaseSyncText">UNID en línea</span>
       </span>
     </div>
     <div class="pwa-ribbon-actions">
       <button class="ribbon-btn primary-cta" id="btnInstallPwa" onclick="handleInstallClick()">
-        📲 Instalar App (Celular / PC)
+        <span class="ribbon-ico">📲</span>
+        <span class="lbl-desktop">Instalar App (Celular / PC)</span>
+        <span class="lbl-mobile">Instalar</span>
       </button>
       <button class="ribbon-btn" onclick="requestAndShowNotifications()">
-        🔔 Activar Notificaciones
+        <span class="ribbon-ico">🔔</span>
+        <span class="lbl-desktop">Activar Notificaciones</span>
+        <span class="lbl-mobile">Alertas</span>
       </button>
       <button class="ribbon-btn" onclick="openRegisterModal()">
-        👤 Mi Registro / Mi Cuenta
+        <span class="ribbon-ico">👤</span>
+        <span class="lbl-desktop">Mi Registro / Mi Cuenta</span>
+        <span class="lbl-mobile">Mi Cuenta</span>
       </button>
       <button class="ribbon-btn" id="btnToggleView" onclick="toggleAppOnlyMode()">
-        📱 Modo App Completa
+        <span class="ribbon-ico">📱</span>
+        <span class="lbl-desktop" id="btnToggleViewDesk">Modo App Completa</span>
+        <span class="lbl-mobile" id="btnToggleViewMob">Solo App</span>
       </button>
     </div>
   </div>
 
   <!-- Institutional Top Header -->
   <header class="inst-header">
-    <div class="brand-logo-box" onclick="showHomeOnPhone()">
-      <div class="brand-unid" id="uiBrandName">UNID</div>
-      <div class="brand-slogan" id="uiBrandSlogan">LO VIVO LO APLICO®</div>
-    </div>
+    <div class="inst-header-brand-row">
+      <div class="brand-logo-box" onclick="showHomeOnPhone()">
+        <div class="brand-unid" id="uiBrandName">UNID</div>
+        <div class="brand-slogan" id="uiBrandSlogan">LO VIVO LO APLICO®</div>
+      </div>
 
-    <div class="hero-tagline-box">
-      <div class="hero-tagline-top">¡Tu futuro también</div>
-      <div class="hero-tagline-bottom" id="uiHeroTagline">se juega!</div>
+      <div class="hero-tagline-box">
+        <div class="hero-tagline-top">¡Tu futuro también</div>
+        <div class="hero-tagline-bottom" id="uiHeroTagline">se juega!</div>
+      </div>
     </div>
 
     <nav class="top-nav-grid" id="topNavContainer" aria-label="Accesos Institucionales UNID">
@@ -1374,7 +1687,7 @@
         </p>
         <button class="yellow-rocket-banner" onclick="openRegisterModal()">
           <span id="uiRocketBanner">Conecta, juega y construye tu mejor versión.</span>
-          <span style="font-size:1.35rem;">🚀</span>
+          <span style="font-size:1.35rem; flex-shrink:0;">🚀</span>
         </button>
       </div>
     </section>
@@ -1385,7 +1698,7 @@
         <div>
           <!-- Phone Status Bar -->
           <div class="phone-statusbar">
-            <span id="phoneClock">9:41</span>
+            <span id="phoneClock">9:41 AM</span>
             <div class="phone-notch"></div>
             <span>📶 5G 🔋</span>
           </div>
@@ -1426,7 +1739,7 @@
               </div>
               <div class="user-credits-row">
                 <span class="credits-star-pill">⭐ <span id="phoneUserCredits">750</span> créditos</span>
-                <span style="font-size:0.72rem; color:#64748B;" id="phoneUserCampus">Campus UNID</span>
+                <span style="font-size:0.71rem; color:#64748B;" id="phoneUserCampus">Campus UNID</span>
               </div>
             </div>
           </div>
@@ -1439,8 +1752,8 @@
           <!-- Dynamic Module Subview inside the Phone -->
           <div class="phone-subview" id="phoneSubview">
             <div class="subview-header">
-              <strong id="subviewTitle" style="font-size:0.98rem; color:#001B3D;">Módulo</strong>
-              <button class="back-chip" onclick="showHomeOnPhone()">← Volver al Inicio</button>
+              <strong id="subviewTitle" style="font-size:0.95rem; color:#001B3D;">Módulo</strong>
+              <button class="back-chip" onclick="showHomeOnPhone()">← Inicio</button>
             </div>
             <div id="subviewContent"></div>
           </div>
@@ -1493,7 +1806,7 @@
     </section>
   </main>
 
-  <!-- Etapas del juego (4 Horizontal Steps) -->
+  <!-- Etapas del juego (4 Steps) -->
   <section class="etapas-section">
     <div class="etapas-title-badge">Etapas del juego</div>
     <div class="etapas-grid" id="etapasGrid">
@@ -1526,23 +1839,8 @@
       </div>
 
       <div class="qr-card-widget" onclick="openQrModal()">
-        <div class="qr-svg-box">
-          <svg viewBox="0 0 36 36" width="44" height="44" fill="#FFFFFF">
-            <rect x="2" y="2" width="10" height="10" rx="1" fill="none" stroke="#FFF" stroke-width="2.5"/>
-            <rect x="5" y="5" width="4" height="4" />
-            <rect x="24" y="2" width="10" height="10" rx="1" fill="none" stroke="#FFF" stroke-width="2.5"/>
-            <rect x="27" y="5" width="4" height="4" />
-            <rect x="2" y="24" width="10" height="10" rx="1" fill="none" stroke="#FFF" stroke-width="2.5"/>
-            <rect x="5" y="27" width="4" height="4" />
-            <rect x="15" y="4" width="3" height="3" />
-            <rect x="15" y="10" width="3" height="6" />
-            <rect x="14" y="18" width="6" height="3" />
-            <rect x="22" y="16" width="4" height="4" />
-            <rect x="28" y="18" width="5" height="3" />
-            <rect x="16" y="24" width="4" height="8" />
-            <rect x="24" y="26" width="4" height="4" />
-            <rect x="30" y="28" width="4" height="6" />
-          </svg>
+        <div class="qr-svg-box" style="background:#FFFFFF; padding:2px; border:1.5px solid #001B3D;">
+          <svg viewBox="0 0 41 41" width="48" height="48" shape-rendering="crispEdges" aria-label="Código QR hacia file:///C:/Users/Bryan%20Delgadillo/Documents/GitHub/APP-UNID/index.html"><rect width="41" height="41" rx="2" fill="#FFFFFF"/><path d="M2,2h1v1h-1zM3,2h1v1h-1zM4,2h1v1h-1zM5,2h1v1h-1zM6,2h1v1h-1zM7,2h1v1h-1zM8,2h1v1h-1zM10,2h1v1h-1zM16,2h1v1h-1zM19,2h1v1h-1zM21,2h1v1h-1zM22,2h1v1h-1zM25,2h1v1h-1zM26,2h1v1h-1zM27,2h1v1h-1zM28,2h1v1h-1zM30,2h1v1h-1zM32,2h1v1h-1zM33,2h1v1h-1zM34,2h1v1h-1zM35,2h1v1h-1zM36,2h1v1h-1zM37,2h1v1h-1zM38,2h1v1h-1zM2,3h1v1h-1zM8,3h1v1h-1zM12,3h1v1h-1zM15,3h1v1h-1zM17,3h1v1h-1zM21,3h1v1h-1zM26,3h1v1h-1zM28,3h1v1h-1zM30,3h1v1h-1zM32,3h1v1h-1zM38,3h1v1h-1zM2,4h1v1h-1zM4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM8,4h1v1h-1zM12,4h1v1h-1zM14,4h1v1h-1zM15,4h1v1h-1zM16,4h1v1h-1zM17,4h1v1h-1zM19,4h1v1h-1zM23,4h1v1h-1zM24,4h1v1h-1zM25,4h1v1h-1zM28,4h1v1h-1zM29,4h1v1h-1zM32,4h1v1h-1zM34,4h1v1h-1zM35,4h1v1h-1zM36,4h1v1h-1zM38,4h1v1h-1zM2,5h1v1h-1zM4,5h1v1h-1zM5,5h1v1h-1zM6,5h1v1h-1zM8,5h1v1h-1zM10,5h1v1h-1zM13,5h1v1h-1zM16,5h1v1h-1zM18,5h1v1h-1zM20,5h1v1h-1zM23,5h1v1h-1zM26,5h1v1h-1zM27,5h1v1h-1zM29,5h1v1h-1zM32,5h1v1h-1zM34,5h1v1h-1zM35,5h1v1h-1zM36,5h1v1h-1zM38,5h1v1h-1zM2,6h1v1h-1zM4,6h1v1h-1zM5,6h1v1h-1zM6,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM13,6h1v1h-1zM15,6h1v1h-1zM16,6h1v1h-1zM19,6h1v1h-1zM20,6h1v1h-1zM23,6h1v1h-1zM25,6h1v1h-1zM26,6h1v1h-1zM28,6h1v1h-1zM29,6h1v1h-1zM30,6h1v1h-1zM32,6h1v1h-1zM34,6h1v1h-1zM35,6h1v1h-1zM36,6h1v1h-1zM38,6h1v1h-1zM2,7h1v1h-1zM8,7h1v1h-1zM10,7h1v1h-1zM11,7h1v1h-1zM12,7h1v1h-1zM13,7h1v1h-1zM15,7h1v1h-1zM17,7h1v1h-1zM18,7h1v1h-1zM19,7h1v1h-1zM21,7h1v1h-1zM22,7h1v1h-1zM23,7h1v1h-1zM24,7h1v1h-1zM26,7h1v1h-1zM32,7h1v1h-1zM38,7h1v1h-1zM2,8h1v1h-1zM3,8h1v1h-1zM4,8h1v1h-1zM5,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM14,8h1v1h-1zM16,8h1v1h-1zM18,8h1v1h-1zM20,8h1v1h-1zM22,8h1v1h-1zM24,8h1v1h-1zM26,8h1v1h-1zM28,8h1v1h-1zM30,8h1v1h-1zM32,8h1v1h-1zM33,8h1v1h-1zM34,8h1v1h-1zM35,8h1v1h-1zM36,8h1v1h-1zM37,8h1v1h-1zM38,8h1v1h-1zM10,9h1v1h-1zM13,9h1v1h-1zM15,9h1v1h-1zM16,9h1v1h-1zM18,9h1v1h-1zM22,9h1v1h-1zM23,9h1v1h-1zM24,9h1v1h-1zM30,9h1v1h-1zM2,10h1v1h-1zM6,10h1v1h-1zM8,10h1v1h-1zM9,10h1v1h-1zM10,10h1v1h-1zM11,10h1v1h-1zM12,10h1v1h-1zM13,10h1v1h-1zM14,10h1v1h-1zM15,10h1v1h-1zM18,10h1v1h-1zM22,10h1v1h-1zM23,10h1v1h-1zM24,10h1v1h-1zM27,10h1v1h-1zM30,10h1v1h-1zM31,10h1v1h-1zM32,10h1v1h-1zM33,10h1v1h-1zM34,10h1v1h-1zM35,10h1v1h-1zM38,10h1v1h-1zM3,11h1v1h-1zM4,11h1v1h-1zM9,11h1v1h-1zM10,11h1v1h-1zM11,11h1v1h-1zM13,11h1v1h-1zM14,11h1v1h-1zM19,11h1v1h-1zM20,11h1v1h-1zM21,11h1v1h-1zM25,11h1v1h-1zM28,11h1v1h-1zM30,11h1v1h-1zM34,11h1v1h-1zM2,12h1v1h-1zM3,12h1v1h-1zM4,12h1v1h-1zM6,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM14,12h1v1h-1zM15,12h1v1h-1zM16,12h1v1h-1zM17,12h1v1h-1zM20,12h1v1h-1zM21,12h1v1h-1zM23,12h1v1h-1zM25,12h1v1h-1zM26,12h1v1h-1zM27,12h1v1h-1zM28,12h1v1h-1zM29,12h1v1h-1zM31,12h1v1h-1zM33,12h1v1h-1zM2,13h1v1h-1zM6,13h1v1h-1zM11,13h1v1h-1zM13,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM16,13h1v1h-1zM17,13h1v1h-1zM18,13h1v1h-1zM19,13h1v1h-1zM20,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM24,13h1v1h-1zM25,13h1v1h-1zM26,13h1v1h-1zM28,13h1v1h-1zM29,13h1v1h-1zM32,13h1v1h-1zM33,13h1v1h-1zM35,13h1v1h-1zM36,13h1v1h-1zM6,14h1v1h-1zM8,14h1v1h-1zM10,14h1v1h-1zM12,14h1v1h-1zM15,14h1v1h-1zM19,14h1v1h-1zM20,14h1v1h-1zM22,14h1v1h-1zM23,14h1v1h-1zM24,14h1v1h-1zM27,14h1v1h-1zM29,14h1v1h-1zM30,14h1v1h-1zM32,14h1v1h-1zM33,14h1v1h-1zM34,14h1v1h-1zM36,14h1v1h-1zM2,15h1v1h-1zM3,15h1v1h-1zM4,15h1v1h-1zM9,15h1v1h-1zM12,15h1v1h-1zM13,15h1v1h-1zM16,15h1v1h-1zM17,15h1v1h-1zM18,15h1v1h-1zM20,15h1v1h-1zM23,15h1v1h-1zM25,15h1v1h-1zM26,15h1v1h-1zM28,15h1v1h-1zM29,15h1v1h-1zM30,15h1v1h-1zM31,15h1v1h-1zM34,15h1v1h-1zM35,15h1v1h-1zM36,15h1v1h-1zM37,15h1v1h-1zM2,16h1v1h-1zM3,16h1v1h-1zM4,16h1v1h-1zM6,16h1v1h-1zM8,16h1v1h-1zM9,16h1v1h-1zM11,16h1v1h-1zM13,16h1v1h-1zM14,16h1v1h-1zM15,16h1v1h-1zM16,16h1v1h-1zM17,16h1v1h-1zM19,16h1v1h-1zM22,16h1v1h-1zM23,16h1v1h-1zM24,16h1v1h-1zM25,16h1v1h-1zM26,16h1v1h-1zM29,16h1v1h-1zM31,16h1v1h-1zM33,16h1v1h-1zM34,16h1v1h-1zM35,16h1v1h-1zM36,16h1v1h-1zM4,17h1v1h-1zM5,17h1v1h-1zM6,17h1v1h-1zM7,17h1v1h-1zM9,17h1v1h-1zM10,17h1v1h-1zM11,17h1v1h-1zM12,17h1v1h-1zM16,17h1v1h-1zM17,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM23,17h1v1h-1zM24,17h1v1h-1zM25,17h1v1h-1zM26,17h1v1h-1zM28,17h1v1h-1zM29,17h1v1h-1zM31,17h1v1h-1zM32,17h1v1h-1zM33,17h1v1h-1zM34,17h1v1h-1zM36,17h1v1h-1zM37,17h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM11,18h1v1h-1zM13,18h1v1h-1zM14,18h1v1h-1zM15,18h1v1h-1zM16,18h1v1h-1zM17,18h1v1h-1zM20,18h1v1h-1zM23,18h1v1h-1zM24,18h1v1h-1zM26,18h1v1h-1zM27,18h1v1h-1zM32,18h1v1h-1zM36,18h1v1h-1zM37,18h1v1h-1zM38,18h1v1h-1zM4,19h1v1h-1zM9,19h1v1h-1zM10,19h1v1h-1zM15,19h1v1h-1zM18,19h1v1h-1zM19,19h1v1h-1zM21,19h1v1h-1zM22,19h1v1h-1zM24,19h1v1h-1zM25,19h1v1h-1zM27,19h1v1h-1zM28,19h1v1h-1zM29,19h1v1h-1zM34,19h1v1h-1zM35,19h1v1h-1zM36,19h1v1h-1zM2,20h1v1h-1zM3,20h1v1h-1zM4,20h1v1h-1zM6,20h1v1h-1zM8,20h1v1h-1zM12,20h1v1h-1zM16,20h1v1h-1zM18,20h1v1h-1zM20,20h1v1h-1zM22,20h1v1h-1zM23,20h1v1h-1zM25,20h1v1h-1zM27,20h1v1h-1zM29,20h1v1h-1zM30,20h1v1h-1zM31,20h1v1h-1zM32,20h1v1h-1zM6,21h1v1h-1zM9,21h1v1h-1zM10,21h1v1h-1zM11,21h1v1h-1zM13,21h1v1h-1zM14,21h1v1h-1zM19,21h1v1h-1zM20,21h1v1h-1zM23,21h1v1h-1zM25,21h1v1h-1zM26,21h1v1h-1zM29,21h1v1h-1zM30,21h1v1h-1zM31,21h1v1h-1zM32,21h1v1h-1zM34,21h1v1h-1zM36,21h1v1h-1zM37,21h1v1h-1zM38,21h1v1h-1zM2,22h1v1h-1zM4,22h1v1h-1zM7,22h1v1h-1zM8,22h1v1h-1zM14,22h1v1h-1zM17,22h1v1h-1zM21,22h1v1h-1zM22,22h1v1h-1zM23,22h1v1h-1zM24,22h1v1h-1zM26,22h1v1h-1zM32,22h1v1h-1zM33,22h1v1h-1zM37,22h1v1h-1zM38,22h1v1h-1zM4,23h1v1h-1zM5,23h1v1h-1zM7,23h1v1h-1zM9,23h1v1h-1zM11,23h1v1h-1zM13,23h1v1h-1zM15,23h1v1h-1zM16,23h1v1h-1zM17,23h1v1h-1zM18,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM25,23h1v1h-1zM26,23h1v1h-1zM27,23h1v1h-1zM29,23h1v1h-1zM30,23h1v1h-1zM33,23h1v1h-1zM34,23h1v1h-1zM35,23h1v1h-1zM37,23h1v1h-1zM2,24h1v1h-1zM7,24h1v1h-1zM8,24h1v1h-1zM10,24h1v1h-1zM12,24h1v1h-1zM15,24h1v1h-1zM17,24h1v1h-1zM20,24h1v1h-1zM23,24h1v1h-1zM25,24h1v1h-1zM28,24h1v1h-1zM29,24h1v1h-1zM32,24h1v1h-1zM33,24h1v1h-1zM34,24h1v1h-1zM36,24h1v1h-1zM4,25h1v1h-1zM5,25h1v1h-1zM6,25h1v1h-1zM10,25h1v1h-1zM12,25h1v1h-1zM16,25h1v1h-1zM17,25h1v1h-1zM22,25h1v1h-1zM23,25h1v1h-1zM24,25h1v1h-1zM26,25h1v1h-1zM30,25h1v1h-1zM32,25h1v1h-1zM33,25h1v1h-1zM34,25h1v1h-1zM35,25h1v1h-1zM36,25h1v1h-1zM37,25h1v1h-1zM38,25h1v1h-1zM2,26h1v1h-1zM3,26h1v1h-1zM4,26h1v1h-1zM5,26h1v1h-1zM6,26h1v1h-1zM7,26h1v1h-1zM8,26h1v1h-1zM15,26h1v1h-1zM18,26h1v1h-1zM21,26h1v1h-1zM22,26h1v1h-1zM23,26h1v1h-1zM24,26h1v1h-1zM25,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM30,26h1v1h-1zM31,26h1v1h-1zM32,26h1v1h-1zM33,26h1v1h-1zM34,26h1v1h-1zM35,26h1v1h-1zM36,26h1v1h-1zM37,26h1v1h-1zM2,27h1v1h-1zM5,27h1v1h-1zM6,27h1v1h-1zM11,27h1v1h-1zM12,27h1v1h-1zM14,27h1v1h-1zM15,27h1v1h-1zM20,27h1v1h-1zM21,27h1v1h-1zM23,27h1v1h-1zM25,27h1v1h-1zM27,27h1v1h-1zM28,27h1v1h-1zM30,27h1v1h-1zM32,27h1v1h-1zM34,27h1v1h-1zM35,27h1v1h-1zM5,28h1v1h-1zM8,28h1v1h-1zM9,28h1v1h-1zM13,28h1v1h-1zM14,28h1v1h-1zM16,28h1v1h-1zM17,28h1v1h-1zM19,28h1v1h-1zM20,28h1v1h-1zM21,28h1v1h-1zM23,28h1v1h-1zM25,28h1v1h-1zM27,28h1v1h-1zM29,28h1v1h-1zM30,28h1v1h-1zM32,28h1v1h-1zM9,29h1v1h-1zM11,29h1v1h-1zM13,29h1v1h-1zM14,29h1v1h-1zM15,29h1v1h-1zM17,29h1v1h-1zM18,29h1v1h-1zM19,29h1v1h-1zM21,29h1v1h-1zM22,29h1v1h-1zM23,29h1v1h-1zM24,29h1v1h-1zM26,29h1v1h-1zM29,29h1v1h-1zM30,29h1v1h-1zM32,29h1v1h-1zM33,29h1v1h-1zM36,29h1v1h-1zM37,29h1v1h-1zM2,30h1v1h-1zM3,30h1v1h-1zM5,30h1v1h-1zM6,30h1v1h-1zM7,30h1v1h-1zM8,30h1v1h-1zM9,30h1v1h-1zM10,30h1v1h-1zM11,30h1v1h-1zM12,30h1v1h-1zM13,30h1v1h-1zM18,30h1v1h-1zM19,30h1v1h-1zM22,30h1v1h-1zM23,30h1v1h-1zM24,30h1v1h-1zM25,30h1v1h-1zM26,30h1v1h-1zM30,30h1v1h-1zM31,30h1v1h-1zM32,30h1v1h-1zM33,30h1v1h-1zM34,30h1v1h-1zM36,30h1v1h-1zM10,31h1v1h-1zM11,31h1v1h-1zM14,31h1v1h-1zM15,31h1v1h-1zM16,31h1v1h-1zM17,31h1v1h-1zM18,31h1v1h-1zM20,31h1v1h-1zM23,31h1v1h-1zM25,31h1v1h-1zM29,31h1v1h-1zM30,31h1v1h-1zM34,31h1v1h-1zM36,31h1v1h-1zM2,32h1v1h-1zM3,32h1v1h-1zM4,32h1v1h-1zM5,32h1v1h-1zM6,32h1v1h-1zM7,32h1v1h-1zM8,32h1v1h-1zM10,32h1v1h-1zM11,32h1v1h-1zM12,32h1v1h-1zM13,32h1v1h-1zM14,32h1v1h-1zM17,32h1v1h-1zM19,32h1v1h-1zM22,32h1v1h-1zM23,32h1v1h-1zM25,32h1v1h-1zM26,32h1v1h-1zM27,32h1v1h-1zM28,32h1v1h-1zM30,32h1v1h-1zM32,32h1v1h-1zM34,32h1v1h-1zM35,32h1v1h-1zM2,33h1v1h-1zM8,33h1v1h-1zM18,33h1v1h-1zM19,33h1v1h-1zM20,33h1v1h-1zM23,33h1v1h-1zM25,33h1v1h-1zM28,33h1v1h-1zM30,33h1v1h-1zM34,33h1v1h-1zM35,33h1v1h-1zM36,33h1v1h-1zM2,34h1v1h-1zM4,34h1v1h-1zM5,34h1v1h-1zM6,34h1v1h-1zM8,34h1v1h-1zM10,34h1v1h-1zM11,34h1v1h-1zM13,34h1v1h-1zM14,34h1v1h-1zM16,34h1v1h-1zM20,34h1v1h-1zM21,34h1v1h-1zM22,34h1v1h-1zM23,34h1v1h-1zM24,34h1v1h-1zM26,34h1v1h-1zM30,34h1v1h-1zM31,34h1v1h-1zM32,34h1v1h-1zM33,34h1v1h-1zM34,34h1v1h-1zM36,34h1v1h-1zM37,34h1v1h-1zM38,34h1v1h-1zM2,35h1v1h-1zM4,35h1v1h-1zM5,35h1v1h-1zM6,35h1v1h-1zM8,35h1v1h-1zM11,35h1v1h-1zM12,35h1v1h-1zM15,35h1v1h-1zM16,35h1v1h-1zM18,35h1v1h-1zM19,35h1v1h-1zM21,35h1v1h-1zM22,35h1v1h-1zM25,35h1v1h-1zM28,35h1v1h-1zM29,35h1v1h-1zM31,35h1v1h-1zM32,35h1v1h-1zM33,35h1v1h-1zM36,35h1v1h-1zM38,35h1v1h-1zM2,36h1v1h-1zM4,36h1v1h-1zM5,36h1v1h-1zM6,36h1v1h-1zM8,36h1v1h-1zM12,36h1v1h-1zM18,36h1v1h-1zM20,36h1v1h-1zM25,36h1v1h-1zM26,36h1v1h-1zM30,36h1v1h-1zM36,36h1v1h-1zM2,37h1v1h-1zM8,37h1v1h-1zM13,37h1v1h-1zM14,37h1v1h-1zM16,37h1v1h-1zM19,37h1v1h-1zM20,37h1v1h-1zM22,37h1v1h-1zM23,37h1v1h-1zM25,37h1v1h-1zM28,37h1v1h-1zM30,37h1v1h-1zM31,37h1v1h-1zM33,37h1v1h-1zM34,37h1v1h-1zM36,37h1v1h-1zM37,37h1v1h-1zM2,38h1v1h-1zM3,38h1v1h-1zM4,38h1v1h-1zM5,38h1v1h-1zM6,38h1v1h-1zM7,38h1v1h-1zM8,38h1v1h-1zM10,38h1v1h-1zM12,38h1v1h-1zM16,38h1v1h-1zM17,38h1v1h-1zM19,38h1v1h-1zM22,38h1v1h-1zM23,38h1v1h-1zM24,38h1v1h-1zM25,38h1v1h-1zM26,38h1v1h-1zM29,38h1v1h-1zM31,38h1v1h-1zM32,38h1v1h-1zM35,38h1v1h-1zM36,38h1v1h-1zM37,38h1v1h-1zM38,38h1v1h-1z" fill="#001B3D"/></svg>
         </div>
         <div class="qr-card-text">
           Escanea el QR<br>y comienza<br>el juego ➔
@@ -1574,7 +1872,7 @@
     window.FORCE_STANDALONE_APP = true;
     const STORAGE_KEY = 'UNID_FQ_DB_V1';
     const MY_SESSION_KEY = 'UNID_FQ_MY_USER_SESSION';
-    const DEFAULT_DB = {"version": "3.0-prod", "settings": {"brandName": "UNID", "brandSlogan": "LO VIVO LO APLICO®", "appName": "FUTURO QUEST", "heroTagline": "Tu futuro también se juega", "mascotName": "Uriel", "mascotBubble": "¡Hola! Soy Uriel, la mascota de UNID y ahora tu guía para llegar al éxito.", "mascotSubBubble": "Descubre, explora y decide", "mascotDescription": "UNID FUTURO QUEST es una plataforma interactiva que te permite conocer tus intereses, descubrir tu vocación y ganar créditos mientras te diviertes.", "rocketBanner": "Conecta, juega y construye tu mejor versión.", "initialLevel": 2, "initialCredits": 750, "requireLoginOnStart": false, "fullAccessLevel2": true, "promoBannerText": "¡Entre más juegues, más cerca estarás de tu descuento!", "footerCtaTitle": "UNID FUTURO QUEST", "footerCtaSub": "¡Juega hoy y construye tu mañana!", "whatsappAdvisor": "528000008643", "contactEmail": "admisiones@unid.edu.mx"}, "topNav": [{"id": "carreras", "title": "Carreras", "icon": "🎓", "badge": "Plan 3 Años", "subtitle": "Licenciaturas e Ingenierías con Estadía Empresarial", "description": "Termina tu carrera universitaria en 3 años (9 cuatrimestres) con un enfoque 100% práctico. Incluye Estadía Empresarial en empresas reales y opción de Modelo Dual Alemán (DHLA).", "highlights": ["Plan cuatrimestral intensivo: concluye en solo 3 años.", "Estadía Empresarial de 4 meses integrada en tu plan de estudios.", "Modalidades: Escolarizada, Ejecutiva (mixta) y 100% Online.", "Modelo Dual DHLA con rotación en empresas socias."]}, {"id": "beneficios", "title": "Beneficios", "icon": "⭐", "badge": "Becas y Descuentos", "subtitle": "Convierte tus créditos de juego en beneficios reales", "description": "En UNID Futuro Quest cada reto superado suma créditos a tu perfil Nivel 2+ que puedes canjear directamente por descuentos de inscripción y beneficios exclusivos.", "highlights": ["Hasta 70% de descuento en tu primera inscripción acumulando créditos.", "Acceso sin costo a talleres de orientación vocacional y simuladores.", "Bolsa de trabajo nacional conectada con más de 4,500 empresas.", "Doble titulación y certificaciones digitales por cuatrimestre."]}, {"id": "campus", "title": "Campus", "icon": "📍", "badge": "Red Nacional", "subtitle": "Presencia UNID en todo México cerca de ti", "description": "Contamos con campus equipados con laboratorios multimedia, cámaras de Gesell, salas de juicios orales y centros de negocios en todo el país.", "highlights": ["Sede destacada: Campus Tepatitlán, Guadalajara y Región Occidente.", "Sedes Norte, Centro y Sur: Monterrey, Mérida, Morelia, Aguascalientes, Cancún y más.", "Movilidad inter-campus sin perder tu avance ni tus créditos.", "Agenda tu recorrido presencial VIP desde el módulo Mis Recompensas."]}, {"id": "comunidad", "title": "Comunidad", "icon": "👥", "badge": "Soy UNID", "subtitle": "Conecta con otros jóvenes y vive la experiencia con Uriel", "description": "Forma parte de una comunidad vibrante donde desarrollas liderazgo, deporte, cultura, acción social y emprendimiento junto a Uriel, nuestra mascota oficial.", "highlights": ["Clubes deportivos, culturales y torneos inter-campus Soy UNID.", "Programas de liderazgo juvenil, voluntariado y formación humana.", "Eventos de networking, hackathons y ferias de emprendimiento.", "Comunidad de más de 100,000 egresados exitosos en toda Latinoamérica."]}], "appModules": [{"id": "retos", "title": "Mis Retos", "subtitle": "Trivias y desafíos vocacionales", "color": "#0072CE", "textColor": "#FFFFFF", "icon": "🎮", "enabled": true, "accessLevel": 2, "description": "Completa retos, trivias y actividades sobre las carreras, habilidades y la vida universitaria. ¡Cada respuesta correcta suma créditos al instante!", "customNotice": "Nivel 2 Activo: Tienes todos los retos desbloqueados."}, {"id": "creditos", "title": "Mis Créditos", "subtitle": "Tu billetera de puntos UNID", "color": "#FFC72C", "textColor": "#001E42", "icon": "🏆", "enabled": true, "accessLevel": 2, "description": "Revisa tu saldo actual de créditos, consulta el historial de puntos ganados y simula el descuento directo aplicable a tu inscripción.", "customNotice": "Tus créditos acumulados son canjeables por beneficios directos en tu inscripción."}, {"id": "carreras", "title": "Mis Carreras", "subtitle": "Explora y elige tu vocación", "color": "#10B981", "textColor": "#FFFFFF", "icon": "🎯", "enabled": true, "accessLevel": 2, "description": "Conoce a detalle los planes de estudio de UNID, filtra por tu área de interés y guarda tus carreras favoritas para ganar +50 créditos por exploración.", "customNotice": "Explora carreras para sumar créditos extra a tu perfil."}, {"id": "recompensas", "title": "Mis Recompensas", "subtitle": "Canjea tus créditos ganados", "color": "#7C3AED", "textColor": "#FFFFFF", "icon": "🎁", "enabled": true, "accessLevel": 2, "description": "Usa tus créditos acumulados para desbloquear cupones oficiales de descuento en inscripción, kits de Uriel y pases VIP a tu campus.", "customNotice": "Tus cupones generados quedan vinculados automáticamente a tu registro."}, {"id": "progreso", "title": "Mi Progreso", "subtitle": "Nivel, etapas e insignias", "color": "#F97316", "textColor": "#FFFFFF", "icon": "📊", "enabled": true, "accessLevel": 2, "description": "Visualiza tu avance en las 4 etapas de UNID Futuro Quest, tus estadísticas de desempeño y el camino hacia el siguiente nivel.", "customNotice": "Acceso Total Nivel 2 habilitado en tu cuenta."}, {"id": "preguntanos", "title": "Pregúntanos", "subtitle": "Chat con Uriel y Admisiones", "color": "#0EA5E9", "textColor": "#FFFFFF", "icon": "💬", "enabled": true, "accessLevel": 2, "description": "Envía tus dudas directamente al equipo de admisiones UNID o consulta las respuestas rápidas de Uriel sobre costos, becas, horarios y requisitos.", "customNotice": "Un asesor de tu campus UNID dará seguimiento a tus dudas."}], "howItWorks": [{"step": 1, "title": "Regístrate", "stageName": "REGISTRO", "desc": "Escanea el código QR o ingresa tu número de celular. Recibe tu acceso directo Nivel 2 y crea tu perfil.", "stageDesc": "Escanea el QR o ingresa tu número de celular.", "color": "#FFD100"}, {"step": 2, "title": "Juega y aprende", "stageName": "RETOS", "desc": "Completa retos, trivia y actividades sobre las carreras, habilidades y la vida universitaria.", "stageDesc": "Completa trivias, actividades y desafíos sobre profesiones.", "color": "#00A8E8"}, {"step": 3, "title": "Acumula puntos", "stageName": "CRÉDITOS", "desc": "Cada actividad te da créditos que podrás ir sumando en tiempo real en tu cuenta.", "stageDesc": "Acumula puntos por cada reto, participación y eventos.", "color": "#A855F7"}, {"step": 4, "title": "Canjea tus créditos", "stageName": "BENEFICIOS", "desc": "Obtén descuentos especiales en tu inscripción y otros beneficios exclusivos de UNID.", "stageDesc": "Canjea tus créditos por descuentos especiales en tu inscripción.", "color": "#22C55E"}], "quizzes": [{"id": "q1", "category": "Modelo UNID", "question": "¿En cuánto tiempo concluyes tu Licenciatura o Ingeniería con el plan cuatrimestral de UNID?", "options": ["En 3 años (9 cuatrimestres)", "En 5 años y medio", "En 6 años", "En 4 años y medio"], "correctIndex": 0, "credits": 150, "explanation": "¡Correcto! En UNID terminas tu carrera en solo 3 años gracias a su plan cuatrimestral intensivo."}, {"id": "q2", "category": "Lo Vivo Lo Aplico", "question": "¿Qué es la Estadía Empresarial UNID que impulsa tu experiencia profesional antes de graduarte?", "options": ["Un cuatrimestre completo de inmersión práctica dentro de una empresa real", "Una plática informativa de 1 hora", "Un examen teórico opcional", "Un viaje turístico de fin de semana"], "correctIndex": 0, "credits": 150, "explanation": "¡Excelente! La Estadía Empresarial te conecta con empresas reales para vivir y aplicar tu profesión."}, {"id": "q3", "category": "Comunidad UNID", "question": "¿Cómo se llama nuestra mascota oficial que te guía dentro de UNID Futuro Quest?", "options": ["Uriel, el zorro rojo de UNID", "Leo el león dorado", "Beto el halcón", "Rocco el lobo"], "correctIndex": 0, "credits": 100, "explanation": "¡Así es! Soy Uriel, tu guía para descubrir tu vocación y llegar al éxito en UNID."}, {"id": "q4", "category": "Vocación Negocios", "question": "Si te apasiona liderar equipos, emprender negocios y crear campañas de alto impacto, ¿qué área UNID es ideal para ti?", "options": ["Negocios, Administración de Empresas y Mercadotecnia Estratégica", "Biología Marina Profunda", "Geología Volcánica", "Astronomía Observacional"], "correctIndex": 0, "credits": 150, "explanation": "¡Tienes ADN de líder! Nuestras carreras de Negocios y Mercadotecnia incluyen simuladores y modelo Dual."}, {"id": "q5", "category": "Tecnología e Innovación", "question": "Si te entusiasma el desarrollo de software, apps móviles, IA y transformación digital, ¿qué carrera UNID te prepara para ello?", "options": ["Ingeniería en Sistemas de Información y Desarrollo de Software", "Licenciatura en Filología Clásica", "Historia Antigua", "Arqueología Subacuática"], "correctIndex": 0, "credits": 150, "explanation": "¡Brillante elección! En Ingeniería en Sistemas aprenderás a crear soluciones tecnológicas desde el primer día."}, {"id": "q6", "category": "Modelo Dual DHLA", "question": "¿Qué ventaja te ofrece el Modelo Dual UNID (certificado por el estándar alemán DHLA)?", "options": ["Alternar tu aprendizaje en el aula con formación práctica en empresas formadoras", "Estudiar sin presentar ningún proyecto", "Asistir solo un día al mes", "Cursar únicamente materias teóricas"], "correctIndex": 0, "credits": 200, "explanation": "¡Increíble! Con el Modelo Dual egresas con sólida experiencia laboral y altísima empleabilidad."}], "careers": [{"id": "c1", "name": "Lic. en Administración de Empresas", "area": "Negocios y Dirección", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual / Ejecutiva", "icon": "💼", "creditsBonus": 50, "description": "Dirige organizaciones, gestiona talento humano, finanzas y proyectos de innovación con Estadía Empresarial garantizada."}, {"id": "c2", "name": "Ing. en Sistemas de Información", "area": "Tecnología e Ingeniería", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva / Online", "icon": "💻", "creditsBonus": 50, "description": "Desarrolla aplicaciones web, móviles, bases de datos, arquitectura en la nube y soluciones de ciberseguridad."}, {"id": "c3", "name": "Lic. en Mercadotecnia Estratégica", "area": "Negocios y Creatividad", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual", "icon": "🚀", "creditsBonus": 50, "description": "Domina el marketing digital, posicionamiento de marcas, investigación de mercados y comercio electrónico."}, {"id": "c4", "name": "Lic. en Derecho y Ciencias Jurídicas", "area": "Derecho y Ciencias Sociales", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva", "icon": "⚖️", "creditsBonus": 50, "description": "Practica en salas de juicios orales, derecho corporativo, penal, constitucional y mediación legal."}, {"id": "c5", "name": "Lic. en Diseño Gráfico Digital", "area": "Diseño y Comunicación", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada", "icon": "🎨", "creditsBonus": 50, "description": "Crea identidad visual, animación digital, diseño UX/UI, producción audiovisual y dirección creativa."}, {"id": "c6", "name": "Lic. en Contabilidad y Finanzas", "area": "Negocios y Finanzas", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva / Online", "icon": "📈", "creditsBonus": 50, "description": "Especialízate en estrategias fiscales, auditoría, finanzas corporativas y análisis de inversiones."}, {"id": "c7", "name": "Ing. Industrial y de Logística", "area": "Tecnología e Ingeniería", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual", "icon": "⚙️", "creditsBonus": 50, "description": "Optimiza cadenas de suministro, manufactura esbelta, calidad total y automatización de procesos."}, {"id": "c8", "name": "Lic. en Educación Física y Deporte", "area": "Salud y Educación", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada", "icon": "🏅", "creditsBonus": 50, "description": "Forma líderes deportivos, entrenamiento de alto rendimiento, gestión deportiva y bienestar integral."}], "rewards": [{"id": "r1", "title": "30% de Descuento en Inscripción", "cost": 500, "icon": "🏷️", "codePrefix": "UNID-30", "description": "Cupón oficial aplicable directamente en tu pago de inscripción de nuevo ingreso en cualquier campus UNID."}, {"id": "r2", "title": "50% de Descuento en Inscripción", "cost": 850, "icon": "🌟", "codePrefix": "UNID-50", "description": "Descuento preferencial del 50% en tu primera inscripción por destacar en los retos de Futuro Quest."}, {"id": "r3", "title": "Kit Oficial Uriel (Sudadera UNID + Termo)", "cost": 650, "icon": "🦊", "codePrefix": "URIEL-KIT", "description": "Recoge en tu campus UNID tu kit oficial de bienvenida con la sudadera azul UNID y termo coleccionable."}, {"id": "r4", "title": "Pase VIP Campus Tour + Test Vocacional Pro", "cost": 300, "icon": "🎟️", "codePrefix": "VIP-TOUR", "description": "Acceso preferencial a laboratorios, sesión personalizada con coordinador de carrera y constancia vocacional."}, {"id": "r5", "title": "Beca Impulso 70% en Inscripción", "cost": 1200, "icon": "🏆", "codePrefix": "UNID-70PRO", "description": "Máximo beneficio de UNID Futuro Quest para jugadores que completaron todos los retos vocacionales."}], "faqs": [{"q": "¿Cómo funciona mi acceso Nivel 2 al registrarme?", "a": "Al ingresar tus datos en UNID Futuro Quest entras directamente como Jugador Nivel 2 con 750 créditos de bienvenida y acceso completo a los 6 módulos de la plataforma."}, {"q": "¿Cómo hago válido mi descuento de inscripción?", "a": "En el módulo 'Mis Recompensas' elige el beneficio que deseas canjear con tus créditos. El sistema generará tu folio único UNID para presentarlo en Admisiones."}, {"q": "¿Puedo instalar UNID Futuro Quest en mi celular y en mi computadora?", "a": "¡Sí! Puedes instalarla con el botón 'Instalar App' en la parte superior tanto en teléfonos Android/iOS como en computadoras Windows/Mac."}], "users": [], "inquiries": [], "notifications": [{"id": "notif_1", "title": "¡Bienvenido(a) a UNID Futuro Quest — Nivel 2!", "body": "Soy Uriel 🦊. Tienes acceso total desbloqueado y 750 créditos iniciales listos para jugar y canjear por descuentos en tu inscripción.", "date": "Reciente", "unread": true, "bonusCredits": 0}, {"id": "notif_2", "title": "🎯 Retos Vocacionales Activos", "body": "Responde las trivias en 'Mis Retos' y acumula créditos adicionales hoy mismo.", "date": "Reciente", "unread": true, "bonusCredits": 0}]};
+    const DEFAULT_DB = {"version": "4.0-mobile-fixed", "settings": {"brandName": "UNID", "brandSlogan": "LO VIVO LO APLICO®", "appName": "FUTURO QUEST", "heroTagline": "Tu futuro también se juega", "mascotName": "Uriel", "mascotBubble": "¡Hola! Soy Uriel, la mascota de UNID y ahora tu guía para llegar al éxito.", "mascotSubBubble": "Descubre, explora y decide", "mascotDescription": "UNID FUTURO QUEST es una plataforma interactiva que te permite conocer tus intereses, descubrir tu vocación y ganar créditos mientras te diviertes.", "rocketBanner": "Conecta, juega y construye tu mejor versión.", "initialLevel": 2, "initialCredits": 750, "requireLoginOnStart": false, "fullAccessLevel2": true, "promoBannerText": "¡Entre más juegues, más cerca estarás de tu descuento!", "footerCtaTitle": "UNID FUTURO QUEST", "footerCtaSub": "¡Juega hoy y construye tu mañana!", "whatsappAdvisor": "528000008643", "contactEmail": "admisiones@unid.edu.mx"}, "topNav": [{"id": "carreras", "title": "Carreras", "icon": "🎓", "badge": "Plan 3 Años", "subtitle": "Licenciaturas e Ingenierías con Estadía Empresarial", "description": "Termina tu carrera universitaria en 3 años (9 cuatrimestres) con un enfoque 100% práctico. Incluye Estadía Empresarial en empresas reales y opción de Modelo Dual Alemán (DHLA).", "highlights": ["Plan cuatrimestral intensivo: concluye en solo 3 años.", "Estadía Empresarial de 4 meses integrada en tu plan de estudios.", "Modalidades: Escolarizada, Ejecutiva (mixta) y 100% Online.", "Modelo Dual DHLA con rotación en empresas socias."]}, {"id": "beneficios", "title": "Beneficios", "icon": "⭐", "badge": "Becas y Descuentos", "subtitle": "Convierte tus créditos de juego en beneficios reales", "description": "En UNID Futuro Quest cada reto superado suma créditos a tu perfil Nivel 2+ que puedes canjear directamente por descuentos de inscripción y beneficios exclusivos.", "highlights": ["Hasta 75% de descuento en tu primera inscripción acumulando créditos.", "Acceso sin costo a talleres de orientación vocacional y simuladores.", "Bolsa de trabajo nacional conectada con más de 4,500 empresas.", "Doble titulación y certificaciones digitales por cuatrimestre."]}, {"id": "campus", "title": "Campus", "icon": "📍", "badge": "Red Nacional", "subtitle": "Presencia UNID en todo México cerca de ti", "description": "Contamos con campus equipados con laboratorios multimedia, cámaras de Gesell, salas de juicios orales y centros de negocios en todo el país.", "highlights": ["Sede destacada: Campus Tepatitlán, Guadalajara y Región Occidente.", "Sedes Norte, Centro y Sur: Monterrey, Mérida, Morelia, Aguascalientes, Cancún y más.", "Movilidad inter-campus sin perder tu avance ni tus créditos.", "Agenda tu recorrido presencial VIP desde el módulo Mis Recompensas."]}, {"id": "comunidad", "title": "Comunidad", "icon": "👥", "badge": "Soy UNID", "subtitle": "Conecta con otros jóvenes y vive la experiencia con Uriel", "description": "Forma parte de una comunidad vibrante donde desarrollas liderazgo, deporte, cultura, acción social y emprendimiento junto a Uriel, nuestra mascota oficial.", "highlights": ["Clubes deportivos, culturales y torneos inter-campus Soy UNID.", "Programas de liderazgo juvenil, voluntariado y formación humana.", "Eventos de networking, hackathons y ferias de emprendimiento.", "Comunidad de más de 100,000 egresados exitosos en toda Latinoamérica."]}], "appModules": [{"id": "retos", "title": "Mis Retos", "subtitle": "Trivias y desafíos vocacionales", "color": "#0072CE", "textColor": "#FFFFFF", "icon": "🎮", "enabled": true, "accessLevel": 2, "description": "Completa retos, trivias y actividades sobre las carreras, habilidades y la vida universitaria. ¡Cada respuesta correcta suma créditos al instante!", "customNotice": "Nivel 2 Activo: Tienes todos los retos desbloqueados."}, {"id": "creditos", "title": "Mis Créditos", "subtitle": "Tu billetera de puntos UNID", "color": "#FFC72C", "textColor": "#001E42", "icon": "🏆", "enabled": true, "accessLevel": 2, "description": "Revisa tu saldo actual de créditos, consulta el historial de puntos ganados y simula el descuento directo aplicable a tu inscripción.", "customNotice": "100 créditos equivalen a beneficios directos en admisiones."}, {"id": "carreras", "title": "Mis Carreras", "subtitle": "Explora y elige tu vocación", "color": "#10B981", "textColor": "#FFFFFF", "icon": "🎯", "enabled": true, "accessLevel": 2, "description": "Conoce a detalle los planes de estudio de UNID, filtra por tu área de interés y guarda tus carreras favoritas para ganar +50 créditos por exploración.", "customNotice": "Explora carreras para sumar créditos extra a tu perfil."}, {"id": "recompensas", "title": "Mis Recompensas", "subtitle": "Canjea tus créditos ganados", "color": "#7C3AED", "textColor": "#FFFFFF", "icon": "🎁", "enabled": true, "accessLevel": 2, "description": "Usa tus créditos acumulados para desbloquear cupones oficiales de descuento en inscripción, kits de Uriel y pases VIP a tu campus.", "customNotice": "Tus cupones generados quedan registrados automáticamente en plataforma."}, {"id": "progreso", "title": "Mi Progreso", "subtitle": "Nivel, etapas e insignias", "color": "#F97316", "textColor": "#FFFFFF", "icon": "📊", "enabled": true, "accessLevel": 2, "description": "Visualiza tu avance en las 4 etapas de UNID Futuro Quest, tus estadísticas de desempeño y el camino hacia el siguiente nivel.", "customNotice": "Acceso Total Nivel 2 habilitado desde tu ingreso."}, {"id": "preguntanos", "title": "Pregúntanos", "subtitle": "Chat con Uriel y Admisiones", "color": "#0EA5E9", "textColor": "#FFFFFF", "icon": "💬", "enabled": true, "accessLevel": 2, "description": "Envía tus dudas directamente al equipo de admisiones UNID o consulta las respuestas rápidas de Uriel sobre costos, becas, horarios y requisitos.", "customNotice": "Todas tus preguntas llegan directo al panel de control (config.html)."}], "howItWorks": [{"step": 1, "title": "Regístrate", "stageName": "REGISTRO", "desc": "Escanea el código QR o ingresa tu número de celular. Ingresa directo como Nivel 2 con acceso total a la plataforma.", "stageDesc": "Escanea el QR o ingresa tu número de celular.", "color": "#FFD100"}, {"step": 2, "title": "Juega y aprende", "stageName": "RETOS", "desc": "Completa retos, trivia y actividades sobre las carreras, habilidades y la vida universitaria.", "stageDesc": "Completa trivias, actividades y desafíos sobre profesiones.", "color": "#00A8E8"}, {"step": 3, "title": "Acumula puntos", "stageName": "CRÉDITOS", "desc": "Cada actividad te da créditos que podrás ir sumando en tiempo real en tu cuenta.", "stageDesc": "Acumula puntos por cada reto, participación y eventos.", "color": "#A855F7"}, {"step": 4, "title": "Canjea tus créditos", "stageName": "BENEFICIOS", "desc": "Obtén descuentos especiales en tu inscripción y otros beneficios exclusivos de UNID.", "stageDesc": "Canjea tus créditos por descuentos especiales en tu inscripción.", "color": "#22C55E"}], "quizzes": [{"id": "q1", "category": "Modelo UNID", "question": "¿En cuánto tiempo concluyes tu Licenciatura o Ingeniería con el plan cuatrimestral de UNID?", "options": ["En 3 años (9 cuatrimestres)", "En 5 años y medio", "En 6 años", "En 4 años y medio"], "correctIndex": 0, "credits": 150, "explanation": "¡Correcto! En UNID terminas tu carrera en solo 3 años gracias a su plan cuatrimestral intensivo."}, {"id": "q2", "category": "Lo Vivo Lo Aplico", "question": "¿Qué es la Estadía Empresarial UNID que impulsa tu experiencia profesional antes de graduarte?", "options": ["Un cuatrimestre completo de inmersión práctica dentro de una empresa real", "Una plática informativa de 1 hora", "Un examen teórico opcional", "Un viaje turístico de fin de semana"], "correctIndex": 0, "credits": 150, "explanation": "¡Excelente! La Estadía Empresarial te conecta con empresas reales para vivir y aplicar tu profesión."}, {"id": "q3", "category": "Comunidad UNID", "question": "¿Cómo se llama nuestra mascota oficial que te guía dentro de UNID Futuro Quest?", "options": ["Uriel, el zorro rojo de UNID", "Leo el león dorado", "Beto el halcón", "Rocco el lobo"], "correctIndex": 0, "credits": 100, "explanation": "¡Así es! Soy Uriel, tu guía para descubrir tu vocación y llegar al éxito en UNID."}, {"id": "q4", "category": "Vocación Negocios", "question": "Si te apasiona liderar equipos, emprender negocios y crear campañas de alto impacto, ¿qué área UNID es ideal para ti?", "options": ["Negocios, Administración de Empresas y Mercadotecnia Estratégica", "Biología Marina Profunda", "Geología Volcánica", "Astronomía Observacional"], "correctIndex": 0, "credits": 150, "explanation": "¡Tienes ADN de líder! Nuestras carreras de Negocios y Mercadotecnia incluyen simuladores y modelo Dual."}, {"id": "q5", "category": "Tecnología e Innovación", "question": "Si te entusiasma el desarrollo de software, apps móviles, IA y transformación digital, ¿qué carrera UNID te prepara para ello?", "options": ["Ingeniería en Sistemas de Información y Desarrollo de Software", "Licenciatura en Filología Clásica", "Historia Antigua", "Arqueología Subacuática"], "correctIndex": 0, "credits": 150, "explanation": "¡Brillante elección! En Ingeniería en Sistemas aprenderás a crear soluciones tecnológicas desde el primer día."}, {"id": "q6", "category": "Modelo Dual DHLA", "question": "¿Qué ventaja te ofrece el Modelo Dual UNID (certificado por el estándar alemán DHLA)?", "options": ["Alternar tu aprendizaje en el aula con formación práctica en empresas formadoras", "Estudiar sin presentar ningún proyecto", "Asistir solo un día al mes", "Cursar únicamente materias teóricas"], "correctIndex": 0, "credits": 200, "explanation": "¡Increíble! Con el Modelo Dual egresas con sólida experiencia laboral y altísima empleabilidad."}], "careers": [{"id": "c1", "name": "Lic. en Administración de Empresas", "area": "Negocios y Dirección", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual / Ejecutiva", "icon": "💼", "creditsBonus": 50, "description": "Dirige organizaciones, gestiona talento humano, finanzas y proyectos de innovación con Estadía Empresarial garantizada."}, {"id": "c2", "name": "Ing. en Sistemas de Información", "area": "Tecnología e Ingeniería", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva / Online", "icon": "💻", "creditsBonus": 50, "description": "Desarrolla aplicaciones web, móviles, bases de datos, arquitectura en la nube y soluciones de ciberseguridad."}, {"id": "c3", "name": "Lic. en Mercadotecnia Estratégica", "area": "Negocios y Creatividad", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual", "icon": "🚀", "creditsBonus": 50, "description": "Domina el marketing digital, posicionamiento de marcas, investigación de mercados y comercio electrónico."}, {"id": "c4", "name": "Lic. en Derecho y Ciencias Jurídicas", "area": "Derecho y Ciencias Sociales", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva", "icon": "⚖️", "creditsBonus": 50, "description": "Practica en salas de juicios orales, derecho corporativo, penal, constitucional y mediación legal."}, {"id": "c5", "name": "Lic. en Diseño Gráfico Digital", "area": "Diseño y Comunicación", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada", "icon": "🎨", "creditsBonus": 50, "description": "Crea identidad visual, animación digital, diseño UX/UI, producción audiovisual y dirección creativa."}, {"id": "c6", "name": "Lic. en Contabilidad y Finanzas", "area": "Negocios y Finanzas", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Ejecutiva / Online", "icon": "📈", "creditsBonus": 50, "description": "Especialízate en estrategias fiscales, auditoría, finanzas corporativas y análisis de inversiones."}, {"id": "c7", "name": "Ing. Industrial y de Logística", "area": "Tecnología e Ingeniería", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada / Dual", "icon": "⚙️", "creditsBonus": 50, "description": "Optimiza cadenas de suministro, manufactura esbelta, calidad total y automatización de procesos."}, {"id": "c8", "name": "Lic. en Educación Física y Deporte", "area": "Salud y Educación", "duration": "3 años (9 cuatrimestres)", "modality": "Escolarizada", "icon": "🏅", "creditsBonus": 50, "description": "Forma líderes deportivos, entrenamiento de alto rendimiento, gestión deportiva y bienestar integral."}], "rewards": [{"id": "r1", "title": "30% de Descuento en Inscripción", "cost": 500, "icon": "🏷️", "codePrefix": "UNID-30", "description": "Cupón oficial aplicable directamente en tu pago de inscripción de nuevo ingreso en cualquier campus UNID."}, {"id": "r2", "title": "50% de Descuento en Inscripción", "cost": 850, "icon": "🌟", "codePrefix": "UNID-50", "description": "Descuento preferencial del 50% en tu primera inscripción por destacar en los retos de Futuro Quest."}, {"id": "r3", "title": "Kit Oficial Uriel (Sudadera UNID + Termo)", "cost": 650, "icon": "🦊", "codePrefix": "URIEL-KIT", "description": "Recoge en tu campus UNID tu kit oficial de bienvenida con la sudadera azul UNID y termo coleccionable."}, {"id": "r4", "title": "Pase VIP Campus Tour + Test Vocacional Pro", "cost": 300, "icon": "🎟️", "codePrefix": "VIP-TOUR", "description": "Acceso preferencial a laboratorios, sesión personalizada con coordinador de carrera y constancia vocacional."}, {"id": "r5", "title": "Beca Impulso 70% en Inscripción", "cost": 1200, "icon": "🏆", "codePrefix": "UNID-70PRO", "description": "Máximo beneficio de UNID Futuro Quest para jugadores que completaron todos los retos vocacionales."}], "faqs": [{"q": "¿Cómo funciona mi acceso Nivel 2 al registrarme?", "a": "Al ingresar tus datos en UNID Futuro Quest entras directamente como Jugador Nivel 2 con 750 créditos de bienvenida y acceso completo a los 6 módulos de la plataforma."}, {"q": "¿Cómo hago válido mi descuento de inscripción?", "a": "En el módulo 'Mis Recompensas' elige el beneficio que deseas canjear con tus créditos. El sistema generará tu folio único UNID y quedará registrado automáticamente para el equipo de Admisiones."}, {"q": "¿Puedo instalar UNID Futuro Quest en mi celular y en mi computadora?", "a": "¡Sí! Esta aplicación es una PWA (Progressive Web App). Puedes instalarla con el botón 'Instalar App' en la parte superior tanto en teléfonos Android/iOS como en computadoras Windows/Mac."}], "users": [], "inquiries": [], "notifications": [{"id": "notif_1", "title": "¡Bienvenido(a) a UNID Futuro Quest — Nivel 2!", "body": "Soy Uriel 🦊. Tienes acceso total desbloqueado y 750 créditos iniciales listos para jugar y canjear por descuentos en tu inscripción.", "date": "Reciente", "unread": true, "bonusCredits": 0}, {"id": "notif_2", "title": "🎯 Retos Vocacionales Activos", "body": "Responde las trivias en 'Mis Retos' y acumula créditos adicionales hoy mismo.", "date": "Reciente", "unread": true, "bonusCredits": 0}]};
 
     let DB = loadDB();
     let myUser = loadMySessionUser();
@@ -1582,15 +1880,7 @@
     let currentPhoneModule = null;
     let lastNotifTimestamp = 0;
 
-    // BroadcastChannel for live sync when updated from admin
-    const syncChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('unid_fq_sync_channel') : null;
-    if (syncChannel) {
-      syncChannel.onmessage = (ev) => {
-        if (ev.data && ev.data.type === 'DB_UPDATED') {
-          DB = loadDB();
-          syncMyUserFromDB();
-      
-    // Reloj en tiempo real para la pantalla del celular
+    // Reloj en tiempo real sincronizado segundo a segundo
     function updateRealClock() {
       const clockEl = document.getElementById('phoneClock');
       if (!clockEl) return;
@@ -1604,7 +1894,7 @@
     updateRealClock();
     setInterval(updateRealClock, 1000);
 
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
+    // Detección automática de App Instalada (PWA Standalone)
     function checkStandaloneMode() {
       const params = new URLSearchParams(window.location.search);
       const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
@@ -1623,7 +1913,14 @@
       showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
     });
 
-    renderAll();
+    // BroadcastChannel for live sync when updated from admin
+    const syncChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('unid_fq_sync_channel') : null;
+    if (syncChannel) {
+      syncChannel.onmessage = (ev) => {
+        if (ev.data && ev.data.type === 'DB_UPDATED') {
+          DB = loadDB();
+          syncMyUserFromDB();
+          renderAll();
           if (ev.data.notification) {
             triggerToastAndNotification(ev.data.notification.title, ev.data.notification.body);
           }
@@ -1635,41 +1932,7 @@
       if (e.key === STORAGE_KEY) {
         DB = loadDB();
         syncMyUserFromDB();
-    
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+        renderAll();
       }
     });
 
@@ -1695,7 +1958,6 @@
           if (parsed && parsed.id) return parsed;
         }
       } catch (e) {}
-      // Temporary local guest session until the student registers their personal profile
       return {
         id: null,
         isGuest: true,
@@ -1741,41 +2003,7 @@
     window.onFirebaseRemoteUpdate = function(remoteDB, remoteNotif) {
       DB = Object.assign({}, DEFAULT_DB, remoteDB);
       syncMyUserFromDB();
-  
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+      renderAll();
       if (remoteNotif && remoteNotif.ts && remoteNotif.ts > lastNotifTimestamp) {
         lastNotifTimestamp = remoteNotif.ts;
         triggerToastAndNotification(remoteNotif.title, remoteNotif.body);
@@ -1826,7 +2054,7 @@
         </button>
       `).join('');
 
-      // Active User Card in Phone (Only shows current user's own session)
+      // Active User Card in Phone
       const u = getActiveUser();
       const firstName = u.isGuest ? 'Estudiante' : (u.name || 'Estudiante').split(' ')[0];
       document.getElementById('phoneUserGreeting').textContent = `¡Hola, ${firstName}!`;
@@ -1837,7 +2065,7 @@
       document.getElementById('phoneUserCampus').textContent = u.campus || 'Campus UNID';
       document.getElementById('ribbonLevelBadge').textContent = u.isGuest
         ? `⚡ NIVEL ${u.level} • ACCESO TOTAL`
-        : `⚡ NIVEL ${u.level} ACTIVO (${firstName.toUpperCase()}) • ACCESO TOTAL`;
+        : `⚡ NIVEL ${u.level} (${firstName.toUpperCase()}) • ACCESO TOTAL`;
 
       const pct = Math.min(100, Math.max(25, Math.round(((u.credits % 500) / 500) * 100)));
       document.getElementById('phoneLevelBar').style.width = pct + '%';
@@ -1859,7 +2087,7 @@
         </button>
       `).join('');
 
-      // How It Works (Right Column) + Etapas del juego (Bottom)
+      // How It Works + Etapas del juego
       const stepActions = ["openRegisterModal()", "openPhoneModule('retos')", "openPhoneModule('creditos')", "openPhoneModule('recompensas')"];
       const stepIcons = ["📱", "🎮", "⭐", "🎓"];
       const howList = document.getElementById('howItWorksList');
@@ -1936,9 +2164,9 @@
             const done = (u.completedQuizzes || []).includes(q.id);
             return `
               <div class="quiz-card" id="quiz-card-${q.id}">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; flex-wrap:wrap;">
                   <span class="quiz-cat-tag">${q.category || 'Reto UNID'}</span>
-                  <span style="font-size:0.75rem; font-weight:900; color:${done ? '#16A34A' : '#D97706'};">
+                  <span style="font-size:0.74rem; font-weight:900; color:${done ? '#16A34A' : '#D97706'};">
                     ${done ? '✅ Completado (+' + q.credits + ' cr)' : '⭐ +' + q.credits + ' créditos'}
                   </span>
                 </div>
@@ -1973,9 +2201,9 @@
             <p style="font-size:0.8rem; color:#334155; margin-bottom:4px;">• Carreras exploradas: <strong>${(u.exploredCareers || []).length}</strong></p>
             <p style="font-size:0.8rem; color:#334155;">• Recompensas canjeadas: <strong>${(u.redeemedRewards || []).length}</strong></p>
           </div>
-          <div style="display:flex; gap:8px; margin-top:6px;">
-            <button class="action-btn-sm" style="flex:1; justify-content:center;" onclick="openPhoneModule('retos')">🎮 Ganar más créditos</button>
-            <button class="action-btn-sm gold" style="flex:1; justify-content:center;" onclick="openPhoneModule('recompensas')">🎁 Canjear ahora</button>
+          <div style="display:flex; gap:8px; margin-top:6px; flex-wrap:wrap;">
+            <button class="action-btn-sm" style="flex:1; justify-content:center;" onclick="openPhoneModule('retos')">🎮 Ganar más</button>
+            <button class="action-btn-sm gold" style="flex:1; justify-content:center;" onclick="openPhoneModule('recompensas')">🎁 Canjear</button>
           </div>
         `;
       } else if (modId === 'carreras') {
@@ -1991,13 +2219,13 @@
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:6px;">
                   <div>
                     <span class="quiz-cat-tag">${c.area}</span>
-                    <h4 style="font-size:0.92rem; color:#001B3D;">${c.icon || '🎓'} ${c.name}</h4>
+                    <h4 style="font-size:0.9rem; color:#001B3D;">${c.icon || '🎓'} ${c.name}</h4>
                   </div>
-                  <span style="font-size:0.72rem; font-weight:800; color:#059669;">${c.duration}</span>
+                  <span style="font-size:0.71rem; font-weight:800; color:#059669; white-space:nowrap;">${c.duration}</span>
                 </div>
                 <p style="font-size:0.78rem; color:#334155; margin:6px 0;">${c.description}</p>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                  <span style="font-size:0.72rem; color:#64748B; font-weight:700;">${c.modality}</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; flex-wrap:wrap; margin-top:8px;">
+                  <span style="font-size:0.71rem; color:#64748B; font-weight:700;">${c.modality}</span>
                   <button class="action-btn-sm ${explored ? '' : 'gold'}" onclick="exploreCareer('${c.id}')">
                     ${explored ? '✅ En Mis Intereses' : '⭐ Me interesa (+' + (c.creditsBonus || 50) + ' cr)'}
                   </button>
@@ -2016,8 +2244,8 @@
             const already = (u.redeemedRewards || []).find(x => x.rewardId === r.id);
             return `
               <div class="item-card">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <h4 style="font-size:0.9rem; color:#001B3D;">${r.icon || '🎁'} ${r.title}</h4>
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:6px;">
+                  <h4 style="font-size:0.88rem; color:#001B3D;">${r.icon || '🎁'} ${r.title}</h4>
                   <span class="credits-star-pill">⭐ ${r.cost}</span>
                 </div>
                 <p style="font-size:0.78rem; color:#475569; margin:6px 0;">${r.description}</p>
@@ -2042,7 +2270,7 @@
         contentEl.innerHTML = `
           <div class="item-card" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5); border-color:#FDBA74;">
             <div style="font-size:0.76rem; font-weight:900; color:#C2410C;">ESTADO DE MI CUENTA</div>
-            <h4 style="font-size:1.05rem; color:#001B3D; margin:3px 0;">Nivel ${u.level} — Acceso Total UNID</h4>
+            <h4 style="font-size:1.02rem; color:#001B3D; margin:3px 0;">Nivel ${u.level} — Acceso Total UNID</h4>
             <p style="font-size:0.78rem; color:#431407;">Cuentas con acceso directo a toda la información, retos, carreras y recompensas de la plataforma.</p>
           </div>
           <div class="item-card">
@@ -2054,7 +2282,7 @@
           </div>
           <div class="item-card">
             <h4 style="font-size:0.88rem; margin-bottom:8px;">Mis Etapas Desbloqueadas</h4>
-            <div style="font-size:0.8rem; line-height:1.7;">
+            <div style="font-size:0.79rem; line-height:1.7;">
               <div>${u.isGuest ? '⏳' : '✅'} <strong>1. Registro Nivel 2:</strong> ${u.isGuest ? 'Pendiente de guardar tus datos' : 'Perfil registrado (' + u.name + ')'}</div>
               <div>${qDone > 0 ? '✅' : '⏳'} <strong>2. Retos Vocacionales:</strong> ${qDone} completados</div>
               <div>✅ <strong>3. Créditos Acumulados:</strong> ${u.credits} puntos</div>
@@ -2135,41 +2363,7 @@
           u.credits += Number(q.credits || 100);
           recalculateLevel(u);
           saveDB();
-      
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+          renderAll();
           triggerToastAndNotification(
             `🎉 ¡Respuesta Correcta! +${q.credits} créditos`,
             `Has sumado ${q.credits} créditos en "${q.category}". Tu nuevo saldo es de ${u.credits} créditos.`
@@ -2195,41 +2389,7 @@
         u.careerInterest = c.name;
         recalculateLevel(u);
         saveDB();
-    
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+        renderAll();
         triggerToastAndNotification(
           `🎓 ¡Carrera Explorada! +${bonus} créditos`,
           `Guardaste "${c.name}" en tus intereses vocacionales.`
@@ -2266,41 +2426,7 @@
         date: new Date().toISOString().slice(0, 16).replace('T', ' ')
       });
       saveDB();
-  
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+      renderAll();
       triggerToastAndNotification(
         `🎁 ¡Recompensa Canjeada! Código: ${code}`,
         `Canjeaste "${r.title}". Presenta tu código en Admisiones UNID.`
@@ -2334,41 +2460,7 @@
       recalculateLevel(u);
       saveDB();
       input.value = '';
-  
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+      renderAll();
       triggerToastAndNotification(
         '💬 ¡Pregunta enviada a Admisiones UNID! (+25 cr)',
         'Un asesor de tu campus se pondrá en contacto contigo muy pronto.'
@@ -2383,14 +2475,14 @@
       document.getElementById('modalBody').innerHTML = `
         <div style="background:#EFF6FF; border-left:4px solid #002D62; padding:12px 14px; border-radius:10px; margin-bottom:14px;">
           <span class="quiz-cat-tag">${item.badge || 'Institucional'}</span>
-          <h4 style="font-size:1.08rem; color:#001B3D; margin-top:4px;">${item.subtitle}</h4>
+          <h4 style="font-size:1.05rem; color:#001B3D; margin-top:4px;">${item.subtitle}</h4>
         </div>
-        <p style="font-size:0.92rem; color:#334155; line-height:1.5; margin-bottom:14px;">${item.description}</p>
+        <p style="font-size:0.9rem; color:#334155; line-height:1.5; margin-bottom:14px;">${item.description}</p>
         <h5 style="font-size:0.88rem; color:#001B3D; margin-bottom:8px;">Puntos Clave:</h5>
-        <ul style="padding-left:18px; font-size:0.86rem; color:#1E293B; line-height:1.65; margin-bottom:16px;">
+        <ul style="padding-left:18px; font-size:0.85rem; color:#1E293B; line-height:1.65; margin-bottom:16px;">
           ${(item.highlights || []).map(h => `<li>${h}</li>`).join('')}
         </ul>
-        <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
           <button class="action-btn-sm gold" onclick="closeUniversalModal(); openPhoneModule('carreras');">🎯 Ver en la App</button>
           <button class="action-btn-sm" onclick="closeUniversalModal()">Cerrar</button>
         </div>
@@ -2398,7 +2490,7 @@
       document.getElementById('universalModal').classList.add('open');
     }
 
-    /* Personal Registration & Login Modal (Strictly Private: Never shows other users' records) */
+    /* Personal Registration & Login Modal */
     function openRegisterModal() {
       const u = getActiveUser();
       const careersOpts = (DB.careers || []).map(c =>
@@ -2407,7 +2499,7 @@
 
       document.getElementById('modalTitle').innerHTML = `🦊 ${u.isGuest ? 'Regístrate en UNID Futuro Quest' : 'Mi Cuenta Personal UNID'}`;
       document.getElementById('modalBody').innerHTML = `
-        <div style="background:#FEF9C3; border:1px solid #FDE047; padding:10px 14px; border-radius:12px; margin-bottom:14px; font-size:0.84rem; color:#713F12;">
+        <div style="background:#FEF9C3; border:1px solid #FDE047; padding:10px 14px; border-radius:12px; margin-bottom:14px; font-size:0.83rem; color:#713F12;">
           <strong>⚡ Acceso Total Nivel ${DB.settings.initialLevel || 2}:</strong> Al registrarte ingresas directamente con acceso completo a toda la plataforma y <strong>${DB.settings.initialCredits || 750} créditos de bienvenida</strong> para canjear en tu inscripción.
         </div>
         <form onsubmit="handleNewRegistration(event)">
@@ -2415,7 +2507,7 @@
             <label>Nombre completo *</label>
             <input type="text" id="regName" class="form-control" placeholder="Escribe tu nombre y apellidos" value="${u.isGuest ? '' : (u.name || '')}" required />
           </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="modal-grid-2">
             <div class="form-group">
               <label>Número de celular (10 dígitos) *</label>
               <input type="tel" id="regPhone" class="form-control" placeholder="Ej. 3781002030" value="${u.isGuest ? '' : (u.phone || '')}" required />
@@ -2425,7 +2517,7 @@
               <input type="email" id="regEmail" class="form-control" placeholder="tucorreo@ejemplo.com" value="${u.isGuest ? '' : (u.email || '')}" />
             </div>
           </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="modal-grid-2">
             <div class="form-group">
               <label>Campus UNID de interés</label>
               <select id="regCampus" class="form-control">
@@ -2447,7 +2539,7 @@
               </select>
             </div>
           </div>
-          <button type="submit" class="action-btn-sm gold" style="width:100%; justify-content:center; padding:12px; font-size:0.92rem; margin-top:4px;">
+          <button type="submit" class="action-btn-sm gold" style="width:100%; justify-content:center; padding:12px; font-size:0.9rem; margin-top:4px;">
             🚀 ${u.isGuest ? 'Registrarme e Ingresar (Nivel ' + (DB.settings.initialLevel || 2) + ')' : 'Guardar Mis Datos'}
           </button>
         </form>
@@ -2456,8 +2548,8 @@
         <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:12px;">
           <div style="font-size:0.82rem; font-weight:800; color:#001B3D; margin-bottom:6px;">🔑 ¿Ya te habías registrado antes?</div>
           <p style="font-size:0.76rem; color:#475569; margin-bottom:8px;">Ingresa tu número de celular registrado para recuperar tu avance y tus créditos:</p>
-          <div style="display:flex; gap:8px;">
-            <input type="tel" id="recoverPhoneInput" class="form-control" style="padding:7px 10px; font-size:0.84rem;" placeholder="Tu número de celular a 10 dígitos" />
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <input type="tel" id="recoverPhoneInput" class="form-control" style="flex:1; min-width:160px; padding:7px 10px; font-size:0.84rem;" placeholder="Tu celular a 10 dígitos" />
             <button type="button" class="action-btn-sm" onclick="recoverMyAccountByPhone()">Recuperar</button>
           </div>
         </div>
@@ -2502,41 +2594,7 @@
 
       saveDB();
       closeUniversalModal();
-  
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+      renderAll();
       triggerToastAndNotification(
         `🎉 ¡Bienvenido(a), ${name}!`,
         `Tu cuenta Nivel ${myUser.level} está activa con ${myUser.credits} créditos disponibles.`
@@ -2557,41 +2615,7 @@
       myUser = Object.assign({}, found, { isGuest: false });
       localStorage.setItem(MY_SESSION_KEY, JSON.stringify(myUser));
       closeUniversalModal();
-  
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+      renderAll();
       showToast(`✅ ¡Bienvenido(a) de vuelta, ${myUser.name}! (⭐ ${myUser.credits} créditos)`);
     }
 
@@ -2599,44 +2623,10 @@
     function openNotificationsModal() {
       (DB.notifications || []).forEach(n => n.unread = false);
       saveDB();
-  
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
-    renderAll();
+      renderAll();
       document.getElementById('modalTitle').innerHTML = `🔔 Centro de Notificaciones UNID`;
       document.getElementById('modalBody').innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
           <span style="font-size:0.82rem; color:#475569;">Avisos oficiales de Uriel y Admisiones UNID:</span>
           <button class="action-btn-sm gold" onclick="requestAndShowNotifications()">🔔 Activar Alertas</button>
         </div>
@@ -2683,34 +2673,43 @@
       }
     }
 
-    /* QR Modal */
+    /* QR Modal con dirección oficial configurada */
+    const DEFAULT_QR_TARGET = "file:///C:/Users/Bryan%20Delgadillo/Documents/GitHub/APP-UNID/index.html";
+
+    function copyQrTargetUrl() {
+      const url = (DB.settings && DB.settings.qrTargetUrl) || DEFAULT_QR_TARGET;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('📋 Dirección del QR copiada al portapapeles');
+        }).catch(() => {
+          showToast('📋 Dirección: ' + url);
+        });
+      } else {
+        showToast('📋 Dirección: ' + url);
+      }
+    }
+
     function openQrModal() {
       const u = getActiveUser();
+      const qrUrl = (DB.settings && DB.settings.qrTargetUrl) || DEFAULT_QR_TARGET;
       document.getElementById('modalTitle').innerHTML = `📱 Código QR — UNID Futuro Quest`;
       document.getElementById('modalBody').innerHTML = `
-        <div style="text-align:center; padding:10px;">
-          <p style="font-size:0.9rem; color:#334155; margin-bottom:14px;">
-            Escanea este código desde tu celular o compártelo para ingresar a <strong>UNID Futuro Quest</strong>:
+        <div style="text-align:center; padding:6px;">
+          <p style="font-size:0.88rem; color:#334155; margin-bottom:12px;">
+            Escanea este código QR para abrir directamente <strong>UNID Futuro Quest</strong>:
           </p>
-          <div style="width:190px; height:190px; margin:0 auto 14px; background:#001B3D; padding:16px; border-radius:20px; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
-            <svg viewBox="0 0 36 36" width="150" height="150" fill="#FFFFFF">
-              <rect x="2" y="2" width="10" height="10" rx="1" fill="none" stroke="#FFD100" stroke-width="2.5"/>
-              <rect x="5" y="5" width="4" height="4" fill="#FFD100"/>
-              <rect x="24" y="2" width="10" height="10" rx="1" fill="none" stroke="#FFD100" stroke-width="2.5"/>
-              <rect x="27" y="5" width="4" height="4" fill="#FFD100"/>
-              <rect x="2" y="24" width="10" height="10" rx="1" fill="none" stroke="#FFD100" stroke-width="2.5"/>
-              <rect x="5" y="27" width="4" height="4" fill="#FFD100"/>
-              <rect x="15" y="4" width="3" height="3" />
-              <rect x="15" y="10" width="3" height="6" />
-              <rect x="14" y="18" width="6" height="3" />
-              <rect x="22" y="16" width="4" height="4" />
-              <rect x="28" y="18" width="5" height="3" />
-              <rect x="16" y="24" width="4" height="8" />
-              <rect x="24" y="26" width="4" height="4" />
-              <rect x="30" y="28" width="4" height="6" />
-            </svg>
+          <div style="width:228px; height:228px; margin:0 auto 12px; background:#001B3D; padding:14px; border-radius:22px; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(0,0,0,0.22); border:3px solid #FFD100;">
+            <svg viewBox="0 0 41 41" width="200" height="200" shape-rendering="crispEdges" style="display:block; margin:0 auto; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.18);" aria-label="Código QR hacia file:///C:/Users/Bryan%20Delgadillo/Documents/GitHub/APP-UNID/index.html"><rect width="41" height="41" rx="2" fill="#FFFFFF"/><path d="M2,2h1v1h-1zM3,2h1v1h-1zM4,2h1v1h-1zM5,2h1v1h-1zM6,2h1v1h-1zM7,2h1v1h-1zM8,2h1v1h-1zM10,2h1v1h-1zM16,2h1v1h-1zM19,2h1v1h-1zM21,2h1v1h-1zM22,2h1v1h-1zM25,2h1v1h-1zM26,2h1v1h-1zM27,2h1v1h-1zM28,2h1v1h-1zM30,2h1v1h-1zM32,2h1v1h-1zM33,2h1v1h-1zM34,2h1v1h-1zM35,2h1v1h-1zM36,2h1v1h-1zM37,2h1v1h-1zM38,2h1v1h-1zM2,3h1v1h-1zM8,3h1v1h-1zM12,3h1v1h-1zM15,3h1v1h-1zM17,3h1v1h-1zM21,3h1v1h-1zM26,3h1v1h-1zM28,3h1v1h-1zM30,3h1v1h-1zM32,3h1v1h-1zM38,3h1v1h-1zM2,4h1v1h-1zM4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM8,4h1v1h-1zM12,4h1v1h-1zM14,4h1v1h-1zM15,4h1v1h-1zM16,4h1v1h-1zM17,4h1v1h-1zM19,4h1v1h-1zM23,4h1v1h-1zM24,4h1v1h-1zM25,4h1v1h-1zM28,4h1v1h-1zM29,4h1v1h-1zM32,4h1v1h-1zM34,4h1v1h-1zM35,4h1v1h-1zM36,4h1v1h-1zM38,4h1v1h-1zM2,5h1v1h-1zM4,5h1v1h-1zM5,5h1v1h-1zM6,5h1v1h-1zM8,5h1v1h-1zM10,5h1v1h-1zM13,5h1v1h-1zM16,5h1v1h-1zM18,5h1v1h-1zM20,5h1v1h-1zM23,5h1v1h-1zM26,5h1v1h-1zM27,5h1v1h-1zM29,5h1v1h-1zM32,5h1v1h-1zM34,5h1v1h-1zM35,5h1v1h-1zM36,5h1v1h-1zM38,5h1v1h-1zM2,6h1v1h-1zM4,6h1v1h-1zM5,6h1v1h-1zM6,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM13,6h1v1h-1zM15,6h1v1h-1zM16,6h1v1h-1zM19,6h1v1h-1zM20,6h1v1h-1zM23,6h1v1h-1zM25,6h1v1h-1zM26,6h1v1h-1zM28,6h1v1h-1zM29,6h1v1h-1zM30,6h1v1h-1zM32,6h1v1h-1zM34,6h1v1h-1zM35,6h1v1h-1zM36,6h1v1h-1zM38,6h1v1h-1zM2,7h1v1h-1zM8,7h1v1h-1zM10,7h1v1h-1zM11,7h1v1h-1zM12,7h1v1h-1zM13,7h1v1h-1zM15,7h1v1h-1zM17,7h1v1h-1zM18,7h1v1h-1zM19,7h1v1h-1zM21,7h1v1h-1zM22,7h1v1h-1zM23,7h1v1h-1zM24,7h1v1h-1zM26,7h1v1h-1zM32,7h1v1h-1zM38,7h1v1h-1zM2,8h1v1h-1zM3,8h1v1h-1zM4,8h1v1h-1zM5,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM14,8h1v1h-1zM16,8h1v1h-1zM18,8h1v1h-1zM20,8h1v1h-1zM22,8h1v1h-1zM24,8h1v1h-1zM26,8h1v1h-1zM28,8h1v1h-1zM30,8h1v1h-1zM32,8h1v1h-1zM33,8h1v1h-1zM34,8h1v1h-1zM35,8h1v1h-1zM36,8h1v1h-1zM37,8h1v1h-1zM38,8h1v1h-1zM10,9h1v1h-1zM13,9h1v1h-1zM15,9h1v1h-1zM16,9h1v1h-1zM18,9h1v1h-1zM22,9h1v1h-1zM23,9h1v1h-1zM24,9h1v1h-1zM30,9h1v1h-1zM2,10h1v1h-1zM6,10h1v1h-1zM8,10h1v1h-1zM9,10h1v1h-1zM10,10h1v1h-1zM11,10h1v1h-1zM12,10h1v1h-1zM13,10h1v1h-1zM14,10h1v1h-1zM15,10h1v1h-1zM18,10h1v1h-1zM22,10h1v1h-1zM23,10h1v1h-1zM24,10h1v1h-1zM27,10h1v1h-1zM30,10h1v1h-1zM31,10h1v1h-1zM32,10h1v1h-1zM33,10h1v1h-1zM34,10h1v1h-1zM35,10h1v1h-1zM38,10h1v1h-1zM3,11h1v1h-1zM4,11h1v1h-1zM9,11h1v1h-1zM10,11h1v1h-1zM11,11h1v1h-1zM13,11h1v1h-1zM14,11h1v1h-1zM19,11h1v1h-1zM20,11h1v1h-1zM21,11h1v1h-1zM25,11h1v1h-1zM28,11h1v1h-1zM30,11h1v1h-1zM34,11h1v1h-1zM2,12h1v1h-1zM3,12h1v1h-1zM4,12h1v1h-1zM6,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM14,12h1v1h-1zM15,12h1v1h-1zM16,12h1v1h-1zM17,12h1v1h-1zM20,12h1v1h-1zM21,12h1v1h-1zM23,12h1v1h-1zM25,12h1v1h-1zM26,12h1v1h-1zM27,12h1v1h-1zM28,12h1v1h-1zM29,12h1v1h-1zM31,12h1v1h-1zM33,12h1v1h-1zM2,13h1v1h-1zM6,13h1v1h-1zM11,13h1v1h-1zM13,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM16,13h1v1h-1zM17,13h1v1h-1zM18,13h1v1h-1zM19,13h1v1h-1zM20,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM24,13h1v1h-1zM25,13h1v1h-1zM26,13h1v1h-1zM28,13h1v1h-1zM29,13h1v1h-1zM32,13h1v1h-1zM33,13h1v1h-1zM35,13h1v1h-1zM36,13h1v1h-1zM6,14h1v1h-1zM8,14h1v1h-1zM10,14h1v1h-1zM12,14h1v1h-1zM15,14h1v1h-1zM19,14h1v1h-1zM20,14h1v1h-1zM22,14h1v1h-1zM23,14h1v1h-1zM24,14h1v1h-1zM27,14h1v1h-1zM29,14h1v1h-1zM30,14h1v1h-1zM32,14h1v1h-1zM33,14h1v1h-1zM34,14h1v1h-1zM36,14h1v1h-1zM2,15h1v1h-1zM3,15h1v1h-1zM4,15h1v1h-1zM9,15h1v1h-1zM12,15h1v1h-1zM13,15h1v1h-1zM16,15h1v1h-1zM17,15h1v1h-1zM18,15h1v1h-1zM20,15h1v1h-1zM23,15h1v1h-1zM25,15h1v1h-1zM26,15h1v1h-1zM28,15h1v1h-1zM29,15h1v1h-1zM30,15h1v1h-1zM31,15h1v1h-1zM34,15h1v1h-1zM35,15h1v1h-1zM36,15h1v1h-1zM37,15h1v1h-1zM2,16h1v1h-1zM3,16h1v1h-1zM4,16h1v1h-1zM6,16h1v1h-1zM8,16h1v1h-1zM9,16h1v1h-1zM11,16h1v1h-1zM13,16h1v1h-1zM14,16h1v1h-1zM15,16h1v1h-1zM16,16h1v1h-1zM17,16h1v1h-1zM19,16h1v1h-1zM22,16h1v1h-1zM23,16h1v1h-1zM24,16h1v1h-1zM25,16h1v1h-1zM26,16h1v1h-1zM29,16h1v1h-1zM31,16h1v1h-1zM33,16h1v1h-1zM34,16h1v1h-1zM35,16h1v1h-1zM36,16h1v1h-1zM4,17h1v1h-1zM5,17h1v1h-1zM6,17h1v1h-1zM7,17h1v1h-1zM9,17h1v1h-1zM10,17h1v1h-1zM11,17h1v1h-1zM12,17h1v1h-1zM16,17h1v1h-1zM17,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM23,17h1v1h-1zM24,17h1v1h-1zM25,17h1v1h-1zM26,17h1v1h-1zM28,17h1v1h-1zM29,17h1v1h-1zM31,17h1v1h-1zM32,17h1v1h-1zM33,17h1v1h-1zM34,17h1v1h-1zM36,17h1v1h-1zM37,17h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM11,18h1v1h-1zM13,18h1v1h-1zM14,18h1v1h-1zM15,18h1v1h-1zM16,18h1v1h-1zM17,18h1v1h-1zM20,18h1v1h-1zM23,18h1v1h-1zM24,18h1v1h-1zM26,18h1v1h-1zM27,18h1v1h-1zM32,18h1v1h-1zM36,18h1v1h-1zM37,18h1v1h-1zM38,18h1v1h-1zM4,19h1v1h-1zM9,19h1v1h-1zM10,19h1v1h-1zM15,19h1v1h-1zM18,19h1v1h-1zM19,19h1v1h-1zM21,19h1v1h-1zM22,19h1v1h-1zM24,19h1v1h-1zM25,19h1v1h-1zM27,19h1v1h-1zM28,19h1v1h-1zM29,19h1v1h-1zM34,19h1v1h-1zM35,19h1v1h-1zM36,19h1v1h-1zM2,20h1v1h-1zM3,20h1v1h-1zM4,20h1v1h-1zM6,20h1v1h-1zM8,20h1v1h-1zM12,20h1v1h-1zM16,20h1v1h-1zM18,20h1v1h-1zM20,20h1v1h-1zM22,20h1v1h-1zM23,20h1v1h-1zM25,20h1v1h-1zM27,20h1v1h-1zM29,20h1v1h-1zM30,20h1v1h-1zM31,20h1v1h-1zM32,20h1v1h-1zM6,21h1v1h-1zM9,21h1v1h-1zM10,21h1v1h-1zM11,21h1v1h-1zM13,21h1v1h-1zM14,21h1v1h-1zM19,21h1v1h-1zM20,21h1v1h-1zM23,21h1v1h-1zM25,21h1v1h-1zM26,21h1v1h-1zM29,21h1v1h-1zM30,21h1v1h-1zM31,21h1v1h-1zM32,21h1v1h-1zM34,21h1v1h-1zM36,21h1v1h-1zM37,21h1v1h-1zM38,21h1v1h-1zM2,22h1v1h-1zM4,22h1v1h-1zM7,22h1v1h-1zM8,22h1v1h-1zM14,22h1v1h-1zM17,22h1v1h-1zM21,22h1v1h-1zM22,22h1v1h-1zM23,22h1v1h-1zM24,22h1v1h-1zM26,22h1v1h-1zM32,22h1v1h-1zM33,22h1v1h-1zM37,22h1v1h-1zM38,22h1v1h-1zM4,23h1v1h-1zM5,23h1v1h-1zM7,23h1v1h-1zM9,23h1v1h-1zM11,23h1v1h-1zM13,23h1v1h-1zM15,23h1v1h-1zM16,23h1v1h-1zM17,23h1v1h-1zM18,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM25,23h1v1h-1zM26,23h1v1h-1zM27,23h1v1h-1zM29,23h1v1h-1zM30,23h1v1h-1zM33,23h1v1h-1zM34,23h1v1h-1zM35,23h1v1h-1zM37,23h1v1h-1zM2,24h1v1h-1zM7,24h1v1h-1zM8,24h1v1h-1zM10,24h1v1h-1zM12,24h1v1h-1zM15,24h1v1h-1zM17,24h1v1h-1zM20,24h1v1h-1zM23,24h1v1h-1zM25,24h1v1h-1zM28,24h1v1h-1zM29,24h1v1h-1zM32,24h1v1h-1zM33,24h1v1h-1zM34,24h1v1h-1zM36,24h1v1h-1zM4,25h1v1h-1zM5,25h1v1h-1zM6,25h1v1h-1zM10,25h1v1h-1zM12,25h1v1h-1zM16,25h1v1h-1zM17,25h1v1h-1zM22,25h1v1h-1zM23,25h1v1h-1zM24,25h1v1h-1zM26,25h1v1h-1zM30,25h1v1h-1zM32,25h1v1h-1zM33,25h1v1h-1zM34,25h1v1h-1zM35,25h1v1h-1zM36,25h1v1h-1zM37,25h1v1h-1zM38,25h1v1h-1zM2,26h1v1h-1zM3,26h1v1h-1zM4,26h1v1h-1zM5,26h1v1h-1zM6,26h1v1h-1zM7,26h1v1h-1zM8,26h1v1h-1zM15,26h1v1h-1zM18,26h1v1h-1zM21,26h1v1h-1zM22,26h1v1h-1zM23,26h1v1h-1zM24,26h1v1h-1zM25,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM30,26h1v1h-1zM31,26h1v1h-1zM32,26h1v1h-1zM33,26h1v1h-1zM34,26h1v1h-1zM35,26h1v1h-1zM36,26h1v1h-1zM37,26h1v1h-1zM2,27h1v1h-1zM5,27h1v1h-1zM6,27h1v1h-1zM11,27h1v1h-1zM12,27h1v1h-1zM14,27h1v1h-1zM15,27h1v1h-1zM20,27h1v1h-1zM21,27h1v1h-1zM23,27h1v1h-1zM25,27h1v1h-1zM27,27h1v1h-1zM28,27h1v1h-1zM30,27h1v1h-1zM32,27h1v1h-1zM34,27h1v1h-1zM35,27h1v1h-1zM5,28h1v1h-1zM8,28h1v1h-1zM9,28h1v1h-1zM13,28h1v1h-1zM14,28h1v1h-1zM16,28h1v1h-1zM17,28h1v1h-1zM19,28h1v1h-1zM20,28h1v1h-1zM21,28h1v1h-1zM23,28h1v1h-1zM25,28h1v1h-1zM27,28h1v1h-1zM29,28h1v1h-1zM30,28h1v1h-1zM32,28h1v1h-1zM9,29h1v1h-1zM11,29h1v1h-1zM13,29h1v1h-1zM14,29h1v1h-1zM15,29h1v1h-1zM17,29h1v1h-1zM18,29h1v1h-1zM19,29h1v1h-1zM21,29h1v1h-1zM22,29h1v1h-1zM23,29h1v1h-1zM24,29h1v1h-1zM26,29h1v1h-1zM29,29h1v1h-1zM30,29h1v1h-1zM32,29h1v1h-1zM33,29h1v1h-1zM36,29h1v1h-1zM37,29h1v1h-1zM2,30h1v1h-1zM3,30h1v1h-1zM5,30h1v1h-1zM6,30h1v1h-1zM7,30h1v1h-1zM8,30h1v1h-1zM9,30h1v1h-1zM10,30h1v1h-1zM11,30h1v1h-1zM12,30h1v1h-1zM13,30h1v1h-1zM18,30h1v1h-1zM19,30h1v1h-1zM22,30h1v1h-1zM23,30h1v1h-1zM24,30h1v1h-1zM25,30h1v1h-1zM26,30h1v1h-1zM30,30h1v1h-1zM31,30h1v1h-1zM32,30h1v1h-1zM33,30h1v1h-1zM34,30h1v1h-1zM36,30h1v1h-1zM10,31h1v1h-1zM11,31h1v1h-1zM14,31h1v1h-1zM15,31h1v1h-1zM16,31h1v1h-1zM17,31h1v1h-1zM18,31h1v1h-1zM20,31h1v1h-1zM23,31h1v1h-1zM25,31h1v1h-1zM29,31h1v1h-1zM30,31h1v1h-1zM34,31h1v1h-1zM36,31h1v1h-1zM2,32h1v1h-1zM3,32h1v1h-1zM4,32h1v1h-1zM5,32h1v1h-1zM6,32h1v1h-1zM7,32h1v1h-1zM8,32h1v1h-1zM10,32h1v1h-1zM11,32h1v1h-1zM12,32h1v1h-1zM13,32h1v1h-1zM14,32h1v1h-1zM17,32h1v1h-1zM19,32h1v1h-1zM22,32h1v1h-1zM23,32h1v1h-1zM25,32h1v1h-1zM26,32h1v1h-1zM27,32h1v1h-1zM28,32h1v1h-1zM30,32h1v1h-1zM32,32h1v1h-1zM34,32h1v1h-1zM35,32h1v1h-1zM2,33h1v1h-1zM8,33h1v1h-1zM18,33h1v1h-1zM19,33h1v1h-1zM20,33h1v1h-1zM23,33h1v1h-1zM25,33h1v1h-1zM28,33h1v1h-1zM30,33h1v1h-1zM34,33h1v1h-1zM35,33h1v1h-1zM36,33h1v1h-1zM2,34h1v1h-1zM4,34h1v1h-1zM5,34h1v1h-1zM6,34h1v1h-1zM8,34h1v1h-1zM10,34h1v1h-1zM11,34h1v1h-1zM13,34h1v1h-1zM14,34h1v1h-1zM16,34h1v1h-1zM20,34h1v1h-1zM21,34h1v1h-1zM22,34h1v1h-1zM23,34h1v1h-1zM24,34h1v1h-1zM26,34h1v1h-1zM30,34h1v1h-1zM31,34h1v1h-1zM32,34h1v1h-1zM33,34h1v1h-1zM34,34h1v1h-1zM36,34h1v1h-1zM37,34h1v1h-1zM38,34h1v1h-1zM2,35h1v1h-1zM4,35h1v1h-1zM5,35h1v1h-1zM6,35h1v1h-1zM8,35h1v1h-1zM11,35h1v1h-1zM12,35h1v1h-1zM15,35h1v1h-1zM16,35h1v1h-1zM18,35h1v1h-1zM19,35h1v1h-1zM21,35h1v1h-1zM22,35h1v1h-1zM25,35h1v1h-1zM28,35h1v1h-1zM29,35h1v1h-1zM31,35h1v1h-1zM32,35h1v1h-1zM33,35h1v1h-1zM36,35h1v1h-1zM38,35h1v1h-1zM2,36h1v1h-1zM4,36h1v1h-1zM5,36h1v1h-1zM6,36h1v1h-1zM8,36h1v1h-1zM12,36h1v1h-1zM18,36h1v1h-1zM20,36h1v1h-1zM25,36h1v1h-1zM26,36h1v1h-1zM30,36h1v1h-1zM36,36h1v1h-1zM2,37h1v1h-1zM8,37h1v1h-1zM13,37h1v1h-1zM14,37h1v1h-1zM16,37h1v1h-1zM19,37h1v1h-1zM20,37h1v1h-1zM22,37h1v1h-1zM23,37h1v1h-1zM25,37h1v1h-1zM28,37h1v1h-1zM30,37h1v1h-1zM31,37h1v1h-1zM33,37h1v1h-1zM34,37h1v1h-1zM36,37h1v1h-1zM37,37h1v1h-1zM2,38h1v1h-1zM3,38h1v1h-1zM4,38h1v1h-1zM5,38h1v1h-1zM6,38h1v1h-1zM7,38h1v1h-1zM8,38h1v1h-1zM10,38h1v1h-1zM12,38h1v1h-1zM16,38h1v1h-1zM17,38h1v1h-1zM19,38h1v1h-1zM22,38h1v1h-1zM23,38h1v1h-1zM24,38h1v1h-1zM25,38h1v1h-1zM26,38h1v1h-1zM29,38h1v1h-1zM31,38h1v1h-1zM32,38h1v1h-1zM35,38h1v1h-1zM36,38h1v1h-1zM37,38h1v1h-1zM38,38h1v1h-1z" fill="#001B3D"/></svg>
           </div>
-          <div style="font-size:0.84rem; font-weight:800; color:#001B3D;">Nivel ${u.level} • ⭐ ${u.credits} créditos</div>
+          <div style="background:#F8FAFC; border:1px solid #CBD5E1; border-radius:10px; padding:8px 10px; margin-bottom:12px; text-align:left; word-break:break-all; font-size:0.74rem; color:#0F172A;">
+            <strong style="color:#002D62; display:block; margin-bottom:2px;">🔗 Dirección codificada en el QR:</strong>
+            <code id="qrEncodedUrlText">${qrUrl}</code>
+          </div>
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:10px;">
+            <button type="button" class="action-btn-sm gold" onclick="copyQrTargetUrl()">📋 Copiar Dirección</button>
+            <a href="${qrUrl}" class="action-btn-sm" style="text-decoration:none;">🚀 Ir a la Dirección</a>
+          </div>
+          <div style="font-size:0.82rem; font-weight:800; color:#001B3D;">Nivel ${u.level} • ⭐ ${u.credits} créditos</div>
         </div>
       `;
       document.getElementById('universalModal').classList.add('open');
@@ -2735,7 +2734,7 @@
         document.getElementById('modalTitle').innerHTML = `📲 Instalar UNID Futuro Quest (Celular y PC)`;
         document.getElementById('modalBody').innerHTML = `
           <p style="font-size:0.9rem; color:#334155; margin-bottom:12px;">
-            Instala <strong>UNID Futuro Quest</strong> como aplicación directa en tu celular o computadora:
+            Instala <strong>UNID Futuro Quest</strong> como aplicación directa en tu celular o computadora (al abrirla desde el ícono instalado se verá únicamente la app del celular):
           </p>
           <div class="item-card">
             <h4 style="font-size:0.9rem; color:#001B3D; margin-bottom:4px;">📱 En Celular Android (Chrome / Edge)</h4>
@@ -2757,7 +2756,10 @@
     function toggleAppOnlyMode() {
       document.body.classList.toggle('app-only-mode');
       const isAppOnly = document.body.classList.contains('app-only-mode');
-      document.getElementById('btnToggleView').textContent = isAppOnly ? '🖥️ Ver Póster + App' : '📱 Modo App Completa';
+      const d = document.getElementById('btnToggleViewDesk');
+      const m = document.getElementById('btnToggleViewMob');
+      if (d) d.textContent = isAppOnly ? 'Ver Póster + App' : 'Modo App Completa';
+      if (m) m.textContent = isAppOnly ? 'Ver Todo' : 'Solo App';
     }
 
     function closeUniversalModal() {
@@ -2779,50 +2781,18 @@
       navigator.serviceWorker.register('sw.js').catch(() => {});
     }
 
-
-    // Reloj en tiempo real para la pantalla del celular
-    function updateRealClock() {
-      const clockEl = document.getElementById('phoneClock');
-      if (!clockEl) return;
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      clockEl.textContent = `${hours12}:${minutes} ${ampm}`;
-    }
-    updateRealClock();
-    setInterval(updateRealClock, 1000);
-
-    // Detectar automáticamente si la app está instalada (PWA Standalone) o en modo exclusivo de app
-    function checkStandaloneMode() {
-      const params = new URLSearchParams(window.location.search);
-      const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches ||
-                                window.matchMedia('(display-mode: fullscreen)').matches ||
-                                window.navigator.standalone === true ||
-                                params.get('mode') === 'app' ||
-                                window.FORCE_STANDALONE_APP === true;
-      if (isStandaloneMedia) {
-        document.body.classList.add('installed-standalone-mode');
-      }
-    }
-    checkStandaloneMode();
-    window.matchMedia('(display-mode: standalone)').addEventListener('change', checkStandaloneMode);
-    window.addEventListener('appinstalled', () => {
-      document.body.classList.add('installed-standalone-mode');
-      showToast('🎉 ¡App instalada! Ahora estás en la vista exclusiva de la app.');
-    });
-
     renderAll();
   </script>
 
-  <!-- Firebase Official Modular SDK (Sincronización silenciosa en segundo plano) -->
+  <!-- Firebase Official Modular SDK (Sincronización Bidireccional + Colección de Usuarios en Vivo) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
     import {
       getFirestore,
       doc,
       setDoc,
+      getDoc,
+      collection,
       onSnapshot
     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
     import {
@@ -2833,12 +2803,12 @@
     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDcd6TgX2ykq_f7ipM_8iGEdQYA4xrmO_k",
-      authDomain: "quiniela-mundial-417fa.firebaseapp.com",
-      projectId: "quiniela-mundial-417fa",
-      storageBucket: "quiniela-mundial-417fa.firebasestorage.app",
-      messagingSenderId: "662664011522",
-      appId: "1:662664011522:web:5efb1805888f252addac1b"
+      apiKey: "AIzaSyDEN0sX4mJacYQSNcuIc2xMMUlgy3rfFQU",
+      authDomain: "project-2998039825269712276.firebaseapp.com",
+      projectId: "project-2998039825269712276",
+      storageBucket: "project-2998039825269712276.firebasestorage.app",
+      messagingSenderId: "401905115506",
+      appId: "1:401905115506:web:b4a36539d945bd8849fdeb"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -2858,36 +2828,109 @@
       }
     }
 
+    // Fusión inteligente para nunca perder un usuario registrado localmente al conectar con Firebase
+    function mergeLocalAndRemoteDB(localDB, remoteDB) {
+      const merged = Object.assign({}, localDB, remoteDB);
+      const deletedIds = new Set([...(localDB.deletedUserIds || []), ...(remoteDB.deletedUserIds || [])]);
+      merged.deletedUserIds = Array.from(deletedIds);
+
+      const userMap = new Map();
+      // Primero agregamos remotos
+      (remoteDB.users || []).forEach(u => {
+        if (u && u.id && !deletedIds.has(u.id)) {
+          userMap.set(u.phone || u.id, u);
+        }
+      });
+      // Luego fusionamos locales (si el usuario se creó en index.html y aún no estaba en remoto, se conserva)
+      let hasUnsyncedLocalUser = false;
+      (localDB.users || []).forEach(u => {
+        if (u && u.id && !deletedIds.has(u.id)) {
+          const key = u.phone || u.id;
+          if (!userMap.has(key)) {
+            userMap.set(key, u);
+            hasUnsyncedLocalUser = true;
+          } else {
+            const rem = userMap.get(key);
+            // Conservar el mayor avance o edición administrativa reciente
+            const mergedUser = Object.assign({}, rem, u, {
+              credits: rem.adminEdited ? rem.credits : Math.max(Number(u.credits || 0), Number(rem.credits || 0)),
+              level: rem.adminEdited ? rem.level : Math.max(Number(u.level || 2), Number(rem.level || 2)),
+              completedQuizzes: Array.from(new Set([...(rem.completedQuizzes || []), ...(u.completedQuizzes || [])])),
+              exploredCareers: Array.from(new Set([...(rem.exploredCareers || []), ...(u.exploredCareers || [])])),
+              redeemedRewards: (u.redeemedRewards && u.redeemedRewards.length >= (rem.redeemedRewards || []).length)
+                ? u.redeemedRewards : (rem.redeemedRewards || [])
+            });
+            userMap.set(key, mergedUser);
+          }
+        }
+      });
+
+      // También verificar si la sesión actual (UNID_FQ_MY_USER_SESSION) tiene un usuario registrado que no está en userMap
+      try {
+        const rawSession = localStorage.getItem('UNID_FQ_MY_USER_SESSION');
+        if (rawSession) {
+          const sessUser = JSON.parse(rawSession);
+          if (sessUser && !sessUser.isGuest && sessUser.id && !deletedIds.has(sessUser.id)) {
+            const key = sessUser.phone || sessUser.id;
+            if (!userMap.has(key)) {
+              userMap.set(key, sessUser);
+              hasUnsyncedLocalUser = true;
+            }
+          }
+        }
+      } catch (e) {}
+
+      merged.users = Array.from(userMap.values());
+
+      // Fusionar preguntas / dudas (inquiries)
+      const inqMap = new Map();
+      [...(remoteDB.inquiries || []), ...(localDB.inquiries || [])].forEach(inq => {
+        if (inq && inq.id) inqMap.set(inq.id, inq);
+      });
+      merged.inquiries = Array.from(inqMap.values());
+
+      return { merged, hasUnsyncedLocalUser };
+    }
+
     try {
       firestoreDb = getFirestore(app);
       const stateDocRef = doc(firestoreDb, "unid_futuro_quest", "platform_state");
 
       onSnapshot(stateDocRef, (snapshot) => {
-        updatePublicStatus('Plataforma Oficial UNID en línea', '#22C55E');
+        updatePublicStatus('UNID en línea', '#22C55E');
         if (snapshot.exists()) {
           const remoteData = snapshot.data();
           if (remoteData && remoteData.payload) {
             try {
-              const parsed = typeof remoteData.payload === 'string' ? JSON.parse(remoteData.payload) : remoteData.payload;
+              const parsedRemote = typeof remoteData.payload === 'string' ? JSON.parse(remoteData.payload) : remoteData.payload;
+              const currentLocalRaw = localStorage.getItem('UNID_FQ_DB_V1');
+              const currentLocal = currentLocalRaw ? JSON.parse(currentLocalRaw) : {};
+              const { merged, hasUnsyncedLocalUser } = mergeLocalAndRemoteDB(currentLocal, parsedRemote);
+
               isRemoteUpdating = true;
-              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(parsed));
+              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(merged));
               if (typeof window.onFirebaseRemoteUpdate === 'function') {
-                window.onFirebaseRemoteUpdate(parsed, remoteData.lastNotification || null);
+                window.onFirebaseRemoteUpdate(merged, remoteData.lastNotification || null);
               }
-              setTimeout(() => { isRemoteUpdating = false; }, 150);
+              setTimeout(() => {
+                isRemoteUpdating = false;
+                if (hasUnsyncedLocalUser && typeof window.pushStateToFirebase === 'function') {
+                  window.pushStateToFirebase(merged, null);
+                }
+              }, 200);
             } catch (e) {}
           }
         } else {
           const currentRaw = localStorage.getItem('UNID_FQ_DB_V1');
           if (currentRaw) {
-            setDoc(stateDocRef, {
-              payload: currentRaw,
-              updatedAt: new Date().toISOString(),
-              project: "UNID FUTURO QUEST"
-            }).catch(() => {});
+            try {
+              const parsedLocal = JSON.parse(currentRaw);
+              window.pushStateToFirebase(parsedLocal, null);
+            } catch (e) {}
           }
         }
-      }, () => {
+      }, (err) => {
+        console.warn("Firestore listener warning:", err.code, err.message);
         initRealtimeDbFallback();
       });
     } catch (err) {
@@ -2899,24 +2942,33 @@
         realtimeDb = getDatabase(app);
         const stateRef = ref(realtimeDb, "unid_futuro_quest/platform_state");
         rtdbOnValue(stateRef, (snap) => {
-          updatePublicStatus('Plataforma Oficial UNID en línea', '#22C55E');
+          updatePublicStatus('UNID en línea', '#22C55E');
           const val = snap.val();
           if (val && val.payload) {
             try {
-              const parsed = typeof val.payload === 'string' ? JSON.parse(val.payload) : val.payload;
+              const parsedRemote = typeof val.payload === 'string' ? JSON.parse(val.payload) : val.payload;
+              const currentLocalRaw = localStorage.getItem('UNID_FQ_DB_V1');
+              const currentLocal = currentLocalRaw ? JSON.parse(currentLocalRaw) : {};
+              const { merged, hasUnsyncedLocalUser } = mergeLocalAndRemoteDB(currentLocal, parsedRemote);
+
               isRemoteUpdating = true;
-              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(parsed));
+              localStorage.setItem('UNID_FQ_DB_V1', JSON.stringify(merged));
               if (typeof window.onFirebaseRemoteUpdate === 'function') {
-                window.onFirebaseRemoteUpdate(parsed, val.lastNotification || null);
+                window.onFirebaseRemoteUpdate(merged, val.lastNotification || null);
               }
-              setTimeout(() => { isRemoteUpdating = false; }, 150);
+              setTimeout(() => {
+                isRemoteUpdating = false;
+                if (hasUnsyncedLocalUser && typeof window.pushStateToFirebase === 'function') {
+                  window.pushStateToFirebase(merged, null);
+                }
+              }, 200);
             } catch (e) {}
           }
         }, () => {
-          updatePublicStatus('Plataforma Oficial UNID activa', '#22C55E');
+          updatePublicStatus('UNID activa', '#22C55E');
         });
       } catch (e) {
-        updatePublicStatus('Plataforma Oficial UNID activa', '#22C55E');
+        updatePublicStatus('UNID activa', '#22C55E');
       }
     }
 
@@ -2939,7 +2991,16 @@
         try {
           const stateDocRef = doc(firestoreDb, "unid_futuro_quest", "platform_state");
           await setDoc(stateDocRef, record, { merge: true });
-        } catch (err) {}
+          // Además guardar cada usuario registrado en la colección dedicada unid_futuro_quest_users para sincronización instantánea
+          const activeUsers = (dbObject.users || []).filter(u => u && u.id && !u.isGuest);
+          for (const u of activeUsers) {
+            const uRef = doc(firestoreDb, "unid_futuro_quest_users", String(u.id));
+            await setDoc(uRef, Object.assign({}, u, { updatedAt: new Date().toISOString() }), { merge: true });
+          }
+          updatePublicStatus('UNID en línea', '#22C55E');
+        } catch (err) {
+          console.warn("Error guardando en Firestore (revisa las reglas de Firebase):", err.code, err.message);
+        }
       }
       if (realtimeDb) {
         try {
@@ -2948,6 +3009,19 @@
         } catch (err) {}
       }
     };
+
+    // Al cargar index.html, si hay un usuario registrado en esta sesión local, empujarlo a Firebase tras 1.2s
+    setTimeout(() => {
+      try {
+        const rawDB = localStorage.getItem('UNID_FQ_DB_V1');
+        if (rawDB) {
+          const dbParsed = JSON.parse(rawDB);
+          if (dbParsed.users && dbParsed.users.length > 0 && typeof window.pushStateToFirebase === 'function') {
+            window.pushStateToFirebase(dbParsed, null);
+          }
+        }
+      } catch (e) {}
+    }, 1200);
   </script>
 </body>
 </html>

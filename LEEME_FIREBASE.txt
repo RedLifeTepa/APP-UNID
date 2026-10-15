@@ -1,26 +1,41 @@
-===================================================================
-UNID FUTURO QUEST — VERSIÓN OFICIAL CONECTADA A FIREBASE
-Proyecto Firebase: quiniela-mundial-417fa
-===================================================================
+====================================================================
+UNID FUTURO QUEST — CONFIGURACIÓN Y REGLAS DEL NUEVO PROYECTO FIREBASE
+Proyecto ID: project-2998039825269712276
+URL de Producción QR: https://juego-unid.netlify.app/app.html
+====================================================================
 
-ARCHIVOS INCLUIDOS:
-1. index.html          -> Aplicación principal PWA para celulares y computadoras (Nivel 2 con acceso total).
-2. config.html         -> Panel de Control Administrativo en tiempo real.
-3. confy.com.html      -> Alias directo del panel de administración (idéntico a config.html).
-4. firebase-config.js  -> Módulo oficial NPM con tus credenciales de Firebase.
-5. package.json        -> Configuración lista para `npm install` y despliegue.
-6. manifest.json / sw.js / icon-192.png / icon-512.png -> Archivos de instalación PWA.
+1. ARCHIVOS ACTUALIZADOS CON EL NUEVO PROYECTO (project-2998039825269712276):
+   - index.html         -> Plataforma principal (Póster + App interactiva + QR oficial)
+   - app.html           -> Vista exclusiva de la App (abre al escanear el código QR)
+   - config.html        -> Panel de Control Administrativo (con botón de Reglas Firebase y Sincronizar)
+   - confy.com.html     -> Copia espejo del Panel de Control Administrativo
+   - firebase-config.js -> Módulo NPM / ES Module con las credenciales nuevas
+   - qr_app_unid.png    -> Imagen PNG del Código QR que apunta a https://juego-unid.netlify.app/app.html
 
-CÓMO FUNCIONA LA CONEXIÓN A FIREBASE:
-- `index.html` y `config.html` ya tienen integrado el SDK Modular Oficial de Firebase v10.14.1 con tus credenciales (`quiniela-mundial-417fa`).
-- Sincroniza automáticamente con Cloud Firestore (colección `unid_futuro_quest`, documento `platform_state`) y cuenta con respaldo automático en Realtime Database (`unid_futuro_quest/platform_state`) y almacenamiento local.
-- Para que cualquier celular o computadora escriba y lea sin restricciones durante tus pruebas, asegúrate de que en tu consola de Firebase (https://console.firebase.google.com/project/quiniela-mundial-417fa/firestore/rules) las reglas permitan lectura/escritura en la colección `unid_futuro_quest`:
+2. PASO OBLIGATORIO EN FIREBASE CONSOLE PARA QUE SE GUARDEN LOS REGISTROS:
+   Entra a: https://console.firebase.google.com/project/project-2998039825269712276
 
-  rules_version = '2';
-  service cloud.firestore {
-    match /databases/{database}/documents {
-      match /unid_futuro_quest/{document=**} {
-        allow read, write: if true;
-      }
+   A) REGLAS PARA CLOUD FIRESTORE (Recomendado):
+      1. En el menú izquierdo ve a "Compilación (Build)" -> "Firestore Database".
+      2. Si aún no está creada la base de datos, haz clic en "Crear base de datos" (Create database).
+      3. Ve a la pestaña "Reglas" (Rules), pega este bloque y haz clic en "Publicar" (Publish):
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
     }
   }
+}
+
+   B) REGLAS PARA REALTIME DATABASE (Opcional / Respaldo):
+      Si también activas "Realtime Database", entra a su pestaña "Reglas" (Rules),
+      pega este bloque y haz clic en "Publicar" (Publish):
+
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
